@@ -39,13 +39,17 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (last);
 }
 
-int	escapespace(char *argv)
+int	escapespace(char *argv, t_lexout *tolex)
 {
 	int i;
 
 	i = 0;
-	while (argv[i] == ' ')
-		i++;
-	
+	if (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
+	{
+		while (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
+			i++;
+		if (tolex->box2space == 2)
+			tolex->box2[tolex->box2index++] = 32;
+	}
 	return (i);
 }
