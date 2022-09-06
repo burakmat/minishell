@@ -1,21 +1,36 @@
-#include "minishell.h"
+#include "lexer.h"
 
 int main(int argc, char **argv)
 {
-	t_lexout *first;
+	t_lexout *tolex;
+	t_errorcode error;
 	char	*a;
 
-	first = malloc(sizeof(t_lexout));
+	tolex = malloc(sizeof(t_lexout));
 
 	while (1)
 	{
-		first->last = malloc(sizeof(char) * 10000);
-		first->box1 = malloc(sizeof(char) * 1000);
-		first->box1index = 0;
+		fillboxes(tolex);
 		a = readline(">>");
 		add_history(a);
-		lexer(a, first);
-		free(first->box1);
+		lexer(a, tolex);
+		free(tolex->box1);
+		free(tolex->box2);
+		free(tolex->box3);
+		free(tolex->box4);
 	}
 	return (0);
+}
+
+void	fillboxes(t_lexout *tolex)
+{
+	tolex->box1 = malloc(sizeof(char) * 1000);
+	tolex->box2 = malloc(sizeof(char) * 1000);
+	tolex->box3 = malloc(sizeof(char) * 1000);
+	tolex->box4 = malloc(sizeof(char) * 1000);
+	tolex->box2runaway = 0;
+	tolex->box1index = 0;
+	tolex->box2index = 0;
+	tolex->box3index = 0;
+	tolex->box4index = 0;
 }

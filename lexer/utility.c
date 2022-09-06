@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "../lexer.h"
 
 
 int	ft_strlen(char *s1)
@@ -37,4 +37,15 @@ char	*ft_strjoin(char *s1, char *s2)
 	free(s1);
 	free(s2);
 	return (last);
+}
+
+int	escapespace(char *argv)
+{
+	int i;
+
+	i = 0;
+	while (argv[i] == ' ')
+		i++;
+	
+	return (i);
 }

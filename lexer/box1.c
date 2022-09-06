@@ -6,11 +6,11 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:16:51 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/06 12:16:57 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/06 13:34:42 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../lexer.h"
 
 int	firstbox(char *argv, t_lexout *tolex)
 {
@@ -25,9 +25,7 @@ int	firstbox(char *argv, t_lexout *tolex)
 			i += box1indoublequote(argv + i, tolex);
 		if (argv[i] == 39)
 			i += box1insinglequote(argv + i, tolex);
-		tolex->box1[tolex->box1index] = argv[i];
-		i++;
-		tolex->box1index++;
+		tolex->box1[tolex->box1index++] = argv[i++];
 	}
 	return (i);
 }
@@ -44,9 +42,7 @@ int	box1indoublequote(char *argv, t_lexout *tolex)
 			printf("ERROR\n");
 			exit(1);
 		}
-		tolex->box1[tolex->box1index] = argv[i];
-		tolex->box1index++;
-		i++;
+		tolex->box1[tolex->box1index++] = argv[i++];
 	}
 	i++;
 	return (i);
@@ -64,9 +60,7 @@ int	box1insinglequote(char *argv, t_lexout *tolex)
 			printf("ERROR\n");
 			exit(1);
 		}
-		tolex->box1[tolex->box1index] = argv[i];
-		tolex->box1index++;
-		i++;
+		tolex->box1[tolex->box1index++] = argv[i++];
 	}
 	i++;
 	return (i);
