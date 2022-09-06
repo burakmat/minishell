@@ -1,0 +1,27 @@
+SRCS = main.c lexer/*c
+
+OBJS = $(SRCS:.c=.o)
+
+CC = gcc
+
+FLAGS =  -Wall -Wextra -Werror
+
+RM = rm -rf
+
+NAME = minishell
+
+all :$(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) $(FLAGS) -lreadline -o $(NAME)
+	make clean
+	./$(NAME)
+
+fclean : clean
+	$(RM) $(NAME)
+
+clean :
+	$(RM) *.o
+	$(RM) lexer/*.o
+
+re : fclean all
