@@ -1,5 +1,17 @@
 #include "minishell.h"
 
+void free_table(t_node *node, t_lexout *table)
+{
+	if (table->box1[0] == '\0')
+		free(node->command);
+	if (table->box2[0] == '\0')
+		free(node->flags);
+	if (table->box3[0] == '\0')
+		free(node->argument);
+	if (table->box4[0] == '\0')
+		free(node->redirections);
+}
+
 void create_node(t_shell *shell, t_lexout table)
 {
 	static int count;
@@ -24,4 +36,5 @@ void create_node(t_shell *shell, t_lexout table)
 	}
 	prev = node;
 	++count;
+	free_table(node, &table);
 }
