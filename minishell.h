@@ -40,6 +40,10 @@ int	inquote(char *argv, t_lexout *tolex);
 int	box1indoublequote(char *argv, t_lexout *tolex);
 int	box1insinglequote(char *argv, t_lexout *tolex);
 
+//box2
+int	secondbox(char *argv, t_lexout *tolex);
+int	secondboxinquote(char *argv, t_lexout *tolex);
+
 // utility
 char	*ft_strjoin(char *s1, char *s2);
 int	ft_strlen(char *s1);
