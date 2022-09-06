@@ -42,6 +42,7 @@ typedef struct s_node
 
 typedef struct s_shell
 {
+	char **env;
 	t_node *head;
 }	t_shell;
 
@@ -56,7 +57,7 @@ int	box1indoublequote(char *argv, t_lexout *tolex);
 int	box1insinglequote(char *argv, t_lexout *tolex);
 
 //command_table.c
-void create_node(t_lexout table);
+void create_node(t_shell *shell, t_lexout table);
 
 // utility
 char	*ft_strjoin(char *s1, char *s2);
