@@ -30,6 +30,21 @@ typedef struct s_lexout
 	t_errorcode *error;
 } t_lexout;
 
+typedef struct s_node
+{
+	char *command;
+	char *flags;
+	char *argument;
+	char *redirections;
+	struct s_node *next_node;
+	struct s_node *previous_node;
+}	t_node;
+
+typedef struct s_shell
+{
+	t_node *head;
+}	t_shell;
+
 // main
 void	fillboxes(t_lexout *tolex);
 int		lexer(char *argv, t_lexout *tolex);
@@ -39,6 +54,9 @@ int	firstbox(char *argv, t_lexout *tolex);
 int	inquote(char *argv, t_lexout *tolex);
 int	box1indoublequote(char *argv, t_lexout *tolex);
 int	box1insinglequote(char *argv, t_lexout *tolex);
+
+//command_table.c
+void create_node(t_lexout table);
 
 // utility
 char	*ft_strjoin(char *s1, char *s2);
