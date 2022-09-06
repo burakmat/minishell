@@ -6,11 +6,11 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/06 14:47:11 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:52:45 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lexer.h"
+#include "../minishell.h"
 
 int	lexer(char *argv, t_lexout *tolex)
 {

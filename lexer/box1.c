@@ -6,11 +6,11 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:16:51 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/06 14:51:28 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:53:31 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lexer.h"
+#include "../minishell.h"
 
 int	firstbox(char *argv, t_lexout *tolex)
 {
