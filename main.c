@@ -1,7 +1,7 @@
 
 #include "minishell.h"
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, **env)
 {
 	t_lexout *tolex;
 	t_errorcode error;

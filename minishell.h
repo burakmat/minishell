@@ -40,6 +40,15 @@ typedef struct s_node
 	struct s_node *previous_node;
 }	t_node;
 
+typedef struct s_data
+{
+	char		*temp;
+	char		**arg;
+	char		**env_in;
+	char		*cwd;
+}				t_data;
+
+
 typedef struct s_shell
 {
 	t_node *head;
