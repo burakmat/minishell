@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:16:51 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/06 13:34:42 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/06 14:51:28 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	firstbox(char *argv, t_lexout *tolex)
 			i += box1indoublequote(argv + i, tolex);
 		if (argv[i] == 39)
 			i += box1insinglequote(argv + i, tolex);
-		tolex->box1[tolex->box1index++] = argv[i++];
+		if (argv[i] != '"' && argv[i] != 39)
+			tolex->box1[tolex->box1index++] = argv[i++];
 	}
 	return (i);
 }
@@ -37,11 +38,6 @@ int	box1indoublequote(char *argv, t_lexout *tolex)
 	i = 1;
 	while (argv[i] != '"')
 	{
-		if (argv[i] == ' ')
-		{
-			printf("ERROR\n");
-			exit(1);
-		}
 		tolex->box1[tolex->box1index++] = argv[i++];
 	}
 	i++;
@@ -55,11 +51,6 @@ int	box1insinglequote(char *argv, t_lexout *tolex)
 	i = 1;
 	while (argv[i] != 39)
 	{
-		if (argv[i] == ' ')
-		{
-			printf("ERROR\n");
-			exit(1);
-		}
 		tolex->box1[tolex->box1index++] = argv[i++];
 	}
 	i++;
