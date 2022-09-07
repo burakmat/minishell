@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:10:16 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 12:10:33 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:40:59 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		last[b + a] = s2[a];
 		a++;
 	}
-	printf("join %s\n", last);
 	free(s1);
 	free(s2);
 	return (last);
@@ -60,7 +59,7 @@ int	escapespace(char *argv, t_lexout *tolex)
 		while (((argv[i] <= 13 && argv[i] >= 9)
 				|| argv[i] == 32) && argv[i] != '\0')
 			i++;
-		if (tolex->box2space == 2)
+		if (tolex->box2space == 2 && tolex->box2index != 0)
 			tolex->box2[tolex->box2index++] = 32;
 		tolex->box2lastisspace = 1;
 	}

@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 12:09:44 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:47:53 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 	(void) shell;
 	printf("firstbox %s\n", tolex->box1);
 	printf("secondbox %s\n", tolex->box2);
-	printf("3. giriş %d\n", i);
 	printf("third %s\n", tolex->box3);
 	printf("%d\n", tolex->error.illegalflag);
 	return (1);

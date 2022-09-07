@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:32 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 12:13:17 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 13:10:07 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	secondbox(char *argv, t_lexout *tolex)
 	{
 		if (argv[i] == '"')
 			i += secondboxinquote(argv + i, tolex);
+		else if (argv[i] == 39)
+			i += secondboxinsinglequote(argv + i, tolex);
 		else if (argv[i] == '-')
 		{
 			if (((argv[i + 1] <= 13 && argv[i + 1] >= 9) || argv[i + 1] == 32))
@@ -29,7 +31,7 @@ int	secondbox(char *argv, t_lexout *tolex)
 				tolex->box2runaway = 1;
 				return (i);
 			}
-			while (!((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '"' && argv[i] != '\0')
+			while (!((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '"' && argv[i] != '\0' && argv[i] != 39)
 				tolex->box2[tolex->box2index++] = argv[i++];
 			tolex->box2lastisspace = 0;
 		}
@@ -50,14 +52,20 @@ int	secondboxinquote(char *argv, t_lexout *tolex)
 	int	i;
 
 	i = 1;
-	if (argv[i] != '-' && isbeforeflag(tolex))
+	if (argv[i] == '"')
+	{
+		i++;
+		return (i);
+	}
+	if (argv[i] != '-' && (isbeforeflag(tolex) || tolex->box2lastisspace == 1))
 	{
 		tolex->box2runaway = 1;
 		return (0);
 	}
 	else
 	{
-		if (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && tolex->box2lastisspace == 1)
+		if (((argv[i] <= 13 && argv[i] >= 9)
+				|| argv[i] == 32) && tolex->box2lastisspace == 1)
 		{
 			tolex->box2runaway = 1;
 			return (0);
@@ -69,9 +77,42 @@ int	secondboxinquote(char *argv, t_lexout *tolex)
 			tolex->box2[tolex->box2index++] = argv[i++];
 		}
 	}
-	i++;
 	tolex->box2lastisspace = 0;
-	return (i);
+	return (i + 1);
+}
+
+int	secondboxinsinglequote(char *argv, t_lexout *tolex)
+{
+	int	i;
+
+	i = 1;
+	if (argv[i] == 39)
+	{
+		i++;
+		return (i);
+	}
+	if (argv[i] != '-' && (isbeforeflag(tolex) || tolex->box2lastisspace == 1))
+	{
+		tolex->box2runaway = 1;
+		return (0);
+	}
+	else
+	{
+		if (((argv[i] <= 13 && argv[i] >= 9)
+				|| argv[i] == 32) && tolex->box2lastisspace == 1)
+		{
+			tolex->box2runaway = 1;
+			return (0);
+		}
+		while (argv[i] != 39)
+		{
+			if ((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32)
+				tolex->error.illegalflag = 1;
+			tolex->box2[tolex->box2index++] = argv[i++];
+		}
+	}
+	tolex->box2lastisspace = 0;
+	return (i + 1);
 }
 
 int	isbeforeflag(t_lexout *tolex)
