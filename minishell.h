@@ -10,12 +10,6 @@
 #include <errno.h>
 #include <sys/wait.h>
 
-typedef struct s_errorcode
-{
-	int	illegalflag;
-	int nosuchfile;
-} t_errorcode;
-
 typedef struct s_lexout
 {
 	char	*box1;
@@ -27,7 +21,6 @@ typedef struct s_lexout
 	int		box3index;
 	int		box4index;
 	int		box2runaway;
-	t_errorcode *error;
 } t_lexout;
 
 typedef struct s_node
@@ -38,10 +31,13 @@ typedef struct s_node
 	char *redirections;
 	struct s_node *next_node;
 	struct s_node *previous_node;
+	char *cmd_path;
+	int is_builtin;
 }	t_node;
 
 typedef struct s_shell
 {
+	int err_code;
 	char **env;
 	t_node *head;
 }	t_shell;
@@ -59,9 +55,15 @@ int	box1insinglequote(char *argv, t_lexout *tolex);
 //command_table.c
 void create_node(t_shell *shell, t_lexout table);
 
+//finish.c
+void	print_error(t_shell *shell);
+
 // utility
-char	*ft_strjoin(char *s1, char *s2);
 int	ft_strlen(char *s1);
 int	escapespace(char *argv);
+int	ft_strncmp(const char *s1, const char *s2, size_t size);
+int	ft_strncmp_exact(const char *s1, const char *s2, size_t size);
+char	*ft_strjoin_path(char const *s1, char const *s2);
+char	**ft_split(char const *s, char c);
 
 #endif

@@ -1,14 +1,14 @@
 
 #include "minishell.h"
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
 	t_lexout *tolex;
-	t_errorcode error;
+	t_shell shell;
 	char	*a;
 
+	shell.env = env;
 	tolex = malloc(sizeof(t_lexout));
-
 	while (1)
 	{
 		fillboxes(tolex);
