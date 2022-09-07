@@ -1,4 +1,4 @@
-#include "../minishell.h"
+#include "minishell.h"
 
 
 int	ft_strlen(char *s1)
@@ -11,7 +11,7 @@ int	ft_strlen(char *s1)
 	return (a);
 }
 
-unsigned int	str_in_array(const char *s, char delimiter)
+unsigned int	str_in_array(char *s, char delimiter)
 {
 	unsigned int	qnt;
 
@@ -30,7 +30,7 @@ unsigned int	str_in_array(const char *s, char delimiter)
 	return (qnt);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char			**arr;
 	unsigned int	j;
@@ -58,9 +58,9 @@ char	**ft_split(char const *s, char c)
 	return (arr);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t size)
+int	ft_strncmp(char *s1, char *s2, int size)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (i < size && (s1[i] != '\0' || s2[i] != '\0'))
@@ -72,9 +72,9 @@ int	ft_strncmp(const char *s1, const char *s2, size_t size)
 	return (1);
 }
 
-int	ft_strncmp_exact(const char *s1, const char *s2, size_t size)
+int	ft_strncmp_exact(char *s1, char *s2, int size)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (i < size && (s1[i] != '\0' || s2[i] != '\0'))
@@ -86,10 +86,10 @@ int	ft_strncmp_exact(const char *s1, const char *s2, size_t size)
 	return (1);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t b)
+int	ft_strlcpy(char *dst, char *src, int b)
 {
-	size_t	a;
-	size_t	c;
+	int	a;
+	int	c;
 
 	a = 0;
 	c = ft_strlen(src);
@@ -105,11 +105,11 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t b)
 	return (c);
 }
 
-char	*ft_strjoin_path(char const *s1, char const *s2)
+char	*ft_strjoin_path(char *s1, char *s2)
 {
-	size_t	a;
+	int	a;
 	char	*last;
-	size_t	b;
+	int	b;
 
 	a = 0;
 	b = ft_strlen(s1);
@@ -120,4 +120,33 @@ char	*ft_strjoin_path(char const *s1, char const *s2)
 	last[b] = '/';
 	ft_strlcpy(&last[b + 1], s2, ft_strlen(s2) + 1);
 	return (last);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ps;
+
+	ps = malloc(size * count);
+	if (ps == 0)
+		return (0);
+	ft_bzero(ps, size * count);
+	return (ps);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, '\0', n);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t	a;
+
+	a = 0;
+	while (a < len)
+	{
+		((unsigned char *)b)[a] = (unsigned char)c;
+		a++;
+	}
+	return (b);
 }

@@ -10,7 +10,7 @@ int main(int argc, char **argv, char **env)
 	shell.env = env;
 	while (1)
 	{
-		fillboxes(&tolex, &shell);
+		fillboxes(&tolex);
 		a = readline(">>");
 		add_history(a);
 		lexer(a, &tolex, &shell);
@@ -18,7 +18,7 @@ int main(int argc, char **argv, char **env)
 	return (0);
 }
 
-void	fillboxes(t_lexout *tolex, t_shell *shell)
+void	fillboxes(t_lexout *tolex)
 {
 	tolex->box1 = malloc(sizeof(char) * 1000);
 	tolex->box2 = malloc(sizeof(char) * 1000);

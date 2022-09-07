@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 18:18:49 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:24:52 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,14 @@ int		box4passsinglequote(char *argv);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout table);
+char *search_in_path(t_shell *shell, t_node *node);
+char **split_path(t_shell *shell, int ind);
+void **edit_first_path(char **all_path_copy);
+int	is_there_path(t_shell *shell);
+void free_table(t_node *node, t_lexout *table);
+int	builtin_check(char *command);
+void	stage_command(t_shell *shell, t_node *node);
+
 
 // utility
 char	*lexer_ft_strjoin(char *s1, char *s2);
@@ -103,11 +111,14 @@ int		lexer_ft_strlen(char *s1);
 int		lexer_escapespace(char *argv, t_lexout *tolex);
 int		box4escapespace(char *argv, t_lexout *tolex);
 int	ft_strlen(char *s1);
-int	ft_strncmp(const char *s1, const char *s2, size_t size);
-int	ft_strncmp_exact(const char *s1, const char *s2, size_t size);
-char	*ft_strjoin_path(char const *s1, char const *s2);
-char	**ft_split(char const *s, char c);
-
+int	ft_strncmp(char *s1, char *s2, int size);
+int	ft_strncmp_exact(char *s1, char *s2, int size);
+char	*ft_strjoin_path(char *s1, char *s2);
+char	**ft_split(char *s, char c);
+void	*ft_calloc(size_t count, size_t size);
+void	ft_bzero(void *s, size_t n);
+void	*ft_memset(void *b, int c, size_t len);
+int	ft_strlcpy(char *dst, char *src, int b);
 //temp
 void	readbox3(char *argv);
 void create_node(t_shell *shell, t_lexout table);
