@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 19:24:52 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 19:40:16 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ char *search_in_path(t_shell *shell, t_node *node);
 char **split_path(t_shell *shell, int ind);
 void **edit_first_path(char **all_path_copy);
 int	is_there_path(t_shell *shell);
-void free_table(t_node *node, t_lexout *table);
-int	builtin_check(char *command);
+void	free_table(t_node *node, t_lexout *table);
+int		builtin_check(char *command);
 void	stage_command(t_shell *shell, t_node *node);
 
 
