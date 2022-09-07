@@ -6,19 +6,28 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/06 14:52:45 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:25:20 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	lexer(char *argv, t_lexout *tolex)
+int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 {
 	int	i;
 
+	tolex->box2space = 2;
 	i = 0;
+	(void) shell;
+	fourthbox(argv, tolex);
+	printf("%s\n", argv);
 	i += firstbox(argv, tolex);
-	i += escapespace(argv + i);
+	i += secondbox(argv + i, tolex);
+	i += thirdbox(argv + i, tolex);
 	printf("firstbox %s\n", tolex->box1);
+	printf("secondbox %s\n", tolex->box2);
+	readbox3(tolex->box3);
+	printf("\n%d\n", tolex->box3null);
+	printf("\nfourth %s\n", tolex->box4);
 	return (1);
 }
