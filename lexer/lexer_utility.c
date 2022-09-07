@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.c                                          :+:      :+:    :+:   */
+/*   lexer_utility.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:10:16 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 12:40:59 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:36:18 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_strlen(char *s1)
+int	lexer_ft_strlen(char *s1)
 {
 	int	a;
 
@@ -22,15 +22,15 @@ int	ft_strlen(char *s1)
 	return (a);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*lexer_ft_strjoin(char *s1, char *s2)
 {
 	int		a;
 	char	*last;
 	int		b;
 
 	a = 0;
-	b = ft_strlen(s1);
-	last = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	b = lexer_ft_strlen(s1);
+	last = malloc(sizeof(char) * (lexer_ft_strlen(s1) + lexer_ft_strlen(s2) + 1));
 	if (!last)
 		return (0);
 	while (b > a)
@@ -39,7 +39,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		a++;
 	}
 	a = 0;
-	while (ft_strlen(s1) + ft_strlen(s2) > a)
+	while (lexer_ft_strlen(s1) + lexer_ft_strlen(s2) > a)
 	{
 		last[b + a] = s2[a];
 		a++;
@@ -49,7 +49,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (last);
 }
 
-int	escapespace(char *argv, t_lexout *tolex)
+int	lexer_escapespace(char *argv, t_lexout *tolex)
 {
 	int	i;
 

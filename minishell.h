@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 12:21:02 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:35:43 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,17 @@ typedef struct s_errorcode
 typedef struct s_lexout
 {
 	char		*box1;
-	char		*box2;
-	char		*box3;
-	char		*box4;
 	int			box1index;
+	char		*box2;
 	int			box2index;
-	int			box3index;
-	int			box4index;
 	int			box2runaway;
 	int			box2space;
 	int			box2lastisspace;
+	char		*box3;
+	int			box3index;
+	char		*box4;
+	int			box4index;
+	int			box4space;
 	t_errorcode	error;
 }	t_lexout;
 
@@ -77,13 +78,27 @@ int		isbeforeflag(t_lexout *tolex);
 
 //box3
 int		thirdbox(char *argv, t_lexout *tolex);
+int		box3inquote(char *argv, t_lexout *tolex);
+int		box3escapespace(char *argv, t_lexout *tolex);
+
+//box4
+void	fourthbox(char *argv, t_lexout *tolex);
+int		box4inquote(char *argv, t_lexout *tolex);
+int		box4insinglequote(char *argv, t_lexout *tolex);
+int		box4greatgreat(char *argv, t_lexout *tolex);
+int		box4great(char *argv, t_lexout *tolex);
+int		box4lessless(char *argv, t_lexout *tolex);
+int		box4less(char *argv, t_lexout *tolex);
+int		box4wtf(char *argv, t_lexout *tolex);
+int		box4inquote_mode2(char *argv, t_lexout *tolex);
+int		box4insinglequote_mode2(char *argv, t_lexout *tolex);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout table);
 
 // utility
-char	*ft_strjoin(char *s1, char *s2);
-int		ft_strlen(char *s1);
-int		escapespace(char *argv, t_lexout *tolex);
+char	*lexer_ft_strjoin(char *s1, char *s2);
+int		lexer_ft_strlen(char *s1);
+int		lexer_escapespace(char *argv, t_lexout *tolex);
 
 #endif
