@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 15:35:43 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:18:49 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_lexout
 	int			box2lastisspace;
 	char		*box3;
 	int			box3index;
+	int			box3null;
+	int			box3space;
 	char		*box4;
 	int			box4index;
 	int			box4space;
@@ -80,11 +82,10 @@ int		isbeforeflag(t_lexout *tolex);
 int		thirdbox(char *argv, t_lexout *tolex);
 int		box3inquote(char *argv, t_lexout *tolex);
 int		box3escapespace(char *argv, t_lexout *tolex);
+int		box3insinglequote(char *argv, t_lexout *tolex);
 
 //box4
 void	fourthbox(char *argv, t_lexout *tolex);
-int		box4inquote(char *argv, t_lexout *tolex);
-int		box4insinglequote(char *argv, t_lexout *tolex);
 int		box4greatgreat(char *argv, t_lexout *tolex);
 int		box4great(char *argv, t_lexout *tolex);
 int		box4lessless(char *argv, t_lexout *tolex);
@@ -92,6 +93,8 @@ int		box4less(char *argv, t_lexout *tolex);
 int		box4wtf(char *argv, t_lexout *tolex);
 int		box4inquote_mode2(char *argv, t_lexout *tolex);
 int		box4insinglequote_mode2(char *argv, t_lexout *tolex);
+int		box4passquote(char *argv);
+int		box4passsinglequote(char *argv);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout table);
@@ -100,5 +103,9 @@ void	create_node(t_shell *shell, t_lexout table);
 char	*lexer_ft_strjoin(char *s1, char *s2);
 int		lexer_ft_strlen(char *s1);
 int		lexer_escapespace(char *argv, t_lexout *tolex);
+int		box4escapespace(char *argv, t_lexout *tolex);
+
+//temp
+void	readbox3(char *argv);
 
 #endif
