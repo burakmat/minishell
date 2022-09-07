@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/07 12:06:40 by osyalcin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 #define MINISHELL_H
 
@@ -28,7 +40,8 @@ typedef struct s_lexout
 	int		box4index;
 	int		box2runaway;
 	int		box2space;
-	t_errorcode *error;
+	int		box2lastisspace;
+	t_errorcode error;
 } t_lexout;
 
 typedef struct s_node
@@ -59,8 +72,11 @@ int	box1insinglequote(char *argv, t_lexout *tolex);
 //box2
 int	secondbox(char *argv, t_lexout *tolex);
 int	secondboxinquote(char *argv, t_lexout *tolex);
-int	secondboxinquote_mode1(char *argv, t_lexout *tolex);
-int	box2spaceafter(char *argv, t_lexout *tolex);
+int	isbeforeflag(t_lexout *tolex);
+
+//box3
+int	thirdbox(char *argv, t_lexout *tolex);
+
 
 //command_table.c
 void create_node(t_shell *shell, t_lexout table);

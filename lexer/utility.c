@@ -1,9 +1,20 @@
-#include "../minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utility.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/07 12:10:16 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/07 12:10:33 by osyalcin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../minishell.h"
 
 int	ft_strlen(char *s1)
 {
-	int a;
+	int	a;
 
 	a = 0;
 	while (s1[a] != '\0')
@@ -41,15 +52,17 @@ char	*ft_strjoin(char *s1, char *s2)
 
 int	escapespace(char *argv, t_lexout *tolex)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
 	{
-		while (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
+		while (((argv[i] <= 13 && argv[i] >= 9)
+				|| argv[i] == 32) && argv[i] != '\0')
 			i++;
 		if (tolex->box2space == 2)
 			tolex->box2[tolex->box2index++] = 32;
+		tolex->box2lastisspace = 1;
 	}
 	return (i);
 }

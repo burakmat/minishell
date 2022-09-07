@@ -1,22 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   box2.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/07 12:06:32 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/07 12:13:17 by osyalcin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	secondbox(char *argv, t_lexout *tolex)
 {
-	int i;
-	char *temp;
+	int	i;
 
-	temp = malloc(sizeof(char) * 10000);
 	i = 0;
+	i += escapespace(argv + i, tolex);
 	while (tolex->box2runaway != 1 && argv[i] != '\0')
 	{
-		printf("i %d\n", i);
-		if(argv[i] == '"')
-		{
-			if (!((argv[i - 1] <= 13 && argv[i - 1] >= 9) || argv[i - 1] == 32))
-				i += secondboxinquote_mode1(argv + i, tolex);
-			else 
-				i += secondboxinquote(argv + i, tolex);
-		}
+		if (argv[i] == '"')
+			i += secondboxinquote(argv + i, tolex);
 		else if (argv[i] == '-')
 		{
 			if (((argv[i + 1] <= 13 && argv[i + 1] >= 9) || argv[i + 1] == 32))
@@ -24,10 +29,17 @@ int	secondbox(char *argv, t_lexout *tolex)
 				tolex->box2runaway = 1;
 				return (i);
 			}
+			while (!((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '"' && argv[i] != '\0')
+				tolex->box2[tolex->box2index++] = argv[i++];
+			tolex->box2lastisspace = 0;
+		}
+		else if (tolex->box2index > 0 && tolex->box2lastisspace != 1)
+		{
 			tolex->box2[tolex->box2index++] = argv[i++];
+			tolex->box2lastisspace = 0;
 		}
 		else
-			tolex->box2[tolex->box2index++] = argv[i++];
+			tolex->box2runaway = 1;
 		i += escapespace(argv + i, tolex);
 	}
 	return (i);
@@ -35,73 +47,42 @@ int	secondbox(char *argv, t_lexout *tolex)
 
 int	secondboxinquote(char *argv, t_lexout *tolex)
 {
-	int i;
+	int	i;
 
 	i = 1;
-	if (argv[i] == '"')
-	{
-		i++;
-		return(i);
-	}
-	if (argv[i] != '-')
+	if (argv[i] != '-' && isbeforeflag(tolex))
 	{
 		tolex->box2runaway = 1;
 		return (0);
 	}
 	else
 	{
-		if (((argv[i + 1] <= 13 && argv[i + 1] >= 9) || argv[i + 1] == 32))
-		{
-			if (box2spaceafter(argv, tolex));
-			tolex->box2runaway = 1;
-			return(0);
-		}
-		tolex->box2[tolex->box2index++] = argv[i++];
-		while (argv[i] != '"')
-			tolex->box2[tolex->box2index++] = argv[i++];
-	}
-	i++;
-	return (i);	
-}
-
-
-box2spaceafter(char *argv, t_lexout *tolex)
-{
-	int i;
-
-	//arkaya bak öne değil
-	i = 0;
-	while (argv[i] != '"')
-		i++;
-
-}
-
-int	secondboxinquote_mode1(char *argv, t_lexout *tolex)
-{
-	int i;
-
-	i = 1;
-	if (argv[i] == '"')
-	{
-		i++;
-		return(i);
-	}
-	if (argv[i] != '-')
-	{
-		tolex->box2runaway = 1;
-		return (0);
-	}
-	else
-	{
-		if (((argv[i + 1] <= 13 && argv[i + 1] >= 9) || argv[i + 1] == 32))
+		if (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && tolex->box2lastisspace == 1)
 		{
 			tolex->box2runaway = 1;
-			return(0);
+			return (0);
 		}
-		tolex->box2[tolex->box2index++] = argv[i++];
 		while (argv[i] != '"')
+		{
+			if ((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32)
+				tolex->error.illegalflag = 1;
 			tolex->box2[tolex->box2index++] = argv[i++];
+		}
 	}
 	i++;
-	return (i);	
+	tolex->box2lastisspace = 0;
+	return (i);
+}
+
+int	isbeforeflag(t_lexout *tolex)
+{
+	int	i;
+
+	i = tolex->box2index;
+	if (tolex->box2index == 0)
+		return (1);
+	if (((tolex->box2[i] <= 13 && tolex->box2[i] >= 9)
+			|| tolex->box2[i] == 32))
+		return (1);
+	return (0);
 }

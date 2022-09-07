@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   box3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 12:09:44 by osyalcin         ###   ########.fr       */
+/*   Created: 2022/09/07 12:06:49 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/07 12:09:26 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
+int	thirdbox(char *argv, t_lexout *tolex)
 {
 	int	i;
 
-	tolex->box2space = 2;
 	i = 0;
-	i += firstbox(argv, tolex);
-	i += secondbox(argv + i, tolex);
-	i += thirdbox(argv + i, tolex);
-	(void) shell;
-	printf("firstbox %s\n", tolex->box1);
-	printf("secondbox %s\n", tolex->box2);
-	printf("3. giriş %d\n", i);
-	printf("third %s\n", tolex->box3);
-	printf("%d\n", tolex->error.illegalflag);
-	return (1);
+	i = escapespace(argv, tolex);
+	while (argv[i] != '\0')
+		tolex->box3[tolex->box3index++] = argv[i++];
+	return (i);
 }

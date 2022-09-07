@@ -29,4 +29,5 @@ void	fillboxes(t_lexout *tolex)
 	tolex->box2index = 0;
 	tolex->box3index = 0;
 	tolex->box4index = 0;
+	tolex->error.illegalflag = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 12:59:18 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/05 12:27:29 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 12:07:16 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+
 typedef struct s_list{
 	void						*content;
 	struct s_list				*next;
 }				t_list;
-
 int			ft_isalpha(int a);
 int			ft_isascii(int a);
 int			ft_isdigit(int a);
