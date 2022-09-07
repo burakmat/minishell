@@ -3,22 +3,17 @@
 
 int main(int argc, char **argv)
 {
-	t_lexout *tolex;
+	t_lexout tolex;
 	t_errorcode error;
+	t_shell shell;
 	char	*a;
-
-	tolex = malloc(sizeof(t_lexout));
 
 	while (1)
 	{
-		fillboxes(tolex);
+		fillboxes(&tolex);
 		a = readline(">>");
 		add_history(a);
-		lexer(a, tolex);
-		free(tolex->box1);
-		free(tolex->box2);
-		free(tolex->box3);
-		free(tolex->box4);
+		lexer(a, &tolex, &shell);
 	}
 	return (0);
 }
@@ -33,5 +28,9 @@ void	fillboxes(t_lexout *tolex)
 	tolex->box1index = 0;
 	tolex->box2index = 0;
 	tolex->box3index = 0;
+	tolex->box3space = 0;
+	tolex->box3null  = 0;
 	tolex->box4index = 0;
+	tolex->box4space = 0;
+	tolex->error.illegalflag = 0;
 }
