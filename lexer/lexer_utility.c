@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:10:16 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 15:36:18 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:51:37 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,19 @@ int	lexer_escapespace(char *argv, t_lexout *tolex)
 		if (tolex->box2space == 2 && tolex->box2index != 0)
 			tolex->box2[tolex->box2index++] = 32;
 		tolex->box2lastisspace = 1;
+	}
+	return (i);
+}
+
+int	box4escapespace(char *argv, t_lexout *tolex)
+{
+	int	i;
+
+	i = 0;
+	while (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
+	{
+		i++;	
+		tolex->box4space = 1;
 	}
 	return (i);
 }
