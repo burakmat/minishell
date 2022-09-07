@@ -73,7 +73,7 @@ int	secondboxinquote(char *argv, t_lexout *tolex)
 		while (argv[i] != '"')
 		{
 			if ((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32)
-				tolex->error.illegalflag = 1;
+				tolex->illegalflag = 1;
 			tolex->box2[tolex->box2index++] = argv[i++];
 		}
 	}
@@ -107,7 +107,7 @@ int	secondboxinsinglequote(char *argv, t_lexout *tolex)
 		while (argv[i] != 39)
 		{
 			if ((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32)
-				tolex->error.illegalflag = 1;
+				tolex->illegalflag = 1;
 			tolex->box2[tolex->box2index++] = argv[i++];
 		}
 	}

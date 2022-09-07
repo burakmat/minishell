@@ -11,45 +11,6 @@ int	ft_strlen(char *s1)
 	return (a);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
-{
-	int		a;
-	char	*last;
-	int		b;
-
-	a = 0;
-	b = ft_strlen(s1);
-	last = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!last)
-		return (0);
-	while (b > a)
-	{
-		last[a] = s1[a];
-		a++;
-	}
-	a = 0;
-	while (ft_strlen(s1) + ft_strlen(s2) > a)
-	{
-		last[b + a] = s2[a];
-		a++;
-	}
-	printf("join %s\n", last);
-	free(s1);
-	free(s2);
-	return (last);
-}
-
-int	escapespace(char *argv)
-{
-	int i;
-
-	i = 0;
-	while (argv[i] == ' ')
-		i++;
-	
-	return (i);
-}
-
 unsigned int	str_in_array(const char *s, char delimiter)
 {
 	unsigned int	qnt;
@@ -95,4 +56,68 @@ char	**ft_split(char const *s, char c)
 		}
 	}
 	return (arr);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size && (s1[i] != '\0' || s2[i] != '\0'))
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_strncmp_exact(const char *s1, const char *s2, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size && (s1[i] != '\0' || s2[i] != '\0'))
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t b)
+{
+	size_t	a;
+	size_t	c;
+
+	a = 0;
+	c = ft_strlen(src);
+	if (b > 0)
+	{
+		while (a < b - 1 && src[a])
+		{
+			dst[a] = src[a];
+			a++;
+		}
+			dst[a] = '\0';
+	}
+	return (c);
+}
+
+char	*ft_strjoin_path(char const *s1, char const *s2)
+{
+	size_t	a;
+	char	*last;
+	size_t	b;
+
+	a = 0;
+	b = ft_strlen(s1);
+	last = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
+	if (!last || !s1)
+		return (0);
+	ft_strlcpy(last, s1, ft_strlen(s1) + 1);
+	last[b] = '/';
+	ft_strlcpy(&last[b + 1], s2, ft_strlen(s2) + 1);
+	return (last);
 }

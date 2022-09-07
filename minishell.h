@@ -22,12 +22,6 @@
 # include <errno.h>
 # include <sys/wait.h>
 
-typedef struct s_errorcode
-{
-	int	illegalflag;
-	int	nosuchfile;
-}	t_errorcode;
-
 typedef struct s_lexout
 {
 	char		*box1;
@@ -44,21 +38,24 @@ typedef struct s_lexout
 	char		*box4;
 	int			box4index;
 	int			box4space;
-	t_errorcode	error;
+	int			illegalflag;
 }	t_lexout;
 
 typedef struct s_node
 {
-	char			*command;
-	char			*flags;
-	char			*argument;
-	char			*redirections;
-	struct s_node	*next_node;
-	struct s_node	*previous_node;
+	char *command;
+	char *flags;
+	char *argument;
+	char *redirections;
+	struct s_node *next_node;
+	struct s_node *previous_node;
+	char *cmd_path;
+	int is_builtin;
 }	t_node;
 
 typedef struct s_shell
 {
+	int err_code;
 	char **env;
 	t_node *head;
 }	t_shell;
@@ -105,8 +102,17 @@ char	*lexer_ft_strjoin(char *s1, char *s2);
 int		lexer_ft_strlen(char *s1);
 int		lexer_escapespace(char *argv, t_lexout *tolex);
 int		box4escapespace(char *argv, t_lexout *tolex);
+int	ft_strlen(char *s1);
+int	ft_strncmp(const char *s1, const char *s2, size_t size);
+int	ft_strncmp_exact(const char *s1, const char *s2, size_t size);
+char	*ft_strjoin_path(char const *s1, char const *s2);
+char	**ft_split(char const *s, char c);
 
 //temp
 void	readbox3(char *argv);
+void create_node(t_shell *shell, t_lexout table);
+
+//finish.c
+void	print_error(t_shell *shell);
 
 #endif
