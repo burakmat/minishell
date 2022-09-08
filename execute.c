@@ -8,7 +8,7 @@ void	execute(t_shell *shell, t_node *node)
 	char *argc[] = {node->flags, NULL};
 	node->cmd_path = search_in_path(shell, node);
 	pipe(fd);
-	pid = fork();
+	/*pid = fork();
 	if (!pid)
 	{
 		if (shell->head->previous_node != NULL)
@@ -19,7 +19,7 @@ void	execute(t_shell *shell, t_node *node)
 	{
 		close(fd[0]);
 		waitpid(pid, 0 ,0);
-	}
+	}*/
 	//clear all node;
 	// arguman null;
 	// pipe;
