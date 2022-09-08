@@ -10,7 +10,6 @@ int main(int argc, char **argv, char **env)
 	shell.env = env;
 	while (1)
 	{
-		fillboxes(&tolex);
 		a = readline(">>");
 		add_history(a);
 		lexer(a, &tolex, &shell);

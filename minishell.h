@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 19:40:16 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/08 10:37:58 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int		box4passquote(char *argv);
 int		box4passsinglequote(char *argv);
 
 //command_table.c
-void	create_node(t_shell *shell, t_lexout table);
+void	create_node(t_shell *shell, t_lexout *table);
 char *search_in_path(t_shell *shell, t_node *node);
 char **split_path(t_shell *shell, int ind);
 void **edit_first_path(char **all_path_copy);
@@ -121,7 +121,7 @@ void	*ft_memset(void *b, int c, size_t len);
 int	ft_strlcpy(char *dst, char *src, int b);
 //temp
 void	readbox3(char *argv);
-void create_node(t_shell *shell, t_lexout table);
+void create_node(t_shell *shell, t_lexout *table);
 
 //finish.c
 void	print_error(t_shell *shell);

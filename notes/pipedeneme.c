@@ -4,18 +4,34 @@
 #include <stdlib.h>
 int main(int argc, char **argv, char **envp)
 {
-	int forpipe[2];
 	char *a;
 	int fd; 
 
-	pipe(forpipe);
-	fd = open("a", O_RDONLY);
-	dup2(fd, 0); // stdin == fd 
-	dup2(1, forpipe[1]); // stdout == forpipe[1];
+	char *ar[] = {"-l", NULL};
+	fd = open("a", O_RDWR);
+	int fd2 = open("b", O_RDONLY);
+	int pid;
 
-	a = malloc(1000);
-	write(forpipe[1], "ahmet", 5);
-	read(0, a, 5);
-	printf("%s\n", a);
+
+	if (!(pid = fork()))
+	{
+		dup2(fd, 1); // stdin == fd 
+		execve("/bin/ls", ar, NULL);
+	}
+	else
+	{
+		waitpid(pid, 0, 0);
+	}
+	a = malloc(100);
+	if (!(pid = fork()))
+	{
+		read(fd, a, 5);
+		write(1, a, 5);
+	}
+	else
+	{
+		waitpid(pid, 0, 0);
+	}
+	
 	return 0;
 }
