@@ -12,17 +12,17 @@ void free_table(t_node *node, t_lexout *table)
 		free(node->redirections);
 }
 
-void create_node(t_shell *shell, t_lexout table)
+void create_node(t_shell *shell, t_lexout *table)
 {
 	static int count;
 	static t_node *prev;
 	t_node *node;
 
 	node = malloc(sizeof(t_node));
-	node->command = table.box1;
-	node->flags = table.box2;
-	node->argument = table.box3;
-	node->redirections = table.box4;
+	node->command = table->box1;
+	node->flags = table->box2;
+	node->argument = table->box3;
+	node->redirections = table->box4;
 	node->cmd_path = NULL;
 	node->next_node = NULL;
 	if (count)
@@ -37,7 +37,7 @@ void create_node(t_shell *shell, t_lexout table)
 	}
 	prev = node;
 	++count;
-	free_table(node, &table);
+	free_table(node, table);
 }
 
 int	builtin_check(char *command) //add functions
@@ -66,8 +66,9 @@ void	stage_command(t_shell *shell, t_node *node)
 	char *abs_path;
 	if (builtin_check(node->command))
 		node->is_builtin = 1;
-	node->cmd_path = search_in_path(shell, node);
+	/* if node->is_builtin == 1 execute builtin */
 	//send node to child
+	execute(shell, node);
 }
 
 char *search_in_path(t_shell *shell, t_node *node)

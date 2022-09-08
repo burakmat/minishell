@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:16:51 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 12:54:45 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/08 13:16:09 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	firstbox(char *argv, t_lexout *tolex)
 			|| argv[i] == 32) && argv[i] != '\0')
 		i++;
 	while (!((argv[i] <= 13 && argv[i] >= 9)
-			|| argv[i] == 32) && argv[i] != '\0')
+			|| argv[i] == 32) && argv[i] != '\0' && argv[i] != '|')
 	{
 		if (argv[i] == '"')
 			i += box1indoublequote(argv + i, tolex);
