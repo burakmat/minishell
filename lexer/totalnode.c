@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:45:10 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/08 17:46:54 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/08 17:52:23 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	totalnode(char *argv, t_lexout *tolex)
 	int i;
 
 	i = 0;
-	tolex->totalnode = 0;
+	tolex->totalnode = 1;
 	while (argv[i] != '\0')
 	{
 		if(argv[i] == '"')
