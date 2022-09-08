@@ -105,6 +105,8 @@ int	is_there_path(t_shell *shell);
 int		builtin_check(char *command);
 void	stage_command(t_shell *shell, t_node *node);
 
+//list_utils.c
+void	clear_all_nodes(t_node *head);
 
 // utility
 char	*lexer_ft_strjoin(char *s1, char *s2);
