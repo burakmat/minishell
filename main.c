@@ -10,6 +10,7 @@ int main(int argc, char **argv, char **env)
 	shell.env = env;
 	while (1)
 	{
+		fillboxesstatic(&tolex);
 		a = readline(">>");
 		add_history(a);
 		lexer(a, &tolex, &shell);
@@ -33,4 +34,9 @@ void	fillboxes(t_lexout *tolex)
 	tolex->box4index = 0;
 	tolex->box4space = 0;
 	tolex->illegalflag = 0;
+}
+
+void	fillboxesstatic(t_lexout *tolex)
+{
+	tolex->currentnode = 0;
 }
