@@ -15,7 +15,7 @@ int main(int argc, char **argv, char **env)
 		add_history(a);
 		totalnode(a, &tolex);
 		lexer(a, &tolex, &shell);
-		stage_command(&shell, shell.head);
+		stage_command(&shell, shell.tail);
 		free(a);
 	}
 	return (0);

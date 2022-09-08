@@ -28,7 +28,7 @@ void create_node(t_shell *shell, t_lexout *table)
 	prev = node;
 	++count;
 	if (count == table->totalnode)
-		shell->tail == node;
+		shell->tail = node;
 }
 
 int	builtin_check(char *command) //add functions
@@ -59,8 +59,8 @@ void	stage_command(t_shell *shell, t_node *node)
 		node->is_builtin = 1;
 	/* if node->is_builtin == 1 execute builtin */
 	//send node to child
-	clear_all_nodes(node);
-	//execute(shell, node);
+	// clear_all_nodes(node);
+	execute(shell, node);
 }
 
 char *search_in_path(t_shell *shell, t_node *node)
