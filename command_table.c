@@ -59,8 +59,20 @@ void	stage_command(t_shell *shell, t_node *node)
 		node->is_builtin = 1;
 	/* if node->is_builtin == 1 execute builtin */
 	//send node to child
-	// clear_all_nodes(node);
 	execute(shell, node);
+	clear_all_nodes(node);
+	free_all_path(shell->free_.my_path);
+	system("leaks minishell");
+}
+
+void	free_all_path(char **path)
+{
+	int i;
+
+	i = 0;
+	while (path[i])
+		free(path[i++]);
+	free(path);
 }
 
 char *search_in_path(t_shell *shell, t_node *node)
@@ -78,6 +90,7 @@ char *search_in_path(t_shell *shell, t_node *node)
 	else
 	{
 		my_path = split_path(shell, i);
+		shell->free_.my_path = my_path;
 		i = 0;
 		while (my_path[i])
 		{

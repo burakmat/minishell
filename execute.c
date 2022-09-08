@@ -19,6 +19,7 @@ void	execute(t_shell *shell, t_node *node)
 	{
 		close(fd[0]);
 		waitpid(pid, 0 ,0);
+
 	}
 	//clear all node;
 	// arguman null;

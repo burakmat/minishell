@@ -43,6 +43,11 @@ typedef struct s_lexout
 	int			totalnode;
 }	t_lexout;
 
+typedef struct s_free
+{
+	char **my_path;
+}	t_free;
+
 typedef struct s_node
 {
 	char *command;
@@ -61,6 +66,7 @@ typedef struct s_shell
 	char **env;
 	t_node *head;
 	t_node *tail;
+	t_free free_;
 }	t_shell;
 
 // main
@@ -112,6 +118,7 @@ void **edit_first_path(char **all_path_copy);
 int	is_there_path(t_shell *shell);
 int		builtin_check(char *command);
 void	stage_command(t_shell *shell, t_node *node);
+void	free_all_path(char **path);
 
 //list_utils.c
 void	clear_all_nodes(t_node *head);
