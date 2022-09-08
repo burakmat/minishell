@@ -57,6 +57,7 @@ typedef struct s_node
 	struct s_node *next_node;
 	struct s_node *previous_node;
 	char *cmd_path;
+	char **exec_args;
 	int is_builtin;
 }	t_node;
 

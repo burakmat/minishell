@@ -4,6 +4,7 @@ void clear_all_nodes(t_node *head)
 {
 	t_node	*current;
 	t_node	*temp;
+	
 	current = head;
 	while (current)
 	{
