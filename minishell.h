@@ -33,12 +33,12 @@ typedef struct s_lexout
 	int			box2lastisspace;
 	char		*box3;
 	int			box3index;
-	int			box3null;
+	int			box3null;//number of nulls in argument
 	int			box3space;
 	char		*box4;
 	int			box4index;
 	int			box4space;
-	int			illegalflag;
+	int			illegalflag;//if 1 going through, 0 split into spaces
 }	t_lexout;
 
 typedef struct s_node
