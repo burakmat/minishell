@@ -1,37 +1,26 @@
-#include <fcntl.h>
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-int main(int argc, char **argv, char **envp)
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+ 
+int main()
 {
-	char *a;
-	int fd; 
-
-	char *ar[] = {"-l", NULL};
-	fd = open("a", O_RDWR);
-	int fd2 = open("b", O_RDONLY);
+	/*int fd[2];
+	//fd[1] - write
+	//fd[0] - read
 	int pid;
-
-
-	if (!(pid = fork()))
+	pid = fork()
+	if (!pid)
 	{
-		dup2(fd, 1); // stdin == fd 
-		execve("/bin/ls", ar, NULL);
+		if prev == 1
+			exec()
 	}
 	else
 	{
-		waitpid(pid, 0, 0);
-	}
-	a = malloc(100);
-	if (!(pid = fork()))
-	{
-		read(fd, a, 5);
-		write(1, a, 5);
-	}
-	else
-	{
-		waitpid(pid, 0, 0);
+		waitpid(pid,0,0)
 	}
 	
-	return 0;
+	return 0;*/
 }

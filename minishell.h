@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/08 10:37:58 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/08 15:52:53 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,12 @@ void	*ft_memset(void *b, int c, size_t len);
 int	ft_strlcpy(char *dst, char *src, int b);
 //temp
 void	readbox3(char *argv);
-void create_node(t_shell *shell, t_lexout *table);
 
 //finish.c
 void	print_error(t_shell *shell);
+
+//execute
+
+void	execute(t_shell *shell, t_node *node);
 
 #endif

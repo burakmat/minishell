@@ -13,6 +13,7 @@ int main(int argc, char **argv, char **env)
 		a = readline(">>");
 		add_history(a);
 		lexer(a, &tolex, &shell);
+		stage_command(&shell, shell.head);
 	}
 	return (0);
 }

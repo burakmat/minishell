@@ -67,8 +67,8 @@ void	stage_command(t_shell *shell, t_node *node)
 	if (builtin_check(node->command))
 		node->is_builtin = 1;
 	/* if node->is_builtin == 1 execute builtin */
-	node->cmd_path = search_in_path(shell, node);
 	//send node to child
+	execute(shell, node);
 }
 
 char *search_in_path(t_shell *shell, t_node *node)
