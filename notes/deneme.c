@@ -8,10 +8,12 @@
 
 int main()
 {
-	int fd = open("a.txt", O_WRONLY);
-	dup2(fd, 1);
-	write(fd, "aslan", 5);
-	write(1, "aslan", 5);
-	printf("osman");
+
+/*	int pid2 = fork();
+	if(!pid2){
+		dup2(fd[])
+	}
+
+*/
 	return 0;
 }

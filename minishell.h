@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/08 16:42:36 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/08 17:45:52 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_lexout
 	int			box4space;
 	int			illegalflag;//if 1 going through, 0 split into spaces
 	int			currentnode;
+	int			totalnode;
 }	t_lexout;
 
 typedef struct s_node
@@ -95,6 +96,12 @@ int		box4inquote_mode2(char *argv, t_lexout *tolex);
 int		box4insinglequote_mode2(char *argv, t_lexout *tolex);
 int		box4passquote(char *argv);
 int		box4passsinglequote(char *argv);
+
+//total node
+
+void	totalnode(char *argv, t_lexout *tolex);
+int		totalnodeinquote(char *argv);
+int		totalnodeinsinglequote(char *argv);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout *table);
