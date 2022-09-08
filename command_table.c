@@ -27,6 +27,8 @@ void create_node(t_shell *shell, t_lexout *table)
 	}
 	prev = node;
 	++count;
+	if (count == table->totalnode)
+		shell->tail == node;
 }
 
 int	builtin_check(char *command) //add functions

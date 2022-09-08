@@ -60,6 +60,7 @@ typedef struct s_shell
 	int err_code;
 	char **env;
 	t_node *head;
+	t_node *tail;
 }	t_shell;
 
 // main
