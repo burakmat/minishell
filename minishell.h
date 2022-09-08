@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/08 15:52:53 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/08 16:42:36 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_lexout
 	int			box4index;
 	int			box4space;
 	int			illegalflag;
+	int			currentnode;
 }	t_lexout;
 
 typedef struct s_node
@@ -63,6 +64,7 @@ typedef struct s_shell
 // main
 void	fillboxes(t_lexout *tolex);
 int		lexer(char *argv, t_lexout *tolex, t_shell *shell);
+void	fillboxesstatic(t_lexout *tolex);
 
 //box1
 int		firstbox(char *argv, t_lexout *tolex);
