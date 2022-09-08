@@ -13,6 +13,8 @@ int main(int argc, char **argv, char **env)
 		fillboxesstatic(&tolex);
 		a = readline(">>");
 		add_history(a);
+		totalnode(a, &tolex);
+		printf("lala\n");
 		lexer(a, &tolex, &shell);
 		stage_command(&shell, shell.head);
 	}
