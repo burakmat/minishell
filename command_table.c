@@ -6,6 +6,8 @@ void create_node(t_shell *shell, t_lexout *table)
 	static t_node *prev;
 	t_node *node;
 
+	if (table->currentnode == 0)
+		count = 0;
 	node = malloc(sizeof(t_node));
 	node->command = table->box1;
 	node->flags = table->box2;
