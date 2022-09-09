@@ -34,8 +34,6 @@ void	set_flags(t_shell *shell, t_node *node)
 	else
 	{
 		node->exec_args = malloc(sizeof(char *) * 2);
-		node->exec_args[0] = malloc(sizeof(char));
-		node->exec_args[1] = malloc(sizeof(char));
 		node->exec_args[0] = node->cmd_path;
 		node->exec_args[1] = NULL;
 	}
@@ -90,5 +88,6 @@ void	set_node(t_shell *shell, t_node *node)
 {
 	
 	node->cmd_path = search_in_path(shell, node);
-	set_flags(shell, node);
+	//set_flags(shell, node);
+
 }

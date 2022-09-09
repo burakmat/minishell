@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:06:38 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/07 17:41:07 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:10:46 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void fourthbox(char *argv, t_lexout *tolex)
 			tolex->box4space = 1;
 			i++;
 		}	
+	}
+	if (tolex->box4index == 0)
+	{
+		free(tolex->box4);
+		tolex->box4 = NULL;
 	}
 }
 

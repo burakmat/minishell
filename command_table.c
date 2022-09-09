@@ -64,7 +64,6 @@ void	stage_command(t_shell *shell, t_node *node)
 	execute(shell, node);
 	clear_all_nodes(shell->head);
 	free_all_path(shell->free_.my_path);
-	//system("leaks minishell");
 }
 
 void	free_all_path(char **path)
