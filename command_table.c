@@ -62,7 +62,7 @@ void	stage_command(t_shell *shell, t_node *node)
 	execute(shell, node);
 	clear_all_nodes(shell->head);
 	free_all_path(shell->free_.my_path);
-	system("leaks minishell");
+	//system("leaks minishell");
 }
 
 void	free_all_path(char **path)
@@ -80,6 +80,7 @@ char *search_in_path(t_shell *shell, t_node *node)
 	int i;
 	char *searched;
 
+
 	i = is_there_path(shell);
 	if (i == -1)
 	{
@@ -93,6 +94,7 @@ char *search_in_path(t_shell *shell, t_node *node)
 		while (shell->free_.my_path[i])
 		{
 			searched = ft_strjoin_path(shell->free_.my_path[i], node->command);
+			printf("serached %s\n", searched);
 			if (!access(searched, X_OK) && node->command != NULL)
 				return (searched);
 			free(searched);
