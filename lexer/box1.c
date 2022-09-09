@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:16:51 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/09 13:59:16 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:17:54 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int	firstbox(char *argv, t_lexout *tolex)
 	}
 	if (tolex->box1index == 0)
 	{
+		if (tolex->boxwasin == 1)
+		{
+			tolex->illegalcommand = 1;
+		}
 		free(tolex->box1);
 		tolex->box1 = NULL;	
 	}
@@ -48,6 +52,7 @@ int	box1indoublequote(char *argv, t_lexout *tolex)
 		tolex->box1[tolex->box1index++] = argv[i++];
 	}
 	i++;
+	tolex->boxwasin = 1;
 	return (i);
 }
 
@@ -61,5 +66,6 @@ int	box1insinglequote(char *argv, t_lexout *tolex)
 		tolex->box1[tolex->box1index++] = argv[i++];
 	}
 	i++;
+	tolex->boxwasin = 1;
 	return (i);
 }
