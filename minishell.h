@@ -59,6 +59,7 @@ typedef struct s_data
 	char		**arg;
 	char		**env_in;
 	char		*cwd;
+	char		**just_env;
 }				t_data;
 
 
