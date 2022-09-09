@@ -111,6 +111,8 @@ char	*ft_strjoin_path(char *s1, char *s2)
 	char	*last;
 	int	b;
 
+	if (s2 == NULL)
+		return(ft_strdup(s1));	
 	a = 0;
 	b = ft_strlen(s1);
 	last = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
@@ -149,4 +151,24 @@ void	*ft_memset(void *b, int c, size_t len)
 		a++;
 	}
 	return (b);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*s;
+	size_t	len;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(s1);
+	s = (char *)malloc(sizeof(char) * len + 1);
+	if (!s)
+		return (0);
+	while (s1[i] != '\0')
+	{
+		s[i] = s1[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
 }

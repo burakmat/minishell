@@ -55,14 +55,14 @@ int	builtin_check(char *command) //add functions
 void	stage_command(t_shell *shell, t_node *node)
 {
 	char *abs_path;
-	if (builtin_check(node->command))
+	/*if (builtin_check(node->command))
 		node->is_builtin = 1;
-	/* if node->is_builtin == 1 execute builtin */
+	if node->is_builtin == 1 execute builtin */
 	//send node to child
 	execute(shell, node);
-	clear_all_nodes(node);
+	clear_all_nodes(shell->head);
 	free_all_path(shell->free_.my_path);
-	system("leaks minishell");
+	//system("leaks minishell");
 }
 
 void	free_all_path(char **path)
@@ -78,8 +78,8 @@ void	free_all_path(char **path)
 char *search_in_path(t_shell *shell, t_node *node)
 {
 	int i;
-	char **my_path;
 	char *searched;
+
 
 	i = is_there_path(shell);
 	if (i == -1)
@@ -89,18 +89,17 @@ char *search_in_path(t_shell *shell, t_node *node)
 	}
 	else
 	{
-		my_path = split_path(shell, i);
-		shell->free_.my_path = my_path;
+		shell->free_.my_path = split_path(shell, i);
 		i = 0;
-		while (my_path[i])
+		while (shell->free_.my_path[i])
 		{
-			searched = ft_strjoin_path(my_path[i], node->command);
-			if (!access(searched, X_OK))
+			searched = ft_strjoin_path(shell->free_.my_path[i], node->command);
+			if (!access(searched, X_OK) && node->command != NULL)
 				return (searched);
 			free(searched);
 			++i;
 		}
-		if (!access(node->command, X_OK))
+		if (!access(node->command, X_OK) && node->command != NULL)
 			return (node->command);
 		return (NULL);
 	}
@@ -127,7 +126,7 @@ void **edit_first_path(char **all_path_copy)
 	j = 0;
 	while (j < i)
 	{
-		first_path[j] = all_path_copy[0][j];
+		first_path[j] = all_path_copy[0][j + 5];
 		++j;
 	}
 	first_path[i] = '\0';
