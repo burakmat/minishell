@@ -60,7 +60,46 @@ void	set_arguments(t_shell *shell, t_node *node)//CHECK NULLS FROM HERE
 	int k;
 	char **tmp;
 
-	tmp = malloc(sizeof(char *) * node->null_num + 1);
+	if (node->argument == NULL)//if there are no arguments
+	{
+		if (node->exec_args == NULL)//if there was no command and flag
+		{
+
+		}
+		else if (node->command != NULL && node->flags == NULL)//if there was command but no flags
+		{
+
+		}
+		else if (node->command == NULL && node->flags != NULL)//if there was no command but there is flag
+		{
+
+		}
+		else//there were both command and flags
+		{
+
+		}
+	}
+	else//if there are argument(s)
+	{
+		if (node->exec_args == NULL)//if there was no command and flag
+		{
+
+		}
+		else if (node->command != NULL && node->flags == NULL)//if there was command but no flags
+		{
+
+		}
+		else if (node->command == NULL && node->flags != NULL)//if there was no command but there is flag
+		{
+
+		}
+		else//there were both command and flags
+		{
+
+		}
+	}
+	
+	/* tmp = malloc(sizeof(char *) * node->null_num + 1);
 	i = 0;
 	k = 0;
 	while ((node->null_num)--)
@@ -87,7 +126,7 @@ void	set_arguments(t_shell *shell, t_node *node)//CHECK NULLS FROM HERE
 	if (j)
 		tmp[k] = NULL;
 	else
-		free(tmp);
+		free(tmp); */
 	//add tmp to node.exec_args
 }
 
