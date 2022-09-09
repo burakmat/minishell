@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/08 17:45:52 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/09 13:41:32 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,9 @@ void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 int	ft_strlcpy(char *dst, char *src, int b);
+char	*ft_strdup(const char *s1);
+
+
 //temp
 void	readbox3(char *argv);
 
