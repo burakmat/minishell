@@ -5,13 +5,14 @@ void	set_flags(t_shell *shell, t_node *node)
 	int i;
 	char **tmp;
 
-	if (*node->flags)
+	if (node->flags != NULL)
 	{
 		if (node->illegalflag)
 		{
 			node->exec_args = malloc(sizeof(char *) * 2);
-			node->exec_args[0] = node->flags;
-			node->exec_args[1] = NULL;
+			node->exec_args[0] = node->command; // bu mantıken lazım
+			node->exec_args[1] = node->flags;
+			node->exec_args[2] = NULL;
 		}
 		else
 		{
@@ -88,6 +89,6 @@ void	set_node(t_shell *shell, t_node *node)
 {
 	
 	node->cmd_path = search_in_path(shell, node);
-	//set_flags(shell, node);
+	set_flags(shell, node);
 
 }

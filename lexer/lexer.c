@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/09 18:22:50 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:35:18 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 	printf("secondbox %p\n", tolex->box2);
 	printf("thirdbox %p\n", tolex->box3);
 	printf("\n%d\n", tolex->box3null);
-	printf("\nfourth %p\n", tolex->box4);*/
+	printf("\nfourth %p\n", tolex->box4);
+	printf("aloo %d\n", tolex->illegalflag);*/
 	if (argv[i] == '|')
 		lexer(argv + i + 1, tolex, shell);
 	return (1);

@@ -5,8 +5,8 @@
 
 int main()
 {
-	char *argv[] = {"/bin/cat","-b", "pipedeneme.c", NULL};
+	char *argv[] = {NULL, NULL};
 
-	execve("/bin/cat", argv, NULL);
+	execve("/bin/ls", argv, NULL);
 	return 0;
 }
