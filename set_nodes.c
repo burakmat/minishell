@@ -13,11 +13,16 @@ void	set_flags(t_shell *shell, t_node *node)
 		else
 		{
 			node->exec_args = ft_split(node->flags, ' ');
-			printf("exec_args: %s\n", node->exec_args[0]);
 		}
 	}
 	else
-		node->exec_args = NULL;
+	{
+		node->exec_args = malloc(sizeof(char *) * 2);
+		node->exec_args[0] = malloc(sizeof(char));
+		node->exec_args[1] = malloc(sizeof(char));
+		node->exec_args[0] = node->cmd_path;
+		node->exec_args[1] = NULL;
+	}
 }
 
 void	set_arguments(t_shell *shell, t_node *node)
