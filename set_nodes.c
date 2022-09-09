@@ -1,13 +1,13 @@
 #include "minishell.h"
 
-void	set_flags(t_shell *shell, t_node *node)
+void	set_flags(t_shell *shell, t_node *node)//CHECK NULLS FROM HERE
 {
 	int i;
 	char **tmp;
 
-	if (*node->flags)
+	if (node->flags != NULL)
 	{
-		if (node->illegalflag)
+		if (node->illegalflag == 1)
 		{
 			node->exec_args = malloc(sizeof(char *) * 2);
 			node->exec_args[0] = node->flags;
@@ -15,7 +15,7 @@ void	set_flags(t_shell *shell, t_node *node)
 		}
 		else
 		{
-			tmp = ft_split(node->flags, ' ');
+			tmp = ft_split(node->flags, ' ');//HAS ALWAYS SPACE????
 			i = 0;
 			if (**tmp)
 			{
@@ -90,5 +90,11 @@ void	set_node(t_shell *shell, t_node *node)
 {
 	
 	node->cmd_path = search_in_path(shell, node);
-	set_flags(shell, node);
+	if (node->cmd_path == NULL && node->illegalcommand)
+	{
+		shell->err_code = 2;
+		print_error(shell);
+	}
+	//set_flags(shell, node);
+
 }
