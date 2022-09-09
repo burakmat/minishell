@@ -2,6 +2,9 @@
 
 void	set_flags(t_shell *shell, t_node *node)
 {
+	int i;
+	char **tmp;
+
 	if (*node->flags)
 	{
 		if (node->illegalflag)
@@ -12,7 +15,20 @@ void	set_flags(t_shell *shell, t_node *node)
 		}
 		else
 		{
-			node->exec_args = ft_split(node->flags, ' ');
+			tmp = ft_split(node->flags, ' ');
+			i = 0;
+			if (**tmp)
+			{
+				while (tmp[i])
+					++i;
+				node->exec_args = malloc(sizeof(char *) * i + 2);
+				node->exec_args[0] = node->command;
+				i = -1;
+				while (tmp[++i])
+					node->exec_args[i + 1] = tmp[i];
+				node->exec_args[i + 1] = tmp[i];
+				free(tmp);
+			}
 		}
 	}
 	else
@@ -63,9 +79,16 @@ void	set_arguments(t_shell *shell, t_node *node)
 	//add tmp to node.exec_args
 }
 
+void	set_path_name_to_execargs(t_node *node)
+{
+	node->exec_args = malloc(sizeof(char *) + 1);
+	node->exec_args[0] = node->command;
+	node->exec_args[1] = NULL;
+}
 
 void	set_node(t_shell *shell, t_node *node)
 {
+	
 	node->cmd_path = search_in_path(shell, node);
 	set_flags(shell, node);
 }
