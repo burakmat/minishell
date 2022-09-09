@@ -94,7 +94,6 @@ char *search_in_path(t_shell *shell, t_node *node)
 		while (shell->free_.my_path[i])
 		{
 			searched = ft_strjoin_path(shell->free_.my_path[i], node->command);
-			printf("serached %s\n", searched);
 			if (!access(searched, X_OK) && node->command != NULL)
 				return (searched);
 			free(searched);
