@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/09 13:13:50 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:22:50 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 	i += thirdbox(argv + i, tolex);
 	create_node(shell, tolex);
 	tolex->currentnode += 1;
-	/*printf("firstbox %s\n", tolex->box1);
-	printf("secondbox %s\n", tolex->box2);
-	readbox3(tolex->box3);
+	/*printf("firstbox %p\n", tolex->box1);
+	printf("illegalcomand %d\n", tolex->illegalcommand);
+	printf("secondbox %p\n", tolex->box2);
+	printf("thirdbox %p\n", tolex->box3);
 	printf("\n%d\n", tolex->box3null);
-	printf("\nfourth %s\n", tolex->box4);*/
+	printf("\nfourth %p\n", tolex->box4);*/
 	if (argv[i] == '|')
 		lexer(argv + i + 1, tolex, shell);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/09 13:41:32 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/09 18:15:29 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_lexout
 {
 	char		*box1;
 	int			box1index;
+	int			boxwasin;
 	char		*box2;
 	int			box2index;
 	int			box2runaway;
@@ -41,6 +42,7 @@ typedef struct s_lexout
 	int			illegalflag;//if 1 going through, 0 split into spaces
 	int			currentnode;
 	int			totalnode;
+	int			illegalcommand;
 }	t_lexout;
 
 typedef struct s_free

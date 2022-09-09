@@ -36,6 +36,8 @@ void	fillboxes(t_lexout *tolex)
 	tolex->box4index = 0;
 	tolex->box4space = 0;
 	tolex->illegalflag = 0;
+	tolex->boxwasin = 0;
+	tolex->illegalcommand = 0;
 }
 
 void	fillboxesstatic(t_lexout *tolex)
