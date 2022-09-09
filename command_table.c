@@ -13,6 +13,8 @@ void create_node(t_shell *shell, t_lexout *table)
 	node->flags = table->box2;
 	node->argument = table->box3;
 	node->redirections = table->box4;
+	node->illegalflag = table->illegalflag;
+	node->null_num = table->box3null;
 	node->cmd_path = NULL;
 	node->next_node = NULL;
 	if (count)

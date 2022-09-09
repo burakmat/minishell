@@ -59,6 +59,8 @@ typedef struct s_node
 	char *cmd_path;
 	char **exec_args;
 	int is_builtin;
+	int	null_num;
+	int	illegalflag;
 }	t_node;
 
 typedef struct s_shell
@@ -67,7 +69,7 @@ typedef struct s_shell
 	char **env;
 	t_node *head;
 	t_node *tail;
-	t_free free_;
+	t_free free_; 
 }	t_shell;
 
 // main
@@ -148,7 +150,9 @@ void	readbox3(char *argv);
 void	print_error(t_shell *shell);
 
 //execute
-
 void	execute(t_shell *shell, t_node *node);
+
+//set_nodes.c
+void	set_node(t_shell *shell, t_node *node);
 
 #endif

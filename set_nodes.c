@@ -1,10 +1,10 @@
 #include "minishell.h"
 
-void	set_flags(t_shell *shell, t_lexout table, t_node *node)
+void	set_flags(t_shell *shell, t_node *node)
 {
 	if (*node->flags)
 	{
-		if (table.illegalflag)
+		if (node->illegalflag)
 		{
 			node->exec_args = malloc(sizeof(char *) * 2);
 			node->exec_args[0] = node->flags;
@@ -12,24 +12,25 @@ void	set_flags(t_shell *shell, t_lexout table, t_node *node)
 		}
 		else
 		{
-			node->exec_args = ft_split(table.box2, ' ');
+			node->exec_args = ft_split(node->flags, ' ');
+			printf("exec_args: %s\n", node->exec_args[0]);
 		}
 	}
 	else
 		node->exec_args = NULL;
 }
 
-void	set_arguments(t_shell *shell, t_lexout table, t_node *node)
+void	set_arguments(t_shell *shell, t_node *node)
 {
 	int i;
 	int j;
 	int k;
 	char **tmp;
 
-	tmp = malloc(sizeof(char *) * table.box3null + 1);
+	tmp = malloc(sizeof(char *) * node->null_num + 1);
 	i = 0;
 	k = 0;
-	while (table.box3null--)
+	while ((node->null_num)--)
 	{
 		j = 0;
 		while (node->argument[i + j])
@@ -55,4 +56,11 @@ void	set_arguments(t_shell *shell, t_lexout table, t_node *node)
 	else
 		free(tmp);
 	//add tmp to node.exec_args
+}
+
+
+void	set_node(t_shell *shell, t_node *node)
+{
+	node->cmd_path = search_in_path(shell, node);
+	set_flags(shell, node);
 }
