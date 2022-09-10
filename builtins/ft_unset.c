@@ -15,7 +15,7 @@ void    ft_delete(char **env, char **tmp)
     free(tmp[i]);
 }
 
-void    ft_unset(char **env, char **arg)
+void    ft_unset(t_shell *shell)
 {
     int     i;
     int     j;
@@ -23,16 +23,16 @@ void    ft_unset(char **env, char **arg)
     char    **tmp;
 
     j = 0;
-    while (arg[++j])
+    while (shell->data->arg[++j])
     {
-        k = ft_strlen(arg[j]);
+        k = ft_strlen(shell->data->arg[j]);
         i = 0;
-        while (env[i])
+        while (shell->data->env_in[i])
         {
-            if (ft_strncmp(env[i], arg[j], k) == 0)
+            if (ft_strncmp(shell->data->env_in[i], shell->data->arg[j], k) == 0)
             {
-                tmp = env;
-                ft_delete(env ,tmp);
+                tmp = shell->data->env_in;
+                ft_delete(shell->data->env_in ,shell->data->temp);
             }
             else
                 i++;

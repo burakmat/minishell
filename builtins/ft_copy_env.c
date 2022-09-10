@@ -21,19 +21,19 @@ void ft_malloc_for_env(t_data *data, char **env)
     }
 }
 
-void    ft_copy_env(t_data *data, char **env)
+void    ft_copy_env(t_shell *shell, char **env)
 {
     int i;
     int j;
 
     i = 0;
     j = 0;
-    ft_malloc_for_env(data, env);
-    while(env[j])
+    ft_malloc_for_env(shell->data, shell->data->env_in);
+    while(shell->data->env_in[j])
     {
-        while(env[j][i])
+        while(shell->data->env_in[j][i])
         {
-            data->env_in[j][i] = env[j][i];
+            shell->data->env_in[j][i] = env[j][i];
             i++;
         }
         j++;

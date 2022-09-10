@@ -1,6 +1,6 @@
-#include "../minishell"
+#include "../minishell.h"
 
-void	ft_pwd(t_data *data)
+void	ft_pwd(t_shell *shell)
 {
-	ft_putendl_fd(getcwd(data->cwd, sizeof(char *)), 1);
+	ft_putendl_fd(getcwd(shell->data->cwd, sizeof(char *)), 1);
 }
