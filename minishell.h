@@ -66,6 +66,16 @@ typedef struct s_node
 	int illegalcommand;
 }	t_node;
 
+typedef struct s_data
+{
+	char		*temp;
+	char		**arg;
+	char		**env_in;
+	char		*cwd;
+	char		**just_env;
+}				t_data;
+
+
 typedef struct s_shell
 {
 	int err_code;
