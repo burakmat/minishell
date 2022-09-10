@@ -21,6 +21,7 @@ void	execute(t_shell *shell, t_node *node)
 	{
 		waitpid(pid, 0 ,0);
 	}
+	printf("lala\n");
 	//clear all node;
 	// arguman null;
 	// pipe;

@@ -63,6 +63,7 @@ typedef struct s_node
 	int is_builtin;
 	int	null_num;
 	int	illegalflag;
+	int illegalcommand;
 }	t_node;
 
 typedef struct s_shell
