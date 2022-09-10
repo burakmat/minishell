@@ -35,5 +35,6 @@ int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 	printf("aloo %d\n", tolex->illegalflag);*/
 	if (argv[i] == '|')
 		lexer(argv + i + 1, tolex, shell);
+	// shell->totalnode = tolex->totalnode;
 	return (1);
 }

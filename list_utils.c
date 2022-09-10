@@ -40,3 +40,21 @@ void	freeexec_args(t_node *node)
 			free(node->exec_args);
 		}
 }
+
+void free_shell_pipes(t_shell *shell)//called in stage command
+{
+	int i;
+
+	if (shell->pipes != NULL)
+	{
+		i = 0;
+		while (shell->pipes[i])
+		{
+			free(shell->pipes[i]);
+			++i;
+		}
+		free(shell->pipes[i]);//null pointer
+		free(shell->pipes);
+		shell->pipes = NULL;
+	}
+}

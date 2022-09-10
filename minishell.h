@@ -68,6 +68,8 @@ typedef struct s_node
 
 typedef struct s_shell
 {
+	int **pipes;
+	int	totalnode;
 	int err_code;
 	char **env;
 	t_node *head;
@@ -129,6 +131,7 @@ void	free_all_path(char **path);
 //list_utils.c
 void	clear_all_nodes(t_node *head);
 void	freeexec_args(t_node *node);
+void	free_shell_pipes(t_shell *shell);
 
 // utility
 char	*lexer_ft_strjoin(char *s1, char *s2);

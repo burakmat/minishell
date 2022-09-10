@@ -8,6 +8,7 @@ int main(int argc, char **argv, char **env)
 	char	*a;
 
 	shell.env = env;
+	shell.pipes = NULL;
 	while (1)
 	{
 		fillboxesstatic(&tolex);
@@ -43,4 +44,5 @@ void	fillboxes(t_lexout *tolex)
 void	fillboxesstatic(t_lexout *tolex)
 {
 	tolex->currentnode = 0;
+	tolex->totalnode = 0;
 }
