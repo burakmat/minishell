@@ -6,7 +6,6 @@ void	execute(t_shell *shell, t_node *node)
 	int pid;
 
 	set_node(shell, node);
-
 	pipe(fd);
 	pid = fork();
 	if (!pid)
