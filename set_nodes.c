@@ -140,10 +140,10 @@ void	set_node(t_shell *shell, t_node *node)
 {
 	
 	node->cmd_path = search_in_path(shell, node);
-	if (node->cmd_path == NULL && node->illegalcommand)
+	if (node->cmd_path == NULL || node->illegalcommand)
 	{
 		shell->err_code = 2;
-		print_error(shell);
+		print_error(shell, node);
 	}
 	set_path_name_to_execargs(node);
 	set_flags(shell, node);

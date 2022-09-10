@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/09 18:15:29 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/10 11:54:49 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,15 +134,15 @@ char	*lexer_ft_strjoin(char *s1, char *s2);
 int		lexer_ft_strlen(char *s1);
 int		lexer_escapespace(char *argv, t_lexout *tolex);
 int		box4escapespace(char *argv, t_lexout *tolex);
-int	ft_strlen(char *s1);
-int	ft_strncmp(char *s1, char *s2, int size);
-int	ft_strncmp_exact(char *s1, char *s2, int size);
+int		ft_strlen(char *s1);
+int		ft_strncmp(char *s1, char *s2, int size);
+int		ft_strncmp_exact(char *s1, char *s2, int size);
 char	*ft_strjoin_path(char *s1, char *s2);
 char	**ft_split(char *s, char c);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
-int	ft_strlcpy(char *dst, char *src, int b);
+int		ft_strlcpy(char *dst, char *src, int b);
 char	*ft_strdup(const char *s1);
 
 
@@ -150,7 +150,7 @@ char	*ft_strdup(const char *s1);
 void	readbox3(char *argv);
 
 //finish.c
-void	print_error(t_shell *shell);
+void	print_error(t_shell *shell, t_node *node);
 
 //execute
 void	execute(t_shell *shell, t_node *node);

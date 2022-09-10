@@ -7,6 +7,6 @@ int main()
 {
 	char *argv[] = {NULL, NULL};
 
-	execve("/bin/ls", argv, NULL);
+	execve("as", argv, NULL);
 	return 0;
 }

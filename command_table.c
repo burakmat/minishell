@@ -93,7 +93,7 @@ char *search_in_path(t_shell *shell, t_node *node)
 	if (i == -1)
 	{
 		shell->err_code = 1;
-		print_error(shell);
+		print_error(shell, node);
 	}
 	else
 	{
