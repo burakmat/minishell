@@ -26,27 +26,25 @@ void	set_flags(t_shell *shell, t_node *node)
 		}
 		else//if flags are legal
 		{
-			/*{
-				;//ERROR?!??? is it possible??
-			}*/
-			//else//if there is command
-			//{
 				free(node->exec_args[1]);//null at the end
+				free(node->exec_args[0]);//command duplicate
 				free(node->exec_args);//all list
 				node->exec_args = NULL;//for safety
 				flags = ft_split(node->flags, ' ');//HAS ALWAYS SPACE????
 				i = 0;
 				while (flags[i])
 					++i;
-				tmp = malloc(sizeof(char *) * i + 2);
-				tmp[0] =ft_strdup(node->command);//command might be cmd_path
-				i = -1;
-				while (flags[++i])
+				tmp = malloc(sizeof(char *) * (i + 2));
+				tmp[0] = ft_strdup(node->command);//command might be cmd_path
+				i = 0;
+				while (flags[i] != NULL)
+				{
 					tmp[i + 1] = flags[i];
-				tmp[i + 1] = flags[i];
+					i++;
+				}
+				tmp[i + 1] = flags[i];;	
 				node->exec_args = tmp;
 				free(flags);
-			//}
 		}
 	}
 }
@@ -149,5 +147,4 @@ void	set_node(t_shell *shell, t_node *node)
 	}
 	set_path_name_to_execargs(node);
 	set_flags(shell, node);
-
 }

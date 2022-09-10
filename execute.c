@@ -6,7 +6,6 @@ void	execute(t_shell *shell, t_node *node)
 	int pid;
 
 	set_node(shell, node);
-
 	pipe(fd);
 	pid = fork();
 	if (!pid)
@@ -21,7 +20,6 @@ void	execute(t_shell *shell, t_node *node)
 	{
 		waitpid(pid, 0 ,0);
 	}
-	printf("lala\n");
 	//clear all node;
 	// arguman null;
 	// pipe;

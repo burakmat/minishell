@@ -63,9 +63,14 @@ void	stage_command(t_shell *shell, t_node *node)
 		node->is_builtin = 1;
 	if node->is_builtin == 1 execute builtin */
 	//send node to child
-	execute(shell, node);
-	clear_all_nodes(shell->head);
-	free_all_path(shell->free_.my_path);
+	if (node->command != NULL)
+	{
+		execute(shell, node);
+		clear_all_nodes(shell->head);
+		free_all_path(shell->free_.my_path);
+	}
+	else
+		free(node);
 }
 
 void	free_all_path(char **path)
