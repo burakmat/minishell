@@ -8,11 +8,15 @@ void clear_all_nodes(t_node *head)
 	current = head;
 	while (current)
 	{
-		free(current->command);
-		free(current->flags);
-		free(current->argument);
+		if (current->command != NULL)
+			free(current->command);
+		if (current->flags != NULL)
+			free(current->flags);
+		if (current->argument)
+			free(current->argument != NULL);
+		if (current->redirections != NULL)
 		free(current->redirections);
-		if (current->cmd_path)
+		if (current->cmd_path != NULL)
 			free(current->cmd_path);
 		temp = current;
 		current = current->next_node;
