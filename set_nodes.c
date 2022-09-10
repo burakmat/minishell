@@ -145,12 +145,11 @@ void	set_node(t_shell *shell, t_node *node)
 		shell->err_code = 2;
 		print_error(shell, node);
 	}
-	else if (node->cmd_path == NULL)
+	else if (node->cmd_path == NULL && !node->illegalcommand)
 	{
 		shell->err_code = 3;
 		print_error(shell, node);
 	}
-	
 	set_path_name_to_execargs(node);
 	set_flags(shell, node);
 	//set_arguments(shell, node);

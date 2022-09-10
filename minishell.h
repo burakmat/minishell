@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/10 11:54:49 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/10 13:17:09 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ void	free_all_path(char **path);
 
 //list_utils.c
 void	clear_all_nodes(t_node *head);
+void	freeexec_args(t_node *node);
 
 // utility
 char	*lexer_ft_strjoin(char *s1, char *s2);

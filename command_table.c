@@ -63,11 +63,11 @@ void	stage_command(t_shell *shell, t_node *node)
 		node->is_builtin = 1;
 	if node->is_builtin == 1 execute builtin */
 	//send node to child
-	if (node->command == NULL && node->redirections != NULL)
+	if (node->command == NULL && node->redirections != NULL && !node->illegalcommand)
 	{
-		printf("şimdilik boş\n");	
+		printf("şimdilik boş\n"); //sadece pipe yapılacak execute girme	
 	}
-	else if (node->command != NULL)
+	else if (node->command != NULL || node->illegalcommand)
 	{
 		execute(shell, node);
 		clear_all_nodes(shell->head);
