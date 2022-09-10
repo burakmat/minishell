@@ -4,7 +4,6 @@ void clear_all_nodes(t_node *head)
 {
 	t_node	*current;
 	t_node	*temp;
-	int		i;
 	
 	current = head;
 	while (current)
@@ -19,18 +18,25 @@ void clear_all_nodes(t_node *head)
 			free(current->redirections);
 		if (current->cmd_path != NULL)
 			free(current->cmd_path);
-		i = 0;
-		if (current->exec_args)
-		{
-			while (current->exec_args[i])
-			{
-				free(current->exec_args[i]);
-				i++;
-			}
-			free(current->exec_args);
-		}
+		freeexec_args(current);
 		temp = current;
 		current = current->next_node;
 		free(temp);
 	}
+}
+
+void	freeexec_args(t_node *node)
+{
+	int	i;
+
+	i = 0;
+	if (node->exec_args)	
+		{
+			while (node->exec_args[i])
+			{
+				free(node->exec_args[i]);
+				i++;
+			}
+			free(node->exec_args);
+		}
 }
