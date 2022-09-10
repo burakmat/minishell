@@ -14,13 +14,20 @@ int main(int argc, char **argv, char **env)
 		fillboxesstatic(&tolex);
 		a = readline(">>");
 		add_history(a);
-		totalnode(a, &tolex);
-		lexer(a, &tolex, &shell);
-		stage_command(&shell, shell.tail);
+		totalnode(a, &tolex);//finds total node
+		lexer(a, &tolex, &shell);//all nodes ready
+		//node control
+		create_pipes(&shell);//1
+		execute(&shell, shell.head);//if box1 and box4 == NULL then free(node)
+		clear_all_nodes(shell.head);//1
+		free_all_path(shell.free_.my_path);//1
+		free_shell_pipes(&shell);
 		free(a);
+		system("leaks minishell");
 	}
 	return (0);
 }
+
 
 void	fillboxes(t_lexout *tolex)
 {

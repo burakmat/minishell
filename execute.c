@@ -2,23 +2,35 @@
 
 void	execute(t_shell *shell, t_node *node)
 {
-	int fd[2];
 	int pid;
+	int i;
 
-	set_node(shell, node);
-	pipe(fd);
+	i = 0;
 	pid = fork();
-	if (!pid)
+	while (1)
 	{
-		if (node->previous_node != NULL)
-			execute(shell, node->previous_node);
-		if(node->cmd_path == NULL)
-			exit(0);
-		execve(node->cmd_path, node->exec_args, NULL);
-	}
-	else
-	{
-		waitpid(pid, 0 ,0);
+		if (!pid)//child
+		{
+			//if no prev current, else go next
+			//check for files if == 1 perror + exit(1)
+			//nulls if (node->command == NULL && node->redirections != NULL && !node->illegalcommand) escape execve
+			//if box1 == null && box4==null then free node, exit(1);
+			if(node->cmd_path == NULL)
+				exit(0);
+			execve(node->cmd_path, node->exec_args, NULL);
+		}
+		else if (i < shell->totalnode - 1)
+		{
+			free_all_path(shell->free_.my_path);
+			node = node->next_node;
+			++i;
+			pid = fork();//pid = fork
+		}
+		else//main
+		{
+			waitpid(pid, 0 ,0);
+			break ;
+		}
 	}
 	//clear all node;
 	// arguman null;

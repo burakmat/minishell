@@ -40,7 +40,7 @@ typedef struct s_lexout
 	int			box4index;
 	int			box4space;
 	int			illegalflag;//if 1 going through, 0 split into spaces
-	int			currentnode;
+	int			currentnode;//starts from 0
 	int			totalnode;
 	int			illegalcommand;
 }	t_lexout;
@@ -60,6 +60,7 @@ typedef struct s_node
 	struct s_node *previous_node;
 	char *cmd_path;
 	char **exec_args;
+	int id;
 	int is_builtin;
 	int	null_num;
 	int	illegalflag;
@@ -125,7 +126,6 @@ char **split_path(t_shell *shell, int ind);
 void **edit_first_path(char **all_path_copy);
 int	is_there_path(t_shell *shell);
 int		builtin_check(char *command);
-void	stage_command(t_shell *shell, t_node *node);
 void	free_all_path(char **path);
 
 //list_utils.c
@@ -161,5 +161,8 @@ void	execute(t_shell *shell, t_node *node);
 
 //set_nodes.c
 void	set_node(t_shell *shell, t_node *node);
+
+//pipe.c
+void	create_pipes(t_shell *shell);
 
 #endif
