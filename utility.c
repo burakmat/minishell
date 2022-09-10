@@ -5,6 +5,8 @@ int	ft_strlen(char *s1)
 {
 	int a;
 
+	if (!s1)
+		return (NULL);
 	a = 0;
 	while (s1[a] != '\0')
 		a++;

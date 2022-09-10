@@ -11,25 +11,22 @@ void	execute(t_shell *shell, t_node *node)
 	{
 		if (!pid)//child
 		{
-			//if no prev current, else go next
 			//check for files if == 1 perror + exit(1)
-			//nulls if (node->command == NULL && node->redirections != NULL && !node->illegalcommand) escape execve
-			//if box1 == null && box4==null then free node, exit(1);
-			if(node->cmd_path == NULL)
-				exit(0);
-			execve(node->cmd_path, node->exec_args, NULL);
+			// printf("lala\n");
+
+			if (node->cmd_path != NULL)
+				execve(node->cmd_path, node->exec_args, NULL);
+			else
+				exit(1);
 		}
 		else if (i < shell->totalnode - 1)
 		{
-
-			free_all_path(node->my_path);
 			node = node->next_node;
 			++i;
 			pid = fork();//pid = fork
 		}
 		else//main
 		{
-			free_all_path(node->my_path);
 			waitpid(pid, 0 ,0);
 			break ;
 		}
