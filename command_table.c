@@ -75,6 +75,7 @@ void	stage_command(t_shell *shell, t_node *node)
 	}
 	else
 		free(node);
+
 }
 
 void	free_all_path(char **path)
