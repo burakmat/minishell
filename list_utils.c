@@ -50,6 +50,8 @@ void free_shell_pipes(t_shell *shell)//called in stage command
 		i = 0;
 		while (shell->pipes[i])
 		{
+			close(shell->pipes[i][0]);
+			close(shell->pipes[i][1]);
 			free(shell->pipes[i]);
 			++i;
 		}

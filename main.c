@@ -14,12 +14,13 @@ int main(int argc, char **argv, char **env)
 		fillboxesstatic(&tolex);
 		a = readline(">>");
 		add_history(a);
-		if (*a != '\0')
+		if (*a != '\0')//same??
 		{
 			totalnode(a, &tolex);//finds total node
 			lexer(a, &tolex, &shell);//all nodes ready
-			if (shell.head->command == NULL && shell.head->redirections == NULL)
+			if (shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
 				free(shell.head);
+			//need an error case for first character pipe |
 			else
 			{
 				create_pipes(&shell);//1
