@@ -42,7 +42,7 @@ void	set_flags(t_shell *shell, t_node *node)
 					tmp[i + 1] = flags[i];
 					i++;
 				}
-				tmp[i + 1] = flags[i];;	
+				tmp[i + 1] = flags[i];
 				node->exec_args = tmp;
 				free(flags);
 		}
@@ -51,7 +51,7 @@ void	set_flags(t_shell *shell, t_node *node)
 
 void	set_arguments(t_shell *shell, t_node *node)//CHECK NULLS FROM HERE
 {
-	/*int i;
+	int i;
 	int j;
 	int k;
 	char **tmp;
@@ -140,11 +140,18 @@ void	set_node(t_shell *shell, t_node *node)
 {
 	
 	node->cmd_path = search_in_path(shell, node);
-	if (node->cmd_path == NULL || node->illegalcommand)
+	if (node->cmd_path == NULL && node->illegalcommand)
 	{
 		shell->err_code = 2;
 		print_error(shell, node);
 	}
+	else if (node->cmd_path == NULL)
+	{
+		shell->err_code = 3;
+		print_error(shell, node);
+	}
+	
 	set_path_name_to_execargs(node);
 	set_flags(shell, node);
+	//set_arguments(shell, node);
 }

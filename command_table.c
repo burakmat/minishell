@@ -63,7 +63,11 @@ void	stage_command(t_shell *shell, t_node *node)
 		node->is_builtin = 1;
 	if node->is_builtin == 1 execute builtin */
 	//send node to child
-	if (node->command != NULL)
+	if (node->command == NULL && node->redirections != NULL)
+	{
+		printf("şimdilik boş\n");	
+	}
+	else if (node->command != NULL)
 	{
 		execute(shell, node);
 		clear_all_nodes(shell->head);
