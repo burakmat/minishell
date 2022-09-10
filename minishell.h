@@ -60,6 +60,7 @@ typedef struct s_node
 	struct s_node *previous_node;
 	char *cmd_path;
 	char **exec_args;
+	char **my_path;
 	int id;
 	int is_builtin;
 	int	null_num;

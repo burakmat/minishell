@@ -20,7 +20,6 @@ int main(int argc, char **argv, char **env)
 		create_pipes(&shell);//1
 		execute(&shell, shell.head);//if box1 and box4 == NULL then free(node)
 		clear_all_nodes(shell.head);//1
-		free_all_path(shell.free_.my_path);//1
 		free_shell_pipes(&shell);
 		free(a);
 		system("leaks minishell");

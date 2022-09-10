@@ -83,11 +83,11 @@ char *search_in_path(t_shell *shell, t_node *node)
 	}
 	else
 	{
-		shell->free_.my_path = split_path(shell, i);
+		node->my_path = split_path(shell, i);
 		i = 0;
-		while (shell->free_.my_path[i])
+		while (node->my_path[i])
 		{
-			searched = ft_strjoin_path(shell->free_.my_path[i], node->command);
+			searched = ft_strjoin_path(node->my_path[i], node->command);
 			if (!access(searched, X_OK) && node->command != NULL)
 				return (searched);
 			free(searched);

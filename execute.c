@@ -21,13 +21,15 @@ void	execute(t_shell *shell, t_node *node)
 		}
 		else if (i < shell->totalnode - 1)
 		{
-			free_all_path(shell->free_.my_path);
+
+			free_all_path(node->my_path);
 			node = node->next_node;
 			++i;
 			pid = fork();//pid = fork
 		}
 		else//main
 		{
+			free_all_path(node->my_path);
 			waitpid(pid, 0 ,0);
 			break ;
 		}
