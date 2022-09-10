@@ -5,8 +5,8 @@
 
 int main()
 {
-	char *argv[] = {NULL, NULL};
+	char *argv[] = {"as", NULL};
 
-	execve("as", argv, NULL);
+	execve(NULL, argv, NULL);
 	return 0;
 }
