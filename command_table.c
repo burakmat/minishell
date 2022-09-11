@@ -37,25 +37,23 @@ void create_node(t_shell *shell, t_lexout *table)
 	set_node(shell ,node);
 }
 
-int	builtin_check(char *command) //add functions
+int	builtin_check(char *command)
 {
 	if (ft_strncmp_exact(command, "echo", ft_strlen(command)) || ft_strncmp_exact(command, "/bin/echo", ft_strlen(command)))
-		;//
+		return (1);
 	else if (ft_strncmp_exact(command, "cd", ft_strlen(command)) || ft_strncmp_exact(command, "/usr/bin/cd", ft_strlen(command)))
-		;//
+		return (2);
 	else if (ft_strncmp_exact(command, "pwd", ft_strlen(command)) || ft_strncmp_exact(command, "/bin/pwd", ft_strlen(command)))
-		;//
+		return (3);
 	else if (ft_strncmp_exact(command, "export", ft_strlen(command)))
-		;//
+		return (4);
 	else if (ft_strncmp_exact(command, "unset", ft_strlen(command)))
-		;//
+		return (5);
 	else if (ft_strncmp_exact(command, "env", ft_strlen(command)) || ft_strncmp_exact(command, "/usr/bin/env", ft_strlen(command)))
-		;//
+		return (6);
 	else if (ft_strncmp_exact(command, "exit", ft_strlen(command)))
-		;//
-	else
-		return (0);
-	return (1);
+		return (7);
+	return (0);
 }
 
 

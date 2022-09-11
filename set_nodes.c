@@ -52,7 +52,7 @@ void	set_arguments(t_shell *shell, t_node *node)
 		j = 0;
 		while (node->exec_args[j])
 			++j;
-		argument = ft_split(node->argument, ' ');
+		argument = ft_split(node->argument, ' ');//argümanlar arası boşluk değil null var
 		i = 0;
 		while (argument[i] != NULL)
 			++i;
@@ -94,7 +94,7 @@ void	set_node(t_shell *shell, t_node *node)
 		shell->err_code = 2;
 		print_error(shell, node);
 	}
-	else if (node->cmd_path == NULL && node.command != NULL)//instead of node->redirections == NULL
+	else if (node->cmd_path == NULL && node->command != NULL)//instead of node->redirections == NULL (export patlıyor aga)
 	{
 		shell->err_code = 3;
 		print_error(shell, node);
@@ -103,9 +103,6 @@ void	set_node(t_shell *shell, t_node *node)
 	if (node->command == NULL)
 		return ;
 	set_path_name_to_execargs(node);
-	if (node->command != NULL)
-	{
-		set_flags(shell, node);
-		set_arguments(shell, node);
-	}
+	set_flags(shell, node);
+	set_arguments(shell, node);
 }

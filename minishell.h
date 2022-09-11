@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/11 10:47:10 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/11 12:20:37 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,6 @@ typedef struct s_node
 	int	illegalflag;
 	int illegalcommand;
 }	t_node;
-
-typedef struct s_data
-{
-	char		*temp;
-	char		**arg;
-	char		**env_in;
-	char		*cwd;
-	char		**just_env;
-}				t_data;
-
 
 typedef struct s_shell
 {
@@ -169,12 +159,20 @@ void	print_error(t_shell *shell, t_node *node);
 
 //execute
 void	execute(t_shell *shell, t_node *node);
-
+void	go_to_builtin(t_shell *shell, t_node *node, char *argv);
 //set_nodes.c
 void	set_node(t_shell *shell, t_node *node);
 
 //pipe.c
 void	create_pipes(t_shell *shell);
 void close_unnecessary_fd(t_shell *shell, t_node *node);
+
+//builtin
+char	*ft_strjoin_builtin(char *s1, char *s2);
+void	builtin_echo(t_node *node);
+void	free_oldenv(t_shell *shell);
+void	re_malloc_env(t_shell *shell, int formalloc, t_node *node);
+void	add_env(t_shell *shell, t_node *node, int a);
+void	builtin_export(t_shell *shell, t_node *node);
 
 #endif
