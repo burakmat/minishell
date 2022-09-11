@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/10 13:17:09 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:12:35 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,5 +168,8 @@ void	execute(t_shell *shell, t_node *node);
 
 //set_nodes.c
 void	set_node(t_shell *shell, t_node *node);
+
+//builtin
+char	*ft_strjoin_builtin(char const *s1, char const *s2);
 
 #endif
