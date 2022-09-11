@@ -8,18 +8,33 @@ int main(int argc, char **argv, char **env)
 	char	*a;
 
 	shell.env = env;
+	shell.pipes = NULL;
 	while (1)
 	{
 		fillboxesstatic(&tolex);
 		a = readline(">>");
 		add_history(a);
-		totalnode(a, &tolex);
-		lexer(a, &tolex, &shell);
-		stage_command(&shell, shell.tail);
-		free(a);
+		if (*a != '\0')//same??
+		{
+			totalnode(a, &tolex);//finds total node
+			lexer(a, &tolex, &shell);//all nodes ready
+			if (shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
+				free(shell.head);
+			//need an error case for first character pipe |
+			else
+			{
+				create_pipes(&shell);//1
+				execute(&shell, shell.head);
+				clear_all_nodes(shell.head);//1
+				free_shell_pipes(&shell);
+			}
+		}
+			free(a);
+			system("leaks minishell");
 	}
 	return (0);
 }
+
 
 void	fillboxes(t_lexout *tolex)
 {
@@ -43,4 +58,5 @@ void	fillboxes(t_lexout *tolex)
 void	fillboxesstatic(t_lexout *tolex)
 {
 	tolex->currentnode = 0;
+	tolex->totalnode = 0;
 }

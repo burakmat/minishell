@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/10 16:12:35 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/11 10:47:10 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_lexout
 	int			box4index;
 	int			box4space;
 	int			illegalflag;//if 1 going through, 0 split into spaces
-	int			currentnode;
+	int			currentnode;//starts from 0
 	int			totalnode;
 	int			illegalcommand;
 }	t_lexout;
@@ -60,6 +60,8 @@ typedef struct s_node
 	struct s_node *previous_node;
 	char *cmd_path;
 	char **exec_args;
+	char **my_path;
+	int id;
 	int is_builtin;
 	int	null_num;
 	int	illegalflag;
@@ -78,6 +80,8 @@ typedef struct s_data
 
 typedef struct s_shell
 {
+	int **pipes;
+	int	totalnode;
 	int err_code;
 	char **env;
 	t_node *head;
@@ -133,12 +137,12 @@ char **split_path(t_shell *shell, int ind);
 void **edit_first_path(char **all_path_copy);
 int	is_there_path(t_shell *shell);
 int		builtin_check(char *command);
-void	stage_command(t_shell *shell, t_node *node);
 void	free_all_path(char **path);
 
 //list_utils.c
 void	clear_all_nodes(t_node *head);
 void	freeexec_args(t_node *node);
+void	free_shell_pipes(t_shell *shell);
 
 // utility
 char	*lexer_ft_strjoin(char *s1, char *s2);
@@ -169,7 +173,8 @@ void	execute(t_shell *shell, t_node *node);
 //set_nodes.c
 void	set_node(t_shell *shell, t_node *node);
 
-//builtin
-char	*ft_strjoin_builtin(char const *s1, char const *s2);
+//pipe.c
+void	create_pipes(t_shell *shell);
+void close_unnecessary_fd(t_shell *shell, t_node *node);
 
 #endif

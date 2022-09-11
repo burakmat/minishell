@@ -2,23 +2,40 @@
 
 void	execute(t_shell *shell, t_node *node)
 {
-	int fd[2];
 	int pid;
+	int i;
 
-	set_node(shell, node);
-	pipe(fd);
+	i = 0;
 	pid = fork();
-	if (!pid)
+	while (1)
 	{
-		if (node->previous_node != NULL)
-			execute(shell, node->previous_node);
-		if(node->cmd_path == NULL)
-			exit(0);
-		execve(node->cmd_path, node->exec_args, NULL);
-	}
-	else
-	{
-		waitpid(pid, 0 ,0);
+		if (!pid)//child
+		{
+			//check for files if == 1 perror + exit(1)
+			///pipes start
+			if (shell->pipes != NULL)
+			{
+				close_unnecessary_fd(shell, node);
+				//need dup
+			}
+			///pipes end
+
+			if (node->cmd_path != NULL)
+				execve(node->cmd_path, node->exec_args, NULL);
+			else
+				exit(1);
+		}
+		else if (i < shell->totalnode - 1)
+		{
+			node = node->next_node;
+			++i;
+			pid = fork();//pid = fork
+		}
+		else//main
+		{
+			waitpid(pid, 0 ,0);
+			break ;
+		}
 	}
 	//clear all node;
 	// arguman null;

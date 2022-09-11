@@ -1,4 +1,4 @@
-SRCS = main.c lexer/*c utility.c command_table.c finish.c execute.c list_utils.c set_nodes.c
+SRCS = main.c lexer/*c utility.c command_table.c finish.c execute.c list_utils.c set_nodes.c pipe.c
 
 OBJS = $(SRCS:.c=.o)
 

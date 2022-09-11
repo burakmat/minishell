@@ -88,20 +88,22 @@ void	set_path_name_to_execargs(t_node *node)
 
 void	set_node(t_shell *shell, t_node *node)
 {
-	
 	node->cmd_path = search_in_path(shell, node);
-	if (node->cmd_path == NULL && node->illegalcommand)
+	if(node->illegalcommand == 1)
 	{
 		shell->err_code = 2;
 		print_error(shell, node);
 	}
-	else if (node->cmd_path == NULL && !node->illegalcommand)
+	else if (node->cmd_path == NULL && node.command != NULL)//instead of node->redirections == NULL
 	{
 		shell->err_code = 3;
 		print_error(shell, node);
 	}
+	free_all_path(node->my_path);
+	if (node->command == NULL)
+		return ;
 	set_path_name_to_execargs(node);
-	if (node->illegalcommand != 1)
+	if (node->command != NULL)
 	{
 		set_flags(shell, node);
 		set_arguments(shell, node);

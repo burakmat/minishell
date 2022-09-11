@@ -16,6 +16,7 @@ void create_node(t_shell *shell, t_lexout *table)
 	node->illegalflag = table->illegalflag;
 	node->null_num = table->box3null;
 	node->illegalcommand = table->illegalcommand;
+	node->id = table->currentnode;
 	node->cmd_path = NULL;
 	node->next_node = NULL;
 	node->exec_args = NULL;
@@ -33,6 +34,7 @@ void create_node(t_shell *shell, t_lexout *table)
 	++count;
 	if (count == table->totalnode)
 		shell->tail = node;
+	set_node(shell ,node);
 }
 
 int	builtin_check(char *command) //add functions
@@ -56,27 +58,6 @@ int	builtin_check(char *command) //add functions
 	return (1);
 }
 
-void	stage_command(t_shell *shell, t_node *node)
-{
-	char *abs_path;
-	/*if (builtin_check(node->command))
-		node->is_builtin = 1;
-	if node->is_builtin == 1 execute builtin */
-	//send node to child
-	if (node->command == NULL && node->redirections != NULL && !node->illegalcommand)
-	{
-		printf("şimdilik boş\n"); //sadece pipe yapılacak execute girme	
-	}
-	else if (node->command != NULL || node->illegalcommand)
-	{
-		execute(shell, node);
-		clear_all_nodes(shell->head);
-		free_all_path(shell->free_.my_path);
-	}
-	else
-		free(node);
-
-}
 
 void	free_all_path(char **path)
 {
@@ -102,11 +83,11 @@ char *search_in_path(t_shell *shell, t_node *node)
 	}
 	else
 	{
-		shell->free_.my_path = split_path(shell, i);
+		node->my_path = split_path(shell, i);
 		i = 0;
-		while (shell->free_.my_path[i])
+		while (node->my_path[i])
 		{
-			searched = ft_strjoin_path(shell->free_.my_path[i], node->command);
+			searched = ft_strjoin_path(node->my_path[i], node->command);
 			if (!access(searched, X_OK) && node->command != NULL)
 				return (searched);
 			free(searched);
