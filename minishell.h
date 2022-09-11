@@ -165,5 +165,6 @@ void	set_node(t_shell *shell, t_node *node);
 
 //pipe.c
 void	create_pipes(t_shell *shell);
+void close_unnecessary_fd(t_shell *shell, t_node *node);
 
 #endif

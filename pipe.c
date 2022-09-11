@@ -17,3 +17,23 @@ void	create_pipes(t_shell *shell)
 		shell->pipes[i] = NULL;
 	}
 }
+
+void close_unnecessary_fd(t_shell *shell, t_node *node)
+{
+	int i;
+
+	i = 0;
+	while (shell->pipes[i])
+	{
+		if (i != node->id - 1 && i != node->id)
+		{
+			close(shell->pipes[i][0]);
+			close(shell->pipes[i][1]);
+		}
+		else if (i == node->id)
+			close(shell->pipes[i][0]);
+		else if(i == node->id - 1)
+			close(shell->pipes[i][1]);
+		++i;
+	}
+}

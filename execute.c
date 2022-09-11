@@ -12,7 +12,13 @@ void	execute(t_shell *shell, t_node *node)
 		if (!pid)//child
 		{
 			//check for files if == 1 perror + exit(1)
-			// printf("lala\n");
+			///pipes start
+			if (shell->pipes != NULL)
+			{
+				close_unnecessary_fd(shell, node);
+				//need dup
+			}
+			///pipes end
 
 			if (node->cmd_path != NULL)
 				execve(node->cmd_path, node->exec_args, NULL);
