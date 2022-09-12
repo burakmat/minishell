@@ -24,8 +24,6 @@ void newProcess(t_shell *shell, t_node *node)
 	}
 }
 
-
-
 void	execute(t_shell *shell, t_node *node)
 {
 	int pid;
@@ -39,7 +37,9 @@ void	execute(t_shell *shell, t_node *node)
 		{
 			++i;
 			if (builtin_check(node->exec_args[0]) == 4)
-				re_malloc_env(shell, node, i);	
+				re_malloc_env(shell, node, i);
+			if (builtin_check(node->exec_args[0]) == 5)
+				edit_unset(shell, node);	
 			newProcess(shell, node);		
 			if (node->next_node != NULL) //node->exec_args error vermesin diye
 				node = node->next_node;
@@ -64,16 +64,16 @@ void	go_to_builtin(t_shell *shell, t_node *node, char *argv)
 	if (builtin_check(argv) == 1)
 		builtin_echo(node);
 	if (builtin_check(argv) == 2)
-		builtin_echo(node);
+		;
 	if (builtin_check(argv) == 3)
-		builtin_echo(node);
-	if (builtin_check(argv) == 4)
+		;
+	if (builtin_check(argv) == 4 && node->exec_args[1] == NULL)
 		builtin_export(shell);
 	if (builtin_check(argv) == 5)
-		builtin_echo(node);
+		;//printf("bir şey koymaya gerek yok gibi\n")
 	if (builtin_check(argv) == 6)
 		builtin_env(shell);
 	if (builtin_check(argv) == 7)
-		builtin_echo(node);
+		;
 	exit(1);
 }

@@ -2,8 +2,9 @@
 
 void	builtin_export(t_shell *shell)
 {
-	show_export(shell);
+	show_export(shell); // asciye göre sırala trolleme char atabilirsin
 }
+
 void	show_export(t_shell *shell)
 {
 	int		i;
