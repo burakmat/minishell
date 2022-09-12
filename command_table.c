@@ -39,17 +39,17 @@ void create_node(t_shell *shell, t_lexout *table)
 
 int	builtin_check(char *command)
 {
-	if (ft_strncmp_exact(command, "echo", 5) || ft_strncmp_exact(command, "/bin/echo", ft_strlen(command)))
+	if (ft_strncmp_exact(command, "echo", 5) || ft_strncmp_exact(command, "/bin/echo", 10))
 		return (1);
-	else if (ft_strncmp_exact(command, "cd", 3) || ft_strncmp_exact(command, "/usr/bin/cd", ft_strlen(command)))
+	else if (ft_strncmp_exact(command, "cd", 3) || ft_strncmp_exact(command, "/usr/bin/cd", 12))
 		return (2);
-	else if (ft_strncmp_exact(command, "pwd", 4) || ft_strncmp_exact(command, "/bin/pwd", ft_strlen(command)))
+	else if (ft_strncmp_exact(command, "pwd", 4) || ft_strncmp_exact(command, "/bin/pwd", 9))
 		return (3);
 	else if (ft_strncmp_exact(command, "export", 7))
 		return (4);
 	else if (ft_strncmp_exact(command, "unset", 6))
 		return (5);
-	else if (ft_strncmp_exact(command, "env", 4) || ft_strncmp_exact(command, "/usr/bin/env", ft_strlen(command)))
+	else if (ft_strncmp_exact(command, "env", 4) || ft_strncmp_exact(command, "/usr/bin/env", 13))
 		return (6);
 	else if (ft_strncmp_exact(command, "exit", 5))
 		return (7);

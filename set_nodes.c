@@ -10,7 +10,7 @@ void	set_flags(t_shell *shell, t_node *node)
 	{
 		if (node->illegalflag == 1)//if flag is illegal
 		{
-			node->exec_args = malloc(sizeof(char *) * 2);
+			node->exec_args = malloc(sizeof(char *) * 3);
 			node->exec_args[0] = ft_strdup(node->command); // bu mantıken lazım
 			node->exec_args[1] = ft_strdup(node->flags);
 			node->exec_args[2] = NULL;
@@ -140,7 +140,8 @@ void	set_node(t_shell *shell, t_node *node)
 	free_all_path(node->my_path);
 	if (node->command == NULL)
 		return ;
-	set_path_name_to_execargs(node);
+	if (node->illegalflag != 1) //problem solver
+		set_path_name_to_execargs(node);
 	set_flags(shell, node);
 	set_arguments(shell, node);
 }

@@ -11,13 +11,15 @@ int	isthere_flag(char *flag)
 void	builtin_echo(t_node *node)
 {
 	int	a;
-	char *temp;
 
-	temp = malloc(sizeof(char) * 1000);
 	a = isthere_flag(node->exec_args[1]);
 	while (node->exec_args[a] != NULL)
 	{
 		printf("%s", node->exec_args[a]);
+		if (node->exec_args[a + 1] != NULL)
+		{
+			printf(" ");
+		}
 		a++;
 	}
 	if (isthere_flag(node->exec_args[1]) == 1)

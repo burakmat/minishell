@@ -31,14 +31,14 @@ void	freeexec_args(t_node *node)
 
 	i = 0;
 	if (node->exec_args)	
+	{
+		while (node->exec_args[i] != NULL)
 		{
-			while (node->exec_args[i])
-			{
-				free(node->exec_args[i]);
-				i++;
-			}
-			free(node->exec_args);
+			free(node->exec_args[i]);
+			i++;
 		}
+		free(node->exec_args);
+	}
 }
 
 void free_shell_pipes(t_shell *shell)
