@@ -9,12 +9,14 @@ void newProcess(t_shell *shell, t_node *node)
 	{
 		//check for files if == 1 perror + exit(1)
 		//redirections
-		check_input_redirections(shell, node);
+		check_input_redirections(shell, node);//added return
+		set_input_redirections(shell, node);//use return value to set last input
+		set_output_redirections(shell, node);
 		///pipes start
 		// if (shell->pipes != NULL)
-		if (node->previous_node != NULL)
+		if (node->previous_node != NULL && node->in == 0)
 			dup2(shell->pipes[node->id - 1][0], 0);
-		if (node->next_node != NULL)
+		if (node->next_node != NULL && node->out == 0)
 			dup2(shell->pipes[node->id][1], 1);
 		close_all_node_fd(shell);
 		if (builtin_check(node->exec_args[0]) != 0) // if command is builtin

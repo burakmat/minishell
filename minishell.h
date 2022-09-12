@@ -67,6 +67,8 @@ typedef struct s_node
 	int	null_num;
 	int	illegalflag;
 	int illegalcommand;
+	int in;
+	int out;
 }	t_node;
 
 typedef struct s_shell
@@ -185,6 +187,8 @@ int	ft_strncmp_builtin(char *s1, char *s2);
 int is_last_equal(char *argv);
 
 //handle_redirect.c
-void	check_input_redirections(t_shell *shell, t_node *node);
+int		check_input_redirections(t_shell *shell, t_node *node);
+void	set_input_redirections(t_shell *shell, t_node *node);
+void	set_output_redirections(t_shell *shell, t_node *node);
 
 #endif

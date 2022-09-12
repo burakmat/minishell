@@ -206,6 +206,7 @@ void	free_2d_char(char **arr)
 			free(arr[i]);
 			++i;
 		}
+		free(arr[i]);//null
 		free(arr);
 	}	
 }

@@ -17,6 +17,8 @@ void create_node(t_shell *shell, t_lexout *table)
 	node->null_num = table->box3null;
 	node->illegalcommand = table->illegalcommand;
 	node->id = table->currentnode;
+	node->in = 0;
+	node->out = 0;
 	node->cmd_path = NULL;
 	node->next_node = NULL;
 	node->exec_args = NULL;
