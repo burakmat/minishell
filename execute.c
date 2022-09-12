@@ -60,6 +60,6 @@ void	go_to_builtin(t_shell *shell, t_node *node, char *argv)
 		builtin_echo(node);
 	if (builtin_check(argv) == 7)
 		builtin_echo(node);
-
+	show_env(shell);
 	exit(1);
 }

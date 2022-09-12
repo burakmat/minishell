@@ -174,3 +174,21 @@ char	*ft_strdup(const char *s1)
 	s[i] = '\0';
 	return (s);
 }
+
+char **duplicate_env(char **env)
+{
+	int		i;
+	char	**temp;
+	
+	while (env[i])
+		i++;
+	temp = malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i])
+	{
+		temp[i] = ft_strdup(env[i]);
+		i++;
+	}
+	temp[i] = env[i];
+	return(temp);
+}

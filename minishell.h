@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/11 12:20:37 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/11 12:39:27 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 int		ft_strlcpy(char *dst, char *src, int b);
 char	*ft_strdup(const char *s1);
-
+char	**duplicate_env(char **env);
 
 //temp
 void	readbox3(char *argv);
@@ -174,5 +174,6 @@ void	free_oldenv(t_shell *shell);
 void	re_malloc_env(t_shell *shell, int formalloc, t_node *node);
 void	add_env(t_shell *shell, t_node *node, int a);
 void	builtin_export(t_shell *shell, t_node *node);
+void	show_env(t_shell *shell);
 
 #endif

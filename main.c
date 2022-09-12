@@ -7,7 +7,7 @@ int main(int argc, char **argv, char **env)
 	t_shell shell;
 	char	*a;
 
-	shell.env = env;
+	shell.env = duplicate_env(env);
 	shell.pipes = NULL;
 	while (1)
 	{
@@ -29,8 +29,8 @@ int main(int argc, char **argv, char **env)
 				free_shell_pipes(&shell);
 			}
 		}
-			free(a);
-			// system("leaks minishell");
+		free(a);
+		// system("leaks minishell");
 	}
 	return (0);
 }
