@@ -14,6 +14,7 @@ void newProcess(t_shell *shell, t_node *node)
 			dup2(shell->pipes[node->id - 1][0], 0);
 		if (node->next_node != NULL)
 			dup2(shell->pipes[node->id][1], 1);
+		close_all_node_fd(shell);
 		if (builtin_check(node->exec_args[0]) != 0) // if command is builtin
 			go_to_builtin(shell, node, node->exec_args[0]);
 		if (node->cmd_path != NULL)
@@ -45,8 +46,8 @@ void	execute(t_shell *shell, t_node *node)
 		}
 		else//main
 		{
-			while (wait(NULL) > 0) ;
 			close_all_node_fd(shell);
+			while (wait(NULL) > 0) ;
 			// printf("stat%d\n", status);
 			break ;
 		}
@@ -67,11 +68,11 @@ void	go_to_builtin(t_shell *shell, t_node *node, char *argv)
 	if (builtin_check(argv) == 3)
 		builtin_echo(node);
 	if (builtin_check(argv) == 4)
-		builtin_export(shell, node);
+		builtin_export(shell);
 	if (builtin_check(argv) == 5)
 		builtin_echo(node);
 	if (builtin_check(argv) == 6)
-		builtin_echo(node);
+		builtin_env(shell);
 	if (builtin_check(argv) == 7)
 		builtin_echo(node);
 	exit(1);

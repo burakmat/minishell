@@ -17,18 +17,6 @@ char	*ft_strjoin_builtin(char *s1, char *s2)
 	return (last);
 }
 
-void	show_env(t_shell *shell)
-{
-	int	i;
-
-	i = 0;
-	while (shell->env[i])
-	{
-		printf("declare -x %s\n", shell->env[i]);
-		i++;
-	}
-}
-
 int	ft_strncmp_builtin(char *s1, char *s2)
 {
 	int	i;
