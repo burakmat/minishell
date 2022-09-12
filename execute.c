@@ -8,6 +8,8 @@ void newProcess(t_shell *shell, t_node *node)
 	if (!pid)
 	{
 		//check for files if == 1 perror + exit(1)
+		//redirections
+		check_input_redirections(shell, node);
 		///pipes start
 		// if (shell->pipes != NULL)
 		if (node->previous_node != NULL)
@@ -38,7 +40,7 @@ void	execute(t_shell *shell, t_node *node)
 		if (i < shell->totalnode - 1)
 		{
 			++i;
-			if (builtin_check(node->exec_args[0]) == 4)
+			if (node->exec_args && builtin_check(node->exec_args[0]) == 4)
 				re_malloc_env(shell, node, i);	
 			newProcess(shell, node);		
 			if (node->next_node != NULL) //node->exec_args error vermesin diye

@@ -21,6 +21,7 @@
 # include <string.h>
 # include <errno.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 
 typedef struct s_lexout
 {
@@ -150,6 +151,7 @@ void	*ft_memset(void *b, int c, size_t len);
 int		ft_strlcpy(char *dst, char *src, int b);
 char	*ft_strdup(const char *s1);
 char	**duplicate_env(char **env);
+void	free_2d_char(char **arr);
 
 //temp
 void	readbox3(char *argv);
@@ -181,5 +183,8 @@ void	different_value(t_shell *shell, t_node *node);
 int		is_env_valid(char *argv);
 int	ft_strncmp_builtin(char *s1, char *s2);
 int is_last_equal(char *argv);
+
+//handle_redirect.c
+void	check_input_redirections(t_shell *shell, t_node *node);
 
 #endif
