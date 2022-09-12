@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/11 12:39:27 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:45:31 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,9 +172,14 @@ void close_all_node_fd(t_shell *shell);
 char	*ft_strjoin_builtin(char *s1, char *s2);
 void	builtin_echo(t_node *node);
 void	free_oldenv(t_shell *shell);
-void	re_malloc_env(t_shell *shell, int formalloc, t_node *node);
+void	re_malloc_env(t_shell *shell, t_node *node, int i);
 void	add_env(t_shell *shell, t_node *node, int a);
 void	builtin_export(t_shell *shell, t_node *node);
 void	show_env(t_shell *shell);
+int	env_dup_check(t_shell *shell, char *argv);
+void	different_value(t_shell *shell, t_node *node);
+int		is_env_valid(char *argv);
+int	ft_strncmp_builtin(char *s1, char *s2);
+int is_last_equal(char *argv);
 
 #endif

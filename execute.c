@@ -37,9 +37,11 @@ void	execute(t_shell *shell, t_node *node)
 		if (i < shell->totalnode - 1)
 		{
 			++i;
-			usleep(100);
+			if (builtin_check(node->exec_args[0]) == 4)
+				re_malloc_env(shell, node, i);	
 			newProcess(shell, node);		
-			node = node->next_node;
+			if (node->next_node != NULL) //node->exec_args error vermesin diye
+				node = node->next_node;
 		}
 		else//main
 		{
@@ -57,6 +59,7 @@ void	execute(t_shell *shell, t_node *node)
 
 void	go_to_builtin(t_shell *shell, t_node *node, char *argv)
 {
+	printf("builtin\n");
 	if (builtin_check(argv) == 1)
 		builtin_echo(node);
 	if (builtin_check(argv) == 2)

@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:49 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/09 18:10:35 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/12 11:54:16 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,12 @@ int	thirdbox(char *argv, t_lexout *tolex)
 		if (tolex->box3space == 1)
 		{
 			tolex->box3[tolex->box3index++] = '\0';
-			tolex->box3null++;	
+			tolex->box3null++;
+			tolex->box3space = 0;	
 		}
-		if (argv[i] == '"')
+		else if (argv[i] == '"')
 			i += box3inquote(argv + i, tolex);
-		if (argv[i] == 39)
+		else if (argv[i] == 39)
 			i += box3insinglequote(argv + i, tolex);
 		else
 		{
@@ -90,9 +91,10 @@ int	box3escapespace(char *argv, t_lexout *tolex)
 	int	i;
 
 	i = 0;
-	while (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
+	if (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
 	{
-		i++;
+		while (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
+			i++;
 		if (tolex->box3index > 0)
 			tolex->box3space = 1;
 	}
