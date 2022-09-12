@@ -166,6 +166,7 @@ void	set_node(t_shell *shell, t_node *node);
 //pipe.c
 void	create_pipes(t_shell *shell);
 void close_unnecessary_fd(t_shell *shell, t_node *node);
+void close_all_node_fd(t_shell *shell);
 
 //builtin
 char	*ft_strjoin_builtin(char *s1, char *s2);

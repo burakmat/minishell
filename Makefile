@@ -4,7 +4,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-FLAGS =  -Wall -Wextra -Werror
+FLAGS =  -Wall -Wextra -Werror -std=c11
 
 RM = rm -rf
 

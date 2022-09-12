@@ -44,35 +44,73 @@ void	set_arguments(t_shell *shell, t_node *node)
 {
 	int i;
 	int j;
+	int k;
 	char **tmp;
-	char **argument;
+	char *argument;
 
 	if (node->argument != NULL)
 	{
-		j = 0;
-		while (node->exec_args[j])
-			++j;
-		argument = ft_split(node->argument, ' ');//argümanlar arası boşluk değil null var
-		i = 0;
-		while (argument[i] != NULL)
-			++i;
-		tmp = malloc(sizeof(char *) * (i + j + 1));
 		i = 0;
 		while (node->exec_args[i])
-		{
-			tmp[i] = ft_strdup(node->exec_args[i]);
 			++i;
-		}
-		freeexec_args(node);
+		tmp = malloc(sizeof(char *) * (i + node->null_num + 1));
+		i = -1;
+		while (node->exec_args[++i] != NULL)//**env new = &env    *new = tmp
+			tmp[i] = node->exec_args[i];
+		tmp[i + node->null_num] = node->exec_args[i];
+		k = 0;
 		j = 0;
-		while (argument[j] != NULL)
+		while (k < node->null_num)
 		{
-			tmp[i + j] = argument[j];
+			tmp[i] = ft_strdup(&node->argument[j]);
+			while (node->argument[j] != '\0')
+				++j;
 			++j;
+			++i;
+			++k;
 		}
-		tmp[i + j] = argument[j];
-		free(argument);
+		free(node->exec_args);
 		node->exec_args = tmp;
+
+		//add tmp to node.exec_args
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		// j = 0;
+		// while (node->exec_args[j])
+		// 	++j;
+		// argument = ft_split(node->argument, ' ');//argümanlar arası boşluk değil null var
+		// i = 0;
+		// while (argument[i] != NULL)
+		// 	++i;
+		// tmp = malloc(sizeof(char *) * (i + j + 1));
+		// i = 0;
+		// while (node->exec_args[i])
+		// {
+		// 	tmp[i] = ft_strdup(node->exec_args[i]);
+		// 	++i;
+		// }
+		// freeexec_args(node);
+		// j = 0;
+		// while (argument[j] != NULL)
+		// {
+		// 	tmp[i + j] = argument[j];
+		// 	++j;
+		// }
+		// tmp[i + j] = argument[j];
+		// free(argument);
+		// node->exec_args = tmp;
 	}
 }
 

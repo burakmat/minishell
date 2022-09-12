@@ -23,17 +23,29 @@ void close_unnecessary_fd(t_shell *shell, t_node *node)
 	int i;
 
 	i = 0;
-	while (shell->pipes[i])
+	while (shell->pipes && shell->pipes[i])
 	{
-		if (i != node->id - 1 && i != node->id)
+		close(shell->pipes[i][0]);
+		close(shell->pipes[i][1]);
+		++i;
+	}
+}
+
+void close_all_node_fd(t_shell *shell)
+{
+	int i;
+	t_node *node;
+
+	node = shell->head;
+	while (node)
+	{
+		i = 0;
+		while (shell->pipes && shell->pipes[i])
 		{
 			close(shell->pipes[i][0]);
 			close(shell->pipes[i][1]);
+			++i;
 		}
-		else if (i == node->id)
-			close(shell->pipes[i][0]);
-		else if(i == node->id - 1)
-			close(shell->pipes[i][1]);
-		++i;
+		node = node->next_node;
 	}
 }
