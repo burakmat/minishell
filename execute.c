@@ -40,6 +40,8 @@ void	execute(t_shell *shell, t_node *node)
 		if (i < shell->totalnode - 1)
 		{
 			++i;
+			if (node->exec_args && builtin_check(node->exec_args[0]) == 2)
+				builtin_cd(shell, node);
 			if (node->exec_args && builtin_check(node->exec_args[0]) == 5)
 				edit_unset(shell, node);	
 			if (node->exec_args && builtin_check(node->exec_args[0]) == 4)
@@ -68,9 +70,9 @@ void	go_to_builtin(t_shell *shell, t_node *node, char *argv)
 	if (builtin_check(argv) == 1)
 		builtin_echo(node);
 	if (builtin_check(argv) == 2)
-		;
+		;//cd bir şey koymaya gerek yok gibi
 	if (builtin_check(argv) == 3)
-		;
+		builtin_pwd();//pwd
 	if (builtin_check(argv) == 4 && node->exec_args[1] == NULL)
 		builtin_export(shell);
 	if (builtin_check(argv) == 5)
@@ -78,6 +80,6 @@ void	go_to_builtin(t_shell *shell, t_node *node, char *argv)
 	if (builtin_check(argv) == 6)
 		builtin_env(shell);
 	if (builtin_check(argv) == 7)
-		;
+		;//exit
 	exit(1);
 }

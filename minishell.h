@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/12 18:10:45 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:06:23 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+#include <limits.h>
 
 typedef struct s_lexout
 {
@@ -186,6 +187,14 @@ int		is_env_valid(char *argv);
 int		ft_strncmp_builtin(char *s1, char *s2, int a);
 int 	is_last_equal(char *argv);
 void	show_export(t_shell *shell);
+
+//pwd & cd
+void	builtin_pwd();
+void	builtin_cd(t_shell *shell ,t_node *node);
+void	find_env_path(t_shell *shell, t_node *node);
+void	edit_envt_path(t_shell *shell);
+char	*ft_strjoin_env(char *s1, char *s2);
+char	*ft_strdup_env(char *s1);
 
 //env
 void	builtin_env(t_shell *shell);

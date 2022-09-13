@@ -1,17 +1,14 @@
-#include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <limits.h>
 
-int main(int argc, char **argv, char **env)
-{
-	int i;
-
-	i = 0;
-	while (env[i])
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
-	return 0;
+int main() {
+   char cwd[PATH_MAX];
+   if (getcwd(cwd, sizeof(cwd)) != NULL) {
+       printf("Current working dir: %s\n", cwd);
+   } else {
+       perror("getcwd() error");
+       return 1;
+   }
+   return 0;
 }
