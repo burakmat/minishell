@@ -51,9 +51,8 @@ void	set_input_redirections(t_shell *shell, t_node *node, int input_num)//not do
 	{
 		re = ft_split(node->redirections, ' ');
 		i = 0;
-		while (i + 1)
+		while (re[i])
 		{
-			printf("hello\n");
 			j = 0;	
 			if (re[i][j] == '<' && re[i][j + 1] != '<')
 			{
