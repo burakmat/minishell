@@ -40,6 +40,8 @@ void	execute(t_shell *shell, t_node *node)
 		if (i < shell->totalnode - 1)
 		{
 			++i;
+			if (node->exec_args && builtin_check(node->exec_args[0]) == 7)
+				builtin_exit();
 			if (node->exec_args && builtin_check(node->exec_args[0]) == 2)
 				builtin_cd(shell, node);
 			if (node->exec_args && builtin_check(node->exec_args[0]) == 5)
