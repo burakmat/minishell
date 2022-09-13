@@ -38,7 +38,7 @@ int	check_input_redirections(t_shell *shell, t_node *node)
 	return (0);
 }
 
-void	set_input_redirections(t_shell *shell, t_node *node)//not done
+void	set_input_redirections(t_shell *shell, t_node *node, int input_num)//not done
 {
 	char	**re;
 	int		i;
@@ -46,46 +46,66 @@ void	set_input_redirections(t_shell *shell, t_node *node)//not done
 	int		fd;
 	char	*buffer;
 	int		pipes[2];
-	int		last;
 
 	if (node->redirections != NULL)
 	{
-		last = -1;
 		re = ft_split(node->redirections, ' ');
 		i = 0;
-		while (i)
+		while (i + 1)
 		{
+			printf("hello\n");
 			j = 0;	
 			if (re[i][j] == '<' && re[i][j + 1] != '<')
 			{
-				fd = open(&re[i][j + 1], O_RDONLY, 0777);
-				//hasn't been closed yet
-				dup2(fd, 0);
-				close(fd);
-				node->in = 1;
-				free_2d_char(re);
-				return ;
+				if (--input_num < 1)
+				{
+					fd = open(&re[i][j + 1], O_RDONLY, 0777);
+					//hasn't been closed yet
+					dup2(fd, 0);
+					close(fd);
+					node->in = 1;
+					free_2d_char(re);
+					return ;
+				}
 			}
 			else if (re[i][j] == '<' && re[i][j + 1] == '<')
 			{
-				printf("wtf2\n");
 				buffer = NULL;
-				pipe(pipes);
-				while (1)
+				if (--input_num < 1)//if last input
 				{
-					buffer = readline("> ");
-					if (ft_strncmp_exact(buffer, &re[i][j + 2], ft_strlen(&re[i][j + 2])))
+					pipe(pipes);
+					while (1)
 					{
-						free(buffer);
-						close(pipes[1]);
-						break ;
+						buffer = readline("> ");
+						if (ft_strncmp_exact(buffer, &re[i][j + 2], ft_strlen(&re[i][j + 2])))
+						{
+							free(buffer);
+							close(pipes[1]);
+							dup2(pipes[0], 0);
+							close(pipes[0]);
+							return ;
+						}
+						else
+						{
+							write(pipes[1], buffer, ft_strlen(buffer));//write
+							write(pipes[1], "\n", 1);
+							free(buffer);
+						}
 					}
-					else
+				}
+				else
+				{
+					while (1)
 					{
-						write(pipes[1], buffer, ft_strlen(buffer));//write
+						buffer = readline("> ");
+						if (ft_strncmp_exact(buffer, &re[i][j + 2], ft_strlen(&re[i][j + 2])))
+						{
+							free(buffer);
+							break ;
+						}
 						free(buffer);
+						
 					}
-					
 				}
 			}
 			++i;

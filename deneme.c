@@ -5,13 +5,22 @@
 int main()
 {
 	int fd;
+	int pipes[2];
 	char *arg[] = {"cat", "-e", NULL};
 	char a = 26;
-	fd = open("a", O_RDWR | O_TRUNC, 0777);
-	close(fd);
-
+	char *buffer;
+	int i = 0;
+	pipe(pipes);
+	while (i++ < 5)
+	{
+		buffer = readline(">>");
+		write(pipes[1], buffer, ft_strlen(buffer));
+	}
+	close(pipes[1]);
+	dup2(pipes[0], 0);
+	close(pipes[0]);
 	// dup2(fd, 0);
-	// execve("/bin/cat", arg, NULL);
+	execve("/bin/cat", arg, NULL);
 
 
 

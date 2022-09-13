@@ -188,7 +188,7 @@ int is_last_equal(char *argv);
 
 //handle_redirect.c
 int		check_input_redirections(t_shell *shell, t_node *node);
-void	set_input_redirections(t_shell *shell, t_node *node);
+void	set_input_redirections(t_shell *shell, t_node *node, int input_num);
 void	set_output_redirections(t_shell *shell, t_node *node);
 
 #endif

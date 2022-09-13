@@ -9,8 +9,7 @@ void newProcess(t_shell *shell, t_node *node)
 	{
 		//check for files if == 1 perror + exit(1)
 		//redirections
-		check_input_redirections(shell, node);//added return
-		set_input_redirections(shell, node);//use return value to set last input
+		set_input_redirections(shell, node, check_input_redirections(shell, node));
 		set_output_redirections(shell, node);
 		///pipes start
 		// if (shell->pipes != NULL)
