@@ -67,7 +67,6 @@ void	execute(t_shell *shell, t_node *node)
 
 void	go_to_builtin(t_shell *shell, t_node *node, char *argv)
 {
-	printf("builtin\n");
 	if (builtin_check(argv) == 1)
 		builtin_echo(node);
 	if (builtin_check(argv) == 2)

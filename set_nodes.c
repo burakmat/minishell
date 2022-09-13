@@ -127,12 +127,13 @@ void	set_path_name_to_execargs(t_node *node)
 void	set_node(t_shell *shell, t_node *node)
 {
 	node->cmd_path = search_in_path(shell, node);
-	if(node->illegalcommand == 1)
+	node->is_builtin = builtin_check(node->command);
+	if(node->illegalcommand == 1 && node->is_builtin == 0)
 	{
 		shell->err_code = 2;
 		print_error(shell, node);
 	}
-	else if (node->cmd_path == NULL && node->command != NULL)//instead of node->redirections == NULL (export patlıyor aga)
+	else if (node->cmd_path == NULL && node->command != NULL && node->is_builtin == 0)//instead of node->redirections == NULL (export patlıyor aga)
 	{
 		shell->err_code = 3;
 		print_error(shell, node);
