@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/12 14:45:31 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:28:15 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <errno.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+#include <limits.h>
 
 typedef struct s_lexout
 {
@@ -178,13 +179,33 @@ void	builtin_echo(t_node *node);
 void	free_oldenv(t_shell *shell);
 void	re_malloc_env(t_shell *shell, t_node *node, int i);
 void	add_env(t_shell *shell, t_node *node, int a);
-void	builtin_export(t_shell *shell, t_node *node);
+void	builtin_export(t_shell *shell);
 void	show_env(t_shell *shell);
 int	env_dup_check(t_shell *shell, char *argv);
 void	different_value(t_shell *shell, t_node *node);
 int		is_env_valid(char *argv);
-int	ft_strncmp_builtin(char *s1, char *s2);
-int is_last_equal(char *argv);
+int		ft_strncmp_builtin(char *s1, char *s2, int a);
+int 	is_last_equal(char *argv);
+void	show_export(t_shell *shell);
+void	builtin_exit();
+
+//pwd & cd
+void	builtin_pwd();
+void	builtin_cd(t_shell *shell ,t_node *node);
+void	find_env_path(t_shell *shell, t_node *node);
+void	edit_envt_path(t_shell *shell);
+char	*ft_strjoin_env(char *s1, char *s2);
+char	*ft_strdup_env(char *s1);
+
+//env
+void	builtin_env(t_shell *shell);
+void	show_env(t_shell *shell);
+int		env_is_there_equal(char *argv);
+
+//edit env
+void	edit_unset(t_shell *shell, t_node *node);
+int	builtin_exist(t_shell *shell, char *argv);
+void	build_new_env(t_shell *shell);
 
 //handle_redirect.c
 int		check_input_redirections(t_shell *shell, t_node *node);
