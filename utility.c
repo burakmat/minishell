@@ -192,3 +192,21 @@ char **duplicate_env(char **env)
 	temp[i] = env[i];
 	return(temp);
 }
+
+void	free_2d_char(char **arr)
+{
+	int i;
+
+	if (arr != NULL)
+	{
+
+		i = 0;
+		while (arr[i])
+		{
+			free(arr[i]);
+			++i;
+		}
+		free(arr[i]);//null
+		free(arr);
+	}	
+}

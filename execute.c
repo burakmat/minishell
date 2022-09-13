@@ -8,11 +8,15 @@ void newProcess(t_shell *shell, t_node *node)
 	if (!pid)
 	{
 		//check for files if == 1 perror + exit(1)
+		//redirections
+		check_input_redirections(shell, node);//added return
+		set_input_redirections(shell, node);//use return value to set last input
+		set_output_redirections(shell, node);
 		///pipes start
 		// if (shell->pipes != NULL)
-		if (node->previous_node != NULL)
+		if (node->previous_node != NULL && node->in == 0)
 			dup2(shell->pipes[node->id - 1][0], 0);
-		if (node->next_node != NULL)
+		if (node->next_node != NULL && node->out == 0)
 			dup2(shell->pipes[node->id][1], 1);
 		close_all_node_fd(shell);
 		if (builtin_check(node->exec_args[0]) != 0) // if command is builtin
@@ -36,10 +40,10 @@ void	execute(t_shell *shell, t_node *node)
 		if (i < shell->totalnode - 1)
 		{
 			++i;
-			if (builtin_check(node->exec_args[0]) == 4)
-				re_malloc_env(shell, node, i);
-			if (builtin_check(node->exec_args[0]) == 5)
+			if (node->exec_args && builtin_check(node->exec_args[0]) == 5)
 				edit_unset(shell, node);	
+			if (node->exec_args && builtin_check(node->exec_args[0]) == 4)
+				re_malloc_env(shell, node, i);	
 			newProcess(shell, node);		
 			if (node->next_node != NULL) //node->exec_args error vermesin diye
 				node = node->next_node;
