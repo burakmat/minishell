@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/14 11:37:01 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:39:05 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_shell
 // main
 void	fillboxes(t_lexout *tolex, t_shell *shell);
 int		lexer(char *argv, t_lexout *tolex, t_shell *shell);
-void	fillboxesstatic(t_lexout *tolex);
+void	fillboxesstatic(t_lexout *tolex, t_shell *shell);
 
 //box1
 int		firstbox(char *argv, t_lexout *tolex);
@@ -120,15 +120,15 @@ int		box4passsinglequote(char *argv);
 
 //total node
 
-void	totalnode(char *argv, t_lexout *tolex);
-int		totalnodeinquote(char *argv);
-int		totalnodeinsinglequote(char *argv);
+void	totalnode(char *argv, t_lexout *tolex, t_shell *shell);
+int		totalnodeinquote(char *argv, t_shell *shell);
+int		totalnodeinsinglequote(char *argv, t_shell *shell);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout *table);
 char *search_in_path(t_shell *shell, t_node *node);
 char **split_path(t_shell *shell, int ind);
-void **edit_first_path(char **all_path_copy);
+void edit_first_path(char **all_path_copy);
 int	is_there_path(t_shell *shell);
 int		builtin_check(char *command);
 void	free_all_path(char **path);

@@ -109,7 +109,7 @@ char **split_path(t_shell *shell, int ind)
 	return (copy_path);
 }
 
-void **edit_first_path(char **all_path_copy)
+void edit_first_path(char **all_path_copy)
 {
 	char *first_path;
 	int i;
