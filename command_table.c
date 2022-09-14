@@ -21,6 +21,7 @@ void create_node(t_shell *shell, t_lexout *table)
 	node->out = 0;
 	node->cmd_path = NULL;
 	node->next_node = NULL;
+	node->my_path = NULL;
 	node->exec_args = NULL;
 	if (count)
 	{
@@ -63,10 +64,14 @@ void	free_all_path(char **path)
 {
 	int i;
 
-	i = 0;
-	while (path[i])
-		free(path[i++]);
-	free(path);
+	if (path != NULL)
+	{
+		i = 0;
+		while (path[i])
+			free(path[i++]);
+		free(path);
+		path = NULL;
+	}
 }
 
 char *search_in_path(t_shell *shell, t_node *node)
@@ -95,7 +100,7 @@ char *search_in_path(t_shell *shell, t_node *node)
 			++i;
 		}
 		if (!access(node->command, X_OK) && node->command != NULL)
-			return (node->command);
+			return (ft_strdup(node->command));
 		return (NULL);
 	}
 }
