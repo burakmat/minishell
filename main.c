@@ -12,7 +12,10 @@ int main(int argc, char **argv, char **env)
 	while (1)
 	{
 		fillboxesstatic(&tolex, &shell);
-		a = readline(">>"); 
+		a = NULL;
+		a = readline(">>");
+		if (a == NULL)
+			exit(0);
 		add_history(a);
 		if (*a != '\0')//same??
 		{

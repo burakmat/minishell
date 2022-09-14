@@ -11,14 +11,29 @@ void receiver(int sig)
 		write(1, "\n", 1);
 		exit(sig);
 	}
+
 }
 
 void cocuk()
 {
-	char *buffer;
+	char *buffer = "merhaba";
 	signal(SIGINT, &receiver);
+	// signal(SIGQUIT, &receiver);
 	buffer = readline(">>");
+	printf("%s\n", buffer);
 	exit(0);
+}
+
+
+void do_nut(int sig)
+{
+	if (sig == SIGQUIT)
+	{
+		printf("quit\n");
+		exit(0);
+	}
+	else if (sig == SIGINT)
+		return ;
 }
 
 int main()
@@ -30,11 +45,13 @@ int main()
 	char *buffer;
 	int i = 0;
 	// pipe(pipes);
+	// signal(SIGINT, SIG_DFL);
+	// signal(SIGQUIT, SIG_DFL);
 
 	while (1)
 	{
-		printf("stop!!\n");
-		sleep(5);
+		// printf("stop!!\n");
+		// sleep(5);
 		fd = fork();
 		if (!fd)
 		{
@@ -42,6 +59,8 @@ int main()
 		}
 		else
 		{
+			signal(SIGINT, &do_nut);
+			signal(SIGQUIT, &do_nut);
 			wait(NULL);
 		}
 	}
