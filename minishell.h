@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/13 18:28:15 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/14 11:37:01 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_shell
 }	t_shell;
 
 // main
-void	fillboxes(t_lexout *tolex);
+void	fillboxes(t_lexout *tolex, t_shell *shell);
 int		lexer(char *argv, t_lexout *tolex, t_shell *shell);
 void	fillboxesstatic(t_lexout *tolex);
 
@@ -196,6 +196,7 @@ void	find_env_path(t_shell *shell, t_node *node);
 void	edit_envt_path(t_shell *shell);
 char	*ft_strjoin_env(char *s1, char *s2);
 char	*ft_strdup_env(char *s1);
+void	extra_env_path(t_shell *shell, t_node *node);
 
 //env
 void	builtin_env(t_shell *shell);

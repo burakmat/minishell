@@ -18,9 +18,10 @@ int main(int argc, char **argv, char **env)
 		{
 			totalnode(a, &tolex);//finds total node
 			lexer(a, &tolex, &shell);//all nodes ready
-			if (shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
+			if (shell.err_code != 4 && shell.head->command == NULL && shell.head->redirections == NULL ) //same??--only difference ">> | pwd .."
 				free(shell.head);
-			//need an error case for first character pipe |
+			else if (shell.err_code == 4)//need an error case for first character pipe |
+				print_error(&shell, NULL);
 			else
 			{
 				create_pipes(&shell);//1
@@ -36,7 +37,7 @@ int main(int argc, char **argv, char **env)
 }
 
 
-void	fillboxes(t_lexout *tolex)
+void	fillboxes(t_lexout *tolex, t_shell *shell)
 {
 	tolex->box1 = malloc(sizeof(char) * 1000);
 	tolex->box2 = malloc(sizeof(char) * 1000);
@@ -53,6 +54,7 @@ void	fillboxes(t_lexout *tolex)
 	tolex->illegalflag = 0;
 	tolex->boxwasin = 0;
 	tolex->illegalcommand = 0;
+	shell->err_code = 0;
 }
 
 void	fillboxesstatic(t_lexout *tolex)

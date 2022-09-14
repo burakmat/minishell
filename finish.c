@@ -13,5 +13,7 @@ void	print_error(t_shell *shell, t_node *node)
 		write(2, node->command, ft_strlen(node->command));
 		write(2, ": command not found\n", 20);
 	}
+	else if (shell->err_code == 4)
+		write(2, "syntax error '|'\n", 18);	
 }
 
