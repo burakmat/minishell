@@ -11,16 +11,16 @@ int main(int argc, char **argv, char **env)
 	shell.pipes = NULL;
 	while (1)
 	{
-		fillboxesstatic(&tolex);
-		a = readline(">>");
+		fillboxesstatic(&tolex, &shell);
+		a = readline(">>"); 
 		add_history(a);
 		if (*a != '\0')//same??
 		{
-			totalnode(a, &tolex);//finds total node
+			totalnode(a, &tolex, &shell);//finds total node
 			lexer(a, &tolex, &shell);//all nodes ready
-			if (shell.err_code != 4 && shell.head->command == NULL && shell.head->redirections == NULL ) //same??--only difference ">> | pwd .."
+			if (shell.err_code != 4 && shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
 				free(shell.head);
-			else if (shell.err_code == 4)//need an error case for first character pipe |
+			else if (shell.err_code == 4 || shell.err_code == 5)//need an error case for first character pipe |
 				print_error(&shell, NULL);
 			else
 			{
@@ -57,7 +57,7 @@ void	fillboxes(t_lexout *tolex, t_shell *shell)
 	shell->err_code = 0;
 }
 
-void	fillboxesstatic(t_lexout *tolex)
+void	fillboxesstatic(t_lexout *tolex, t_shell *shell)
 {
 	tolex->currentnode = 0;
 	tolex->totalnode = 0;

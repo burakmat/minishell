@@ -6,13 +6,13 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:45:10 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/08 17:52:23 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:33:35 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	totalnode(char *argv, t_lexout *tolex)
+void	totalnode(char *argv, t_lexout *tolex, t_shell *shell)
 {
 	int i;
 
@@ -21,31 +21,35 @@ void	totalnode(char *argv, t_lexout *tolex)
 	while (argv[i] != '\0')
 	{
 		if(argv[i] == '"')
-			i += totalnodeinquote(argv + i);
+			i += totalnodeinquote(argv + i, shell);
 		if(argv[i] == 39)
-			i += totalnodeinsinglequote(argv + i);
+			i += totalnodeinsinglequote(argv + i, shell);
 		if (argv[i] == '|')
 			tolex->totalnode++;
 		i++;
 	}
 }
 
-int	totalnodeinquote(char *argv)
+int	totalnodeinquote(char *argv, t_shell *shell)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	while (argv[i] != '"' && argv[i] != '\0')
 		i++;
+	if (argv[i] != '"')
+		shell->err_code = 5;
 	return(i + 1);
 }
 
-int	totalnodeinsinglequote(char *argv)
+int	totalnodeinsinglequote(char *argv, t_shell *shell)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	while (argv[i] != 39 && argv[i] != '\0')
 		i++;
+	if (argv[i] != 39)
+		shell->err_code = 5;
 	return(i + 1);
 }

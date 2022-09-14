@@ -6,7 +6,7 @@ int	ft_strlen(char *s1)
 	int a;
 
 	if (!s1)
-		return (NULL);
+		return (0);
 	a = 0;
 	while (s1[a] != '\0')
 		a++;
@@ -158,11 +158,11 @@ void	*ft_memset(void *b, int c, size_t len)
 char	*ft_strdup(const char *s1)
 {
 	char	*s;
-	size_t	len;
+	int		len;
 	int		i;
 
 	i = 0;
-	len = ft_strlen(s1);
+	len = ft_strlen((char *)s1);
 	s = (char *)malloc(sizeof(char) * len + 1);
 	if (!s)
 		return (0);
@@ -180,7 +180,8 @@ char **duplicate_env(char **env)
 	int		i;
 	char	**temp;
 	
-	while (env[i])
+	i = 0;
+	while (env && env[i])
 		i++;
 	temp = malloc(sizeof(char *) * (i + 1));
 	i = 0;

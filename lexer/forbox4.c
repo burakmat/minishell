@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 15:10:29 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/13 18:24:41 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:15:33 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,8 @@ int	box4wtf(char *argv, t_lexout *tolex)
 		tolex->box4[tolex->box4index++] = 32;
 		tolex->box4space = 0;
 	}
-	tolex->box4[tolex->box4index++] = argv[i];
 	argv[i++] = 32;
+	tolex->box4[tolex->box4index++] = argv[i];
 	argv[i++] = 32;
 	i += box4escapespace(argv + i, tolex);
 	while (!((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0' && argv[i] != '<' && argv[i] != '>')
