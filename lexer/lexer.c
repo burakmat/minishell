@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/14 18:07:20 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/14 19:06:20 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 
 	tolex->box2space = 2;
 	i = 0;
+	if (shell->err_code == 5)
+		return (0);
 	fillboxes(tolex, shell);
 	fourthbox(argv, tolex);
 	i += firstbox(argv, tolex);

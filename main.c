@@ -17,15 +17,16 @@ int main(int argc, char **argv, char **env)
 		if (*a != '\0')//same??
 		{
 			totalnode(a, &tolex, &shell);//finds total node
+			//$ yap
 			lexer(a, &tolex, &shell);//all nodes ready
 			if (shell.err_code != 4 && shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
 				free(shell.head);
-			else if (shell.err_code >= 5)//need an error case for first character pipe |
+			else if (shell.err_code >= 6)//need an error case for first character pipe |
 			{
 				print_error(&shell, NULL);
 				clear_all_nodes(shell.head);
 			}
-			else if (shell.err_code == 4)
+			else if (shell.err_code == 4 || shell.err_code == 5)
 				print_error(&shell, NULL);
 			else
 			{
