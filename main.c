@@ -20,7 +20,12 @@ int main(int argc, char **argv, char **env)
 			lexer(a, &tolex, &shell);//all nodes ready
 			if (shell.err_code != 4 && shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
 				free(shell.head);
-			else if (shell.err_code == 4 || shell.err_code == 5)//need an error case for first character pipe |
+			else if (shell.err_code >= 5)//need an error case for first character pipe |
+			{
+				print_error(&shell, NULL);
+				clear_all_nodes(shell.head);
+			}
+			else if (shell.err_code == 4)
 				print_error(&shell, NULL);
 			else
 			{
@@ -31,7 +36,7 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 		free(a);
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 	return (0);
 }
@@ -54,11 +59,11 @@ void	fillboxes(t_lexout *tolex, t_shell *shell)
 	tolex->illegalflag = 0;
 	tolex->boxwasin = 0;
 	tolex->illegalcommand = 0;
-	shell->err_code = 0;
 }
 
 void	fillboxesstatic(t_lexout *tolex, t_shell *shell)
 {
+	shell->err_code = 0;
 	tolex->currentnode = 0;
 	tolex->totalnode = 0;
 }

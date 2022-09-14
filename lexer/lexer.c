@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/14 17:35:14 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:07:20 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,17 @@ int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 	i += firstbox(argv, tolex);
 	i += secondbox(argv + i, tolex);
 	i += thirdbox(argv + i, tolex);
+	if (tolex->box1 == NULL && tolex->box4 == NULL)
+		shell->err_code = 6;
 	if (argv[0] != '|')
 		create_node(shell, tolex);
 	else
 		shell->err_code = 4;
 	tolex->currentnode += 1;
 	// printf("firstbox %s\n", tolex->box1);
-	// printf("illegalcomand %d\n", tolex->illegalcommand);
-	// printf("secondbox %p\n", tolex->box2);
+	// printf("secondbox %s\n", tolex->box2);
 	// printf("thirdbox %s\n", tolex->box3);
-	// printf("\n%d\n", tolex->box3null);
-	// printf("\nfourth -%s\n", tolex->box4);
-	// printf("aloo %d\n", tolex->illegalflag);
+	// printf("fourth -%s\n", tolex->box4);
 	if (argv[i] == '|' && argv[0] != '|')
 		lexer(argv + i + 1, tolex, shell);
 	shell->totalnode = tolex->totalnode;

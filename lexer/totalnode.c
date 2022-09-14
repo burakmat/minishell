@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:45:10 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/14 17:33:35 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:54:08 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	totalnodeinquote(char *argv, t_shell *shell)
 		i++;
 	if (argv[i] != '"')
 		shell->err_code = 5;
-	return(i + 1);
+	return(i);
 }
 
 int	totalnodeinsinglequote(char *argv, t_shell *shell)
@@ -51,5 +51,5 @@ int	totalnodeinsinglequote(char *argv, t_shell *shell)
 		i++;
 	if (argv[i] != 39)
 		shell->err_code = 5;
-	return(i + 1);
+	return(i);
 }

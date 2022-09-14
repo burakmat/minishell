@@ -6,7 +6,6 @@ OBJS = $(SRCS:.c=.o)
 CC = gcc
 
 FLAGS =  -Wall -Wextra -Werror 
-CFLAGS = -g
 
 RM = rm -rf
 
@@ -15,9 +14,9 @@ NAME = minishell
 all :$(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) -g $(OBJS) $(FLAGS) -lreadline -o $(NAME)
+	$(CC) $(OBJS) $(FLAGS) -lreadline -o $(NAME)
 	make clean
-	@-./$(NAME)
+	./$(NAME)
 
 fclean : clean
 	$(RM) $(NAME)
