@@ -2,25 +2,63 @@
 #include <signal.h>
 
 
+void receiver(int sig)
+{
+	char *buffer;
+	// write(1, "signal", 6);
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		exit(sig);
+	}
+}
+
+void cocuk()
+{
+	char *buffer;
+	signal(SIGINT, &receiver);
+	buffer = readline(">>");
+	exit(0);
+}
+
 int main()
 {
 	int fd;
 	int pipes[2];
-	char *arg[] = {"cat", "-e", NULL};
+	char *arg[] = {"which", "which", NULL};
 	char a = 26;
 	char *buffer;
 	int i = 0;
-	pipe(pipes);
-	while (i++ < 5)
+	// pipe(pipes);
+
+	while (1)
 	{
-		buffer = readline(">>");
-		write(pipes[1], buffer, ft_strlen(buffer));
+		printf("stop!!\n");
+		sleep(5);
+		fd = fork();
+		if (!fd)
+		{
+			cocuk();
+		}
+		else
+		{
+			wait(NULL);
+		}
 	}
-	close(pipes[1]);
-	dup2(pipes[0], 0);
-	close(pipes[0]);
+
+
+
+
+
+	// while (i++ < 5)
+	// {
+	// 	buffer = readline(">>");
+	// 	write(pipes[1], buffer, ft_strlen(buffer));
+	// }
+	// close(pipes[1]);
+	// dup2(pipes[0], 0);
+	// close(pipes[0]);
 	// dup2(fd, 0);
-	execve("/bin/cat", arg, NULL);
 
 
 

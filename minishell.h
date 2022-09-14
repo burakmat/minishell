@@ -45,6 +45,7 @@ typedef struct s_lexout
 	int			currentnode;//starts from 0
 	int			totalnode;
 	int			illegalcommand;
+	
 }	t_lexout;
 
 typedef struct s_free
@@ -80,7 +81,7 @@ typedef struct s_shell
 	char **env;
 	t_node *head;
 	t_node *tail;
-	t_free free_; 
+	t_free free_;
 }	t_shell;
 
 // main
