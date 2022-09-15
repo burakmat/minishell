@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 17:45:10 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/14 17:54:08 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:48:29 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	totalnode(char *argv, t_lexout *tolex, t_shell *shell)
 	{
 		if(argv[i] == '"')
 			i += totalnodeinquote(argv + i, shell);
-		if(argv[i] == 39)
+		else if(argv[i] == 39)
 			i += totalnodeinsinglequote(argv + i, shell);
-		if (argv[i] == '|')
+		else if (argv[i] == '|')
 			tolex->totalnode++;
 		i++;
 	}

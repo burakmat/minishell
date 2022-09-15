@@ -1,21 +1,13 @@
 #include<stdio.h>
-  
-// chdir function is declared
-// inside this header
+#include <stdlib.h>
 #include<unistd.h> 
 int main()
 {   
-    char s[100];
-  
-    // printing current working directory
-    printf("%s\n", getcwd(s, 100));
-  
-    // using the command
-    chdir("..");
-  
-    // printing current working directory
-    printf("%s\n", getcwd(s, 100));
-  
-    // after chdir is executed
+    char *s;
+
+	s = malloc(1000);
+	free(s);
+	s = malloc(100000);
+	system("leaks a.out");
     return 0;
 }
