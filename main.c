@@ -12,7 +12,7 @@ int main(int argc, char **argv, char **env)
 	while (1)
 	{
 		fillboxesstatic(&tolex, &shell);
-		a = readline(">>"); 
+		a = readline("minishell>>"); 
 		add_history(a);
 		if (*a != '\0')//same??
 		{
