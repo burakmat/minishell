@@ -8,8 +8,7 @@ void receiver(int sig)
 	// write(1, "signal", 6);
 	if (sig == SIGINT)
 	{
-		write(1, "\n", 1);
-		exit(sig);
+		exit(0);
 	}
 
 }
@@ -19,9 +18,9 @@ void cocuk()
 	char *buffer = "merhaba";
 	int fd;
 
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, &receiver);
+	// signal(SIGQUIT, SIG_DFL);
 	// signal(SIGQUIT, &receiver);
+	signal(SIGINT, &receiver);
 	write(1, ">>", 2);
 	fd = dup(1);
 	close(1);
@@ -30,7 +29,7 @@ void cocuk()
 		exit(1);
 	dup2(fd, 1);
 	if (*buffer != '\0')
-		printf("%s\n", buffer);
+		printf("buffer: %s\n", buffer);
 	exit(0);
 }
 
@@ -77,6 +76,10 @@ int main()
 			{
 				printf("exit\n");
 				break;
+			}
+			else if (WEXITSTATUS(e) == 0)
+			{
+				write(1, "\n", 1);
 			}
 		}
 	}

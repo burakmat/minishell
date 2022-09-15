@@ -16,7 +16,7 @@ all :$(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(FLAGS) -lreadline -o $(NAME)
 	make clean
-	./$(NAME)
+	# ./$(NAME)
 
 fclean : clean
 	$(RM) $(NAME)
