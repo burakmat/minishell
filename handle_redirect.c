@@ -102,8 +102,7 @@ void	set_input_redirections(t_shell *shell, t_node *node, int input_num)//not do
 							free(buffer);
 							break ;
 						}
-						free(buffer);
-						
+						free(buffer); 
 					}
 				}
 			}
