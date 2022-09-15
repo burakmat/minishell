@@ -2,7 +2,7 @@
 
 int	isthere_flag(char *flag)
 {
-	if (flag[0] == '-' && flag[1] == 'n' && flag[2] == '\0')
+	if (flag && flag[0] == '-' && flag[1] == 'n' && flag[2] == '\0')
 		return (2);
 	return (1);
 }

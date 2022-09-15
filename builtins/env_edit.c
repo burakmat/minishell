@@ -32,6 +32,20 @@ void	re_malloc_env(t_shell *shell, t_node *node, int i)
 	different_value(shell, node);
 }
 
+int is_value_number(char *argv)
+{
+	int i;
+
+	i = 0;
+	if (argv[0] >= 48 && argv[0] <= 57)
+	{
+		write(2, &argv[0], 1);
+		write(2, " not a valid identifier\n", 25);
+		return (0);
+	}
+	return (1);
+}
+
 void	different_value(t_shell *shell, t_node *node)
 {
 	int i;
@@ -96,7 +110,7 @@ void	add_env(t_shell *shell, t_node *node, int a)
 	i = 1;
 	while (node->exec_args[i])
 	{
-		if (env_dup_check(shell, node->exec_args[i]) == 0 && is_env_valid(node->exec_args[i]) == 1)
+		if (env_dup_check(shell, node->exec_args[i]) == 0 && is_env_valid(node->exec_args[i]) == 1 && is_value_number(node->exec_args[i]))
 		{
 			shell->env[a] = ft_strdup(node->exec_args[i]);
 			a++;

@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/14 17:39:05 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/15 11:06:54 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ typedef struct s_shell
 	int	totalnode;
 	int err_code;
 	char **env;
+	char	*temp_readline;
+	int		readline_index;
 	t_node *head;
 	t_node *tail;
 	t_free free_;
@@ -124,6 +126,12 @@ int		box4passsinglequote(char *argv);
 void	totalnode(char *argv, t_lexout *tolex, t_shell *shell);
 int		totalnodeinquote(char *argv, t_shell *shell);
 int		totalnodeinsinglequote(char *argv, t_shell *shell);
+
+//dollar_sign
+char	*dollar_sign(char *argv, t_shell *shell);
+int	dollarsign_check(char *argv, t_shell *shell);
+int	dollarsign_inquote(char *argv, t_shell *shell);
+int	dollarsign_insinglequote(char *argv, t_shell *shell);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout *table);
@@ -189,6 +197,7 @@ int		ft_strncmp_builtin(char *s1, char *s2, int a);
 int 	is_last_equal(char *argv);
 void	show_export(t_shell *shell);
 void	builtin_exit();
+int		is_value_number(char *argv);;
 
 //pwd & cd
 void	builtin_pwd();

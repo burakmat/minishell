@@ -20,9 +20,9 @@ int main(int argc, char **argv, char **env)
 		if (*a != '\0')//same??
 		{
 			totalnode(a, &tolex, &shell);//finds total node
-			//$ yap
+			a = dollar_sign(a, &shell);//$ yap
 			lexer(a, &tolex, &shell);//all nodes ready
-			if (shell.err_code != 4 && shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
+			if (shell.err_code < 4 && shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
 				free(shell.head);
 			else if (shell.err_code >= 6)//need an error case for first character pipe |
 			{
@@ -40,7 +40,6 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 		free(a);
-		system("leaks minishell");
 	}
 	return (0);
 }
@@ -70,4 +69,5 @@ void	fillboxesstatic(t_lexout *tolex, t_shell *shell)
 	shell->err_code = 0;
 	tolex->currentnode = 0;
 	tolex->totalnode = 0;
+	shell->readline_index = 0;
 }
