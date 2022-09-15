@@ -17,10 +17,20 @@ void receiver(int sig)
 void cocuk()
 {
 	char *buffer = "merhaba";
+	int fd;
+
+	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, &receiver);
 	// signal(SIGQUIT, &receiver);
-	buffer = readline(">>");
-	printf("%s\n", buffer);
+	write(1, ">>", 2);
+	fd = dup(1);
+	close(1);
+	buffer = readline(NULL);
+	if (buffer == NULL)
+		exit(1);
+	dup2(fd, 1);
+	if (*buffer != '\0')
+		printf("%s\n", buffer);
 	exit(0);
 }
 
@@ -44,9 +54,10 @@ int main()
 	char a = 26;
 	char *buffer;
 	int i = 0;
+	int e;
+	e = 0;
 	// pipe(pipes);
 	// signal(SIGINT, SIG_DFL);
-	// signal(SIGQUIT, SIG_DFL);
 
 	while (1)
 	{
@@ -61,7 +72,12 @@ int main()
 		{
 			signal(SIGINT, &do_nut);
 			signal(SIGQUIT, &do_nut);
-			wait(NULL);
+			wait(&e);
+			if (WEXITSTATUS(e) == 1)
+			{
+				printf("exit\n");
+				break;
+			}
 		}
 	}
 

@@ -124,10 +124,7 @@ void	set_output_redirections(t_shell *shell, t_node *node)
 	{
 		re = ft_split(node->redirections, ' ');
 		i = 0;
-		while (re[i] != NULL)
-			++i;
-		--i;
-		while (i + 1)
+		while (re[i])
 		{
 			j = 0;
 			if (re[i][j] == '>' && re[i][j + 1] != '>' && node->out == 0)
@@ -154,7 +151,7 @@ void	set_output_redirections(t_shell *shell, t_node *node)
 				fd = open(&re[i][j + 2], O_WRONLY | O_CREAT | O_APPEND, 0777);
 				close(fd);
 			}
-			--i;
+			++i;
 		}
 		free_2d_char(re);
 	}
