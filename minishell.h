@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/15 13:55:47 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:58:01 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,12 +192,11 @@ void	builtin_export(t_shell *shell);
 void	show_env(t_shell *shell);
 int	env_dup_check(t_shell *shell, char *argv);
 void	different_value(t_shell *shell, t_node *node);
-int		is_env_valid(char *argv);
+int		is_env_valid(char *argv, int mode);
 int		ft_strncmp_builtin(char *s1, char *s2, int a);
 int 	is_last_equal(char *argv);
 void	show_export(char **temp);
 void	builtin_exit();
-int		is_value_number(char *argv);;
 int	compare_ascii(char **temp);
 //pwd & cd
 void	builtin_pwd();

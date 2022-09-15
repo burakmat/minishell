@@ -11,7 +11,7 @@ void	re_malloc_env(t_shell *shell, t_node *node, int i)
 	i = 0;
 	while (node->exec_args[b])
 	{
-		if (env_dup_check(shell, node->exec_args[b]) == 0 && is_env_valid(node->exec_args[b]) == 1)
+		if (is_env_valid(node->exec_args[b], 1) == 1 && env_dup_check(shell, node->exec_args[b]) == 0)
 			i++;
 		b++;
 	}
@@ -32,20 +32,6 @@ void	re_malloc_env(t_shell *shell, t_node *node, int i)
 	different_value(shell, node);
 }
 
-int is_value_number(char *argv)
-{
-	int i;
-
-	i = 0;
-	if (argv[0] >= 48 && argv[0] <= 57)
-	{
-		write(2, &argv[0], 1);
-		write(2, " not a valid identifier\n", 25);
-		return (0);
-	}
-	return (1);
-}
-
 void	different_value(t_shell *shell, t_node *node)
 {
 	int i;
@@ -56,7 +42,7 @@ void	different_value(t_shell *shell, t_node *node)
 	while (node->exec_args[i])
 	{
 		b = env_dup_check(shell, node->exec_args[i]);
-		if (b != 0 && is_env_valid(node->exec_args[i]) == 1 && is_last_equal(node->exec_args[i]) == 1)
+		if (b != 0 && is_env_valid(node->exec_args[i], 0) == 1 && is_last_equal(node->exec_args[i]) == 1)
 		{
 			free(shell->env[b]);
 			shell->env[b] = ft_strdup(node->exec_args[i]);
@@ -110,7 +96,7 @@ void	add_env(t_shell *shell, t_node *node, int a)
 	i = 1;
 	while (node->exec_args[i])
 	{
-		if (env_dup_check(shell, node->exec_args[i]) == 0 && is_env_valid(node->exec_args[i]) == 1 && is_value_number(node->exec_args[i]))
+		if (env_dup_check(shell, node->exec_args[i]) == 0 && is_env_valid(node->exec_args[i], 0) == 1)
 		{
 			shell->env[a] = ft_strdup(node->exec_args[i]);
 			a++;
@@ -119,16 +105,17 @@ void	add_env(t_shell *shell, t_node *node, int a)
 	}
 }
 
-int		is_env_valid(char *argv)
+int		is_env_valid(char *argv, int mode)
 {
 	int i;
 
 	i = 0;
-	while (argv[i] != '=' && argv[i] != '\0')
+	while (argv[i] != '=' && argv[i] != '\0' && !(argv[0] >= 48 && argv[0] <= 57))
 		i++;
 	if (i == 0)
 	{
-		printf("not a valid identifier\n");
+		if (mode == 1)
+			printf("\"%s\" not a valid identifier\n", argv);
 		return (0);
 	}
 	return (1);
