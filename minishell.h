@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/15 17:58:01 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:48:44 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ int		box4inquote_mode2(char *argv, t_lexout *tolex);
 int		box4insinglequote_mode2(char *argv, t_lexout *tolex);
 int		box4passquote(char *argv);
 int		box4passsinglequote(char *argv);
+void	box4_check(t_shell *shell, t_lexout *tolex);
+void	box4_go_to_check(t_shell *shell, char *argv);
 
 //total node
 

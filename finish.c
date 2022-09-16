@@ -16,5 +16,7 @@ void	print_error(t_shell *shell, t_node *node)
 	else if (shell->err_code == 5)
 		write(2, "quote hasn't been closed\n", 26);
 	else if (shell->err_code == 6)
-		write(2, "syntax error '|'\n", 18);	
+		write(2, "syntax error '|'\n", 18);
+	else if (shell->err_code == 8)
+		write(2, "syntax error \"redirection need a string\"\n", 42);
 }
