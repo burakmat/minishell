@@ -12,7 +12,8 @@ NAME = minishell
 
 LIB = ./lib/.minishell
 
-CFLAGS			= -Wall -Wextra -Werror -I./lib/readline/include 
+CFLAGS			= -Wall -Wextra -Werror -I./lib/readline/include
+LDFLAGS			= -L./lib/readline/lib -lreadline
 
 all : $(LIB) $(NAME)
 
@@ -20,7 +21,7 @@ $(LIB):
 	make -C ./lib
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(CFLAGS) -lreadline -o $(NAME)
+	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(NAME)
 
 fclean : clean
 	$(RM) $(NAME)

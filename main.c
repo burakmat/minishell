@@ -1,5 +1,15 @@
 #include "minishell.h"
 
+
+void	sig_int(int sig)
+{
+	(void)sig;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	printf("\n");
+	rl_redisplay();
+}
+
 int main(int argc, char **argv, char **env)
 {
 	t_lexout tolex;
@@ -10,11 +20,17 @@ int main(int argc, char **argv, char **env)
 	(void)argv;
 	shell.env = duplicate_env(env);
 	shell.pipes = NULL;
+	signal(SIGINT, &sig_int);
 	while (1)
 	{
 		fillboxesstatic(&tolex, &shell);
-		a = readline("minishell>>"); 
+		a = readline("MEGAshell>>"); 
 		add_history(a);
+		if (a == NULL)
+		{
+			printf("exit");
+			exit(0);
+		}
 		if (*a != '\0')//same??
 		{
 			totalnode(a, &tolex, &shell);//finds total node
