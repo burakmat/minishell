@@ -6,23 +6,24 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/16 11:48:44 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:57:02 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <readline/readline.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <readline/history.h>
-# include <string.h>
-# include <errno.h>
-# include <sys/wait.h>
+# include <limits.h>
+# include <signal.h>
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
 # include <fcntl.h>
-#include <limits.h>
+# include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_lexout
 {

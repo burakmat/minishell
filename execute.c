@@ -29,9 +29,7 @@ void newProcess(t_shell *shell, t_node *node)
 
 void	execute(t_shell *shell, t_node *node)
 {
-	int pid;
 	int i;
-	int status = 0;
 
 	i = -1;
 	while (1)

@@ -6,6 +6,8 @@ int main(int argc, char **argv, char **env)
 	t_shell shell;
 	char	*a;
 
+	(void)argc;
+	(void)argv;
 	shell.env = duplicate_env(env);
 	shell.pipes = NULL;
 	while (1)
@@ -59,6 +61,7 @@ void	fillboxes(t_lexout *tolex, t_shell *shell)
 	tolex->illegalflag = 0;
 	tolex->boxwasin = 0;
 	tolex->illegalcommand = 0;
+	(void)shell;
 }
 
 void	fillboxesstatic(t_lexout *tolex, t_shell *shell)
