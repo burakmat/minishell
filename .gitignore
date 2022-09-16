@@ -2,3 +2,5 @@
 .DS_Store
 *.out
 *.exe
+lib/.minishell
+lib/readline

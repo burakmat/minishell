@@ -15,8 +15,6 @@ int main(int argc, char **argv, char **env)
 	t_lexout tolex;
 	t_shell shell;
 	char	*a;
-	int		pid;
-	int		exit_status;
 
 	(void)argc;
 	(void)argv;
