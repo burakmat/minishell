@@ -86,4 +86,6 @@ void	fillboxesstatic(t_lexout *tolex, t_shell *shell)
 	tolex->currentnode = 0;
 	tolex->totalnode = 0;
 	shell->readline_index = 0;
+	shell->exit_status_before = 0;
+	shell->exit_status = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/16 12:57:02 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:17:27 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_shell
 	char **env;
 	char	*temp_readline;
 	int		readline_index;
+	int		exit_status;
+	int		exit_status_before;
 	t_node *head;
 	t_node *tail;
 	t_free free_;
