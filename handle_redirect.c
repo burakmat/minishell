@@ -8,6 +8,7 @@ int	check_input_redirections(t_shell *shell, t_node *node)
 	int		in;
 	char	**re;
 
+	(void)shell;
 	if (node->redirections != NULL)
 	{
 		in = 0;
@@ -47,6 +48,7 @@ void	set_input_redirections(t_shell *shell, t_node *node, int input_num)//not do
 	char	*buffer;
 	int		pipes[2];
 
+	(void)shell;
 	if (node->redirections != NULL)
 	{
 		re = ft_split(node->redirections, ' ');
@@ -119,6 +121,7 @@ void	set_output_redirections(t_shell *shell, t_node *node)
 	int		j;
 	int		fd;
 
+	(void)shell;
 	if (node->redirections != NULL)
 	{
 		re = ft_split(node->redirections, ' ');

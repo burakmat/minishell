@@ -23,6 +23,7 @@ void close_unnecessary_fd(t_shell *shell, t_node *node)
 	int i;
 
 	i = 0;
+	(void)node;
 	while (shell->pipes && shell->pipes[i])
 	{
 		close(shell->pipes[i][0]);

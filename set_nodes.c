@@ -6,6 +6,7 @@ void	set_flags(t_shell *shell, t_node *node)
 	char **flags;
 	char **tmp;
 
+	(void)shell;
 	if (node->flags != NULL)
 	{
 		if (node->illegalflag == 1)
@@ -46,8 +47,8 @@ void	set_arguments(t_shell *shell, t_node *node)
 	int j;
 	int k;
 	char **tmp;
-	char *argument;
 
+	(void)shell;
 	if (node->argument != NULL)
 	{
 		i = 0;

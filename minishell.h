@@ -6,23 +6,24 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/15 13:55:47 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:57:02 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
-# include <readline/readline.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <readline/history.h>
-# include <string.h>
-# include <errno.h>
-# include <sys/wait.h>
+# include <limits.h>
+# include <signal.h>
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
 # include <fcntl.h>
-#include <limits.h>
+# include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_lexout
 {
@@ -120,6 +121,8 @@ int		box4inquote_mode2(char *argv, t_lexout *tolex);
 int		box4insinglequote_mode2(char *argv, t_lexout *tolex);
 int		box4passquote(char *argv);
 int		box4passsinglequote(char *argv);
+void	box4_check(t_shell *shell, t_lexout *tolex);
+void	box4_go_to_check(t_shell *shell, char *argv);
 
 //total node
 
@@ -192,12 +195,11 @@ void	builtin_export(t_shell *shell);
 void	show_env(t_shell *shell);
 int	env_dup_check(t_shell *shell, char *argv);
 void	different_value(t_shell *shell, t_node *node);
-int		is_env_valid(char *argv);
+int		is_env_valid(char *argv, int mode);
 int		ft_strncmp_builtin(char *s1, char *s2, int a);
 int 	is_last_equal(char *argv);
 void	show_export(char **temp);
 void	builtin_exit();
-int		is_value_number(char *argv);;
 int	compare_ascii(char **temp);
 //pwd & cd
 void	builtin_pwd();

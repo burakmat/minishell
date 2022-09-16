@@ -1,17 +1,13 @@
-
 #include "minishell.h"
 
-void receiver(int sig)
-{
-	write(1, "\n", 1);
-	if (sig == SIGINT)
-		exit(0);
-}
 
-void do_nut(int sig)
+void	sig_int(int sig)
 {
-	if (sig == SIGINT)
-		return ;
+	(void)sig;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	printf("\n");
+	rl_redisplay();
 }
 
 int main(int argc, char **argv, char **env)
@@ -22,54 +18,45 @@ int main(int argc, char **argv, char **env)
 	int		pid;
 	int		exit_status;
 
+	(void)argc;
+	(void)argv;
 	shell.env = duplicate_env(env);
 	shell.pipes = NULL;
+	signal(SIGINT, &sig_int);
 	while (1)
 	{
-		pid = fork();
-		if (!pid)
+		fillboxesstatic(&tolex, &shell);
+		a = readline("MEGAshell>>"); 
+		add_history(a);
+		if (a == NULL)
 		{
-			signal(SIGINT, &receiver);
-			fillboxesstatic(&tolex, &shell);
-			a = NULL;
-			a = readline(">>");
-			if (a == NULL)
-			{
-				exit(1);
-			}
-			add_history(a);
-			if (*a != '\0')//same??
-			{
-				totalnode(a, &tolex, &shell);//finds total node
-				a = dollar_sign(a, &shell);//$ yap
-				lexer(a, &tolex, &shell);//all nodes ready
-				if (shell.err_code < 4 && shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
-					free(shell.head);
-				else if (shell.err_code >= 6)//need an error case for first character pipe |
-				{
-					print_error(&shell, NULL);
-					clear_all_nodes(shell.head);
-				}
-				else if (shell.err_code == 4 || shell.err_code == 5)
-					print_error(&shell, NULL);
-				else
-				{
-					create_pipes(&shell);//1
-					execute(&shell, shell.head);
-					clear_all_nodes(shell.head);//1
-					free_shell_pipes(&shell);
-				}
-			}
-			free(a);
+			printf("exit");
 			exit(0);
 		}
-		else
+		if (*a != '\0')//same??
 		{
-			signal(SIGINT, &do_nut);
-			wait(&exit_status);
-			if (WEXITSTATUS(exit_status) != 0)
-				return (0);
+			totalnode(a, &tolex, &shell);//finds total node
+			a = dollar_sign(a, &shell);//$ yap
+			lexer(a, &tolex, &shell);//all nodes ready
+			if (shell.err_code < 4 && shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
+				free(shell.head);
+			else if (shell.err_code >= 6)//need an error case for first character pipe |
+			{
+				print_error(&shell, NULL);
+				clear_all_nodes(shell.head);
+			}
+			else if (shell.err_code == 4 || shell.err_code == 5)
+				print_error(&shell, NULL);
+			else
+			{
+				create_pipes(&shell);//1
+				execute(&shell, shell.head);
+				clear_all_nodes(shell.head);//1
+				free_shell_pipes(&shell);
+			}
 		}
+		free(a);
+		// system("leaks minishell");
 	}
 	return (0);
 }
@@ -92,6 +79,7 @@ void	fillboxes(t_lexout *tolex, t_shell *shell)
 	tolex->illegalflag = 0;
 	tolex->boxwasin = 0;
 	tolex->illegalcommand = 0;
+	(void)shell;
 }
 
 void	fillboxesstatic(t_lexout *tolex, t_shell *shell)

@@ -5,18 +5,23 @@ OBJS = $(SRCS:.c=.o)
 
 CC = gcc
 
-FLAGS =  -Wall -Wextra -Werror 
 
 RM = rm -rf
 
 NAME = minishell
 
-all :$(NAME)
+LIB = ./lib/.minishell
+
+CFLAGS			= -Wall -Wextra -Werror -I./lib/readline/include
+LDFLAGS			= -L./lib/readline/lib -lreadline
+
+all : $(LIB) $(NAME)
+
+$(LIB):
+	make -C ./lib
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) $(FLAGS) -lreadline -o $(NAME)
-	make clean
-	# ./$(NAME)
+	$(CC) $(OBJS) $(CFLAGS) $(LDFLAGS) -o $(NAME)
 
 fclean : clean
 	$(RM) $(NAME)
