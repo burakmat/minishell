@@ -111,13 +111,11 @@ int	ft_strlcpy(char *dst, char *src, int b)
 
 char	*ft_strjoin_path(char *s1, char *s2)
 {
-	int	a;
 	char	*last;
 	int	b;
 
 	if (s2 == NULL)
-		return(ft_strdup(s1));	
-	a = 0;
+		return(ft_strdup(s1));
 	b = ft_strlen(s1);
 	last = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
 	if (!last || !s1)
@@ -181,7 +179,7 @@ char **duplicate_env(char **env)
 {
 	int		i;
 	char	**temp;
-	
+
 	i = 0;
 	while (env && env[i])
 		i++;
@@ -211,5 +209,5 @@ void	free_2d_char(char **arr)
 		}
 		free(arr[i]);//null
 		free(arr);
-	}	
+	}
 }

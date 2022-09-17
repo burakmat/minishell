@@ -2,11 +2,9 @@
 
 char	*ft_strjoin_builtin(char *s1, char *s2)
 {
-	int		a;
 	char	*last;
 	int		b;
 
-	a = 0;
 	b = ft_strlen(s1);
 	last = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!last)
@@ -37,11 +35,9 @@ int	ft_strncmp_builtin(char *s1, char *s2, int a)
 
 char	*ft_strjoin_env(char *s1, char *s2)
 {
-	int		a;
 	char	*last;
 	int		b;
 
-	a = 0;
 	b = ft_strlen(s1);
 	last = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!last)

@@ -3,9 +3,7 @@
 void	builtin_export(t_shell *shell)
 {
 	char **temp;
-	int i;
 
-	i = 0;
 	temp = duplicate_env(shell->env);
 	compare_ascii(temp);
 	show_export(temp); // asciye göre sırala trolleme char atabilirsin
