@@ -32,7 +32,7 @@ void	print_err1(t_shell *shell, t_node *node)
 	}
 }
 
-void	print_err2(t_shell *shell, t_node *node)
+void	print_err2(t_shell *shell)
 {
 	if (shell->err_code == 5)
 	{
@@ -56,5 +56,5 @@ void	print_error(t_shell *shell, t_node *node)
 	if (shell->err_code <= 4)
 		print_err1(shell, node);
 	else
-		print_err2(shell, node);
+		print_err2(shell);
 }
