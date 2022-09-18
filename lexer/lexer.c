@@ -12,33 +12,33 @@
 
 #include "../minishell.h"
 
-int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
+int	lexer(char *argv, t_lexout *tolex)
 {
 	int	i;
 
 	tolex->box2space = 2;
 	i = 0;
-	if (shell->err_code == 5)
+	if (shell.err_code == 5)
 		return (0);
-	fillboxes(tolex, shell);
+	fillboxes(tolex);
 	fourthbox(argv, tolex);
-	box4_check(shell, tolex);
+	box4_check(tolex);
 	i += firstbox(argv, tolex);
 	i += secondbox(argv + i, tolex);
 	i += thirdbox(argv + i, tolex);
 	if (tolex->box1 == NULL && tolex->box4 == NULL && tolex->totalnode > 1)
-		shell->err_code = 6;
+		shell.err_code = 6;
 	if (argv[0] != '|')
-		create_node(shell, tolex);
+		create_node(tolex);
 	else
-		shell->err_code = 4;
+		shell.err_code = 4;
 	tolex->currentnode += 1;
 	// printf("firstbox %s\n", tolex->box1);
 	// printf("secondbox %s\n", tolex->box2);
 	// printf("thirdbox %s\n", tolex->box3);
 	// printf("fourth -%s\n", tolex->box4);
 	if (argv[i] == '|' && argv[0] != '|')
-		lexer(argv + i + 1, tolex, shell);
-	shell->totalnode = tolex->totalnode;
+		lexer(argv + i + 1, tolex);
+	shell.totalnode = tolex->totalnode;
 	return (1);
 }

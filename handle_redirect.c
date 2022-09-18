@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	check_input_redirections(t_shell *shell, t_node *node)
+int	check_input_redirections(t_node *node)
 {
 	int		i;
 	int		j;
@@ -8,7 +8,6 @@ int	check_input_redirections(t_shell *shell, t_node *node)
 	int		in;
 	char	**re;
 
-	(void)shell;
 	if (node->redirections != NULL)
 	{
 		in = 0;
@@ -39,7 +38,7 @@ int	check_input_redirections(t_shell *shell, t_node *node)
 	return (0);
 }
 
-void	set_input_redirections(t_shell *shell, t_node *node, int input_num)//not done
+void	set_input_redirections(t_node *node, int input_num)
 {
 	char	**re;
 	int		i;
@@ -48,7 +47,6 @@ void	set_input_redirections(t_shell *shell, t_node *node, int input_num)//not do
 	char	*buffer;
 	int		pipes[2];
 
-	(void)shell;
 	if (node->redirections != NULL)
 	{
 		re = ft_split(node->redirections, ' ');
@@ -114,14 +112,13 @@ void	set_input_redirections(t_shell *shell, t_node *node, int input_num)//not do
 	}
 }
 
-void	set_output_redirections(t_shell *shell, t_node *node)
+void	set_output_redirections(t_node *node)
 {
 	char	**re;
 	int		i;
 	int		j;
 	int		fd;
 
-	(void)shell;
 	if (node->redirections != NULL)
 	{
 		re = ft_split(node->redirections, ' ');

@@ -1,12 +1,11 @@
 #include "minishell.h"
 
-void	set_flags(t_shell *shell, t_node *node)
+void	set_flags(t_node *node)
 {
 	int i;
 	char **flags;
 	char **tmp;
 
-	(void)shell;
 	if (node->flags != NULL)
 	{
 		if (node->illegalflag == 1)
@@ -41,14 +40,13 @@ void	set_flags(t_shell *shell, t_node *node)
 	}
 }
 
-void	set_arguments(t_shell *shell, t_node *node)
+void	set_arguments(t_node *node)
 {
 	int i;
 	int j;
 	int k;
 	char **tmp;
 
-	(void)shell;
 	if (node->argument != NULL)
 	{
 		i = 0;
@@ -85,26 +83,26 @@ void	set_path_name_to_execargs(t_node *node)
 	}
 }
 
-void	set_node(t_shell *shell, t_node *node)
+void	set_node(t_node *node)
 {
-	node->cmd_path = search_in_path(shell, node);
+	node->cmd_path = search_in_path(node);
 	if (node->command != NULL)
 		node->is_builtin = builtin_check(node->command);
 	if(node->illegalcommand == 1 && node->is_builtin == 0)
 	{
-		shell->err_code = 2;
-		print_error(shell, node);
+		shell.err_code = 2;
+		print_error(node);
 	}
 	else if (node->cmd_path == NULL && node->command != NULL && node->is_builtin == 0)//instead of node->redirections == NULL (export patlıyor aga)
 	{
-		shell->err_code = 3;
-		print_error(shell, node);
+		shell.err_code = 3;
+		print_error(node);
 	}
 	free_all_path(node->my_path);
 	if (node->command == NULL)
 		return ;
 	if (node->illegalflag != 1) //problem solver
 		set_path_name_to_execargs(node);
-	set_flags(shell, node);
-	set_arguments(shell, node);
+	set_flags(node);
+	set_arguments(node);
 }

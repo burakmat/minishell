@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-void	re_malloc_env(t_shell *shell, t_node *node, int i)
+void	re_malloc_env(t_node *node, int i)
 {
 	char **temp;
 	int a;
@@ -11,28 +11,28 @@ void	re_malloc_env(t_shell *shell, t_node *node, int i)
 	i = 0;
 	while (node->exec_args[b])
 	{
-		if (is_env_valid(node->exec_args[b], 1) == 1 && env_dup_check(shell, node->exec_args[b]) == 0)
+		if (is_env_valid(node->exec_args[b], 1) == 1 && env_dup_check(node->exec_args[b]) == 0)
 			i++;
 		b++;
 	}
-	while (shell->env[a])
+	while (shell.env[a])
 		a++;
 	temp = malloc((a + i + 1) * sizeof(char *));
 	a = 0;
 	b = 0;
-	while (shell->env[a])
+	while (shell.env[a])
 	{
-		temp[a] = shell->env[a];
+		temp[a] = shell.env[a];
 		a++;
 	}
 	temp[a + i] = NULL;
-	free(shell->env);
-	shell->env = temp;
-	add_env(shell, node, a);
-	different_value(shell, node);
+	free(shell.env);
+	shell.env = temp;
+	add_env(node, a);
+	different_value(node);
 }
 
-void	different_value(t_shell *shell, t_node *node)
+void	different_value(t_node *node)
 {
 	int i;
 	int b;
@@ -41,11 +41,11 @@ void	different_value(t_shell *shell, t_node *node)
 	b = 0;
 	while (node->exec_args[i])
 	{
-		b = env_dup_check(shell, node->exec_args[i]);
+		b = env_dup_check(node->exec_args[i]);
 		if (b != 0 && is_env_valid(node->exec_args[i], 0) == 1 && is_last_equal(node->exec_args[i]) == 1)
 		{
-			free(shell->env[b]);
-			shell->env[b] = ft_strdup(node->exec_args[i]);
+			free(shell.env[b]);
+			shell.env[b] = ft_strdup(node->exec_args[i]);
 		}
 		i++;
 	}
@@ -63,7 +63,7 @@ int is_last_equal(char *argv)
 	return (0);	
 }
 
-int	env_dup_check(t_shell *shell, char *argv)
+int	env_dup_check(char *argv)
 {
 	int i;
 	int a;
@@ -76,11 +76,11 @@ int	env_dup_check(t_shell *shell, char *argv)
 	d = 0;
 	while (argv[a] != '=' && argv[a] != '\0')
 		a++;
-	while (shell->env[i])
+	while (shell.env[i])
 	{
-		if (ft_strncmp(shell->env[i], argv, a) == 0)
+		if (ft_strncmp(shell.env[i], argv, a) == 0)
 			b++;
-		if (ft_strncmp(shell->env[i], argv, a) == 1)
+		if (ft_strncmp(shell.env[i], argv, a) == 1)
 			d = i;
 		i++;
 	}
@@ -89,16 +89,16 @@ int	env_dup_check(t_shell *shell, char *argv)
 	return (d);
 }
 
-void	add_env(t_shell *shell, t_node *node, int a)
+void	add_env(t_node *node, int a)
 {
 	int	i;
 
 	i = 1;
 	while (node->exec_args[i])
 	{
-		if (env_dup_check(shell, node->exec_args[i]) == 0 && is_env_valid(node->exec_args[i], 0) == 1)
+		if (env_dup_check(node->exec_args[i]) == 0 && is_env_valid(node->exec_args[i], 0) == 1)
 		{
-			shell->env[a] = ft_strdup(node->exec_args[i]);
+			shell.env[a] = ft_strdup(node->exec_args[i]);
 			a++;
 		}
 		i++;

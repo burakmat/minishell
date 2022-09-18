@@ -87,10 +87,12 @@ typedef struct s_shell
 	t_free free_;
 }	t_shell;
 
+t_shell shell;
+
 // main
-void	fillboxes(t_lexout *tolex, t_shell *shell);
-int		lexer(char *argv, t_lexout *tolex, t_shell *shell);
-void	fillboxesstatic(t_lexout *tolex, t_shell *shell);
+void	fillboxes(t_lexout *tolex);
+int		lexer(char *argv, t_lexout *tolex);
+void	fillboxesstatic(t_lexout *tolex);
 
 //box1
 int		firstbox(char *argv, t_lexout *tolex);
@@ -121,34 +123,34 @@ int		box4inquote_mode2(char *argv, t_lexout *tolex);
 int		box4insinglequote_mode2(char *argv, t_lexout *tolex);
 int		box4passquote(char *argv);
 int		box4passsinglequote(char *argv);
-void	box4_check(t_shell *shell, t_lexout *tolex);
-void	box4_go_to_check(t_shell *shell, char *argv);
+void	box4_check(t_lexout *tolex);
+void	box4_go_to_check(char *argv);
 
 //total node
 
-void	totalnode(char *argv, t_lexout *tolex, t_shell *shell);
-int		totalnodeinquote(char *argv, t_shell *shell);
-int		totalnodeinsinglequote(char *argv, t_shell *shell);
+void	totalnode(char *argv, t_lexout *tolex);
+int		totalnodeinquote(char *argv);
+int		totalnodeinsinglequote(char *argv);
 
 //dollar_sign
-char	*dollar_sign(char *argv, t_shell *shell);
-int	dollarsign_check(char *argv, t_shell *shell);
-int	dollarsign_inquote(char *argv, t_shell *shell);
-int	dollarsign_insinglequote(char *argv, t_shell *shell);
+char	*dollar_sign(char *argv);
+int	dollarsign_check(char *argv);
+int	dollarsign_inquote(char *argv);
+int	dollarsign_insinglequote(char *argv);
 
 //command_table.c
-void	create_node(t_shell *shell, t_lexout *table);
-char *search_in_path(t_shell *shell, t_node *node);
-char **split_path(t_shell *shell, int ind);
+void	create_node(t_lexout *table);
+char *search_in_path(t_node *node);
+char **split_path(int ind);
 void edit_first_path(char **all_path_copy);
-int	is_there_path(t_shell *shell);
+int	is_there_path();
 int		builtin_check(char *command);
 void	free_all_path(char **path);
 
 //list_utils.c
 void	clear_all_nodes(t_node *head);
 void	freeexec_args(t_node *node);
-void	free_shell_pipes(t_shell *shell);
+void	free_shell_pipes();
 
 // utility
 char	*lexer_ft_strjoin(char *s1, char *s2);
@@ -172,29 +174,29 @@ void	free_2d_char(char **arr);
 void	readbox3(char *argv);
 
 //finish.c
-void	print_error(t_shell *shell, t_node *node);
+void	print_error(t_node *node);
 
 //execute
-void	execute(t_shell *shell, t_node *node);
-void	go_to_builtin(t_shell *shell, t_node *node, char *argv);
+void	execute(t_node *node);
+void	go_to_builtin(t_node *node, char *argv);
 //set_nodes.c
-void	set_node(t_shell *shell, t_node *node);
+void	set_node(t_node *node);
 
 //pipe.c
-void	create_pipes(t_shell *shell);
-void close_unnecessary_fd(t_shell *shell, t_node *node);
-void close_all_node_fd(t_shell *shell);
+void	create_pipes();
+void close_unnecessary_fd(t_node *node);
+void close_all_node_fd();
 
 //builtin
 char	*ft_strjoin_builtin(char *s1, char *s2);
 void	builtin_echo(t_node *node);
-void	free_oldenv(t_shell *shell);
-void	re_malloc_env(t_shell *shell, t_node *node, int i);
-void	add_env(t_shell *shell, t_node *node, int a);
-void	builtin_export(t_shell *shell);
-void	show_env(t_shell *shell);
-int	env_dup_check(t_shell *shell, char *argv);
-void	different_value(t_shell *shell, t_node *node);
+void	free_oldenv();
+void	re_malloc_env(t_node *node, int i);
+void	add_env(t_node *node, int a);
+void	builtin_export();
+void	show_env();
+int	env_dup_check(char *argv);
+void	different_value(t_node *node);
 int		is_env_valid(char *argv, int mode);
 int		ft_strncmp_builtin(char *s1, char *s2, int a);
 int 	is_last_equal(char *argv);
@@ -203,26 +205,26 @@ void	builtin_exit();
 int	compare_ascii(char **temp);
 //pwd & cd
 void	builtin_pwd();
-void	builtin_cd(t_shell *shell ,t_node *node);
-void	find_env_path(t_shell *shell, t_node *node);
-void	edit_envt_path(t_shell *shell);
+void	builtin_cd(t_node *node);
+void	find_env_path(t_node *node);
+void	edit_envt_path();
 char	*ft_strjoin_env(char *s1, char *s2);
 char	*ft_strdup_env(char *s1);
-void	extra_env_path(t_shell *shell, t_node *node);
+void	extra_env_path(t_node *node);
 
 //env
-void	builtin_env(t_shell *shell);
-void	show_env(t_shell *shell);
+void	builtin_env();
+void	show_env();
 int		env_is_there_equal(char *argv);
 
 //edit env
-void	edit_unset(t_shell *shell, t_node *node);
-int	builtin_exist(t_shell *shell, char *argv);
-void	build_new_env(t_shell *shell);
+void	edit_unset(t_node *node);
+int	builtin_exist(char *argv);
+void	build_new_env();
 
 //handle_redirect.c
-int		check_input_redirections(t_shell *shell, t_node *node);
-void	set_input_redirections(t_shell *shell, t_node *node, int input_num);
-void	set_output_redirections(t_shell *shell, t_node *node);
+int		check_input_redirections(t_node *node);
+void	set_input_redirections(t_node *node, int input_num);
+void	set_output_redirections(t_node *node);
 
 #endif

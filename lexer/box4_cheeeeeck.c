@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void box4_check(t_shell *shell, t_lexout *tolex)
+void box4_check(t_lexout *tolex)
 {
 	int i;
 	int a;
@@ -26,7 +26,7 @@ void box4_check(t_shell *shell, t_lexout *tolex)
 		while (tolex->box4[i] != ' ' && tolex->box4[i] != '\0')
 			temp[a++] = tolex->box4[i++];
 		temp[a] = '\0';
-		box4_go_to_check(shell, temp);
+		box4_go_to_check(temp);
 		free(temp);
 		temp = malloc(sizeof(char) * 1000);
 		if (tolex->box4[i] != '\0')
@@ -35,7 +35,7 @@ void box4_check(t_shell *shell, t_lexout *tolex)
 	free(temp);
 }
 
-void	box4_go_to_check(t_shell *shell, char *argv)
+void	box4_go_to_check(char *argv)
 {
 	int	i;
 	int	a;
@@ -53,5 +53,5 @@ void	box4_go_to_check(t_shell *shell, char *argv)
 			i++;
 	}
 	if (a == i)
-		shell->err_code = 8;
+		shell.err_code = 8;
 }

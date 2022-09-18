@@ -1,12 +1,12 @@
 #include "../minishell.h"
 
-void	builtin_export(t_shell *shell)
+void	builtin_export()
 {
 	char **temp;
 	int i;
 
 	i = 0;
-	temp = duplicate_env(shell->env);
+	temp = duplicate_env(shell.env);
 	compare_ascii(temp);
 	show_export(temp); // asciye göre sırala trolleme char atabilirsin
 }

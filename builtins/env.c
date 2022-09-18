@@ -1,19 +1,19 @@
 #include "../minishell.h"
 
-void	builtin_env(t_shell *shell)
+void	builtin_env()
 {
-	show_env(shell);
+	show_env();
 }
 
-void	show_env(t_shell *shell)
+void	show_env()
 {
 	int	a;
 
 	a = 0;
-	while (shell->env[a])
+	while (shell.env[a])
 	{	
-		if (env_is_there_equal(shell->env[a]) == 1)
-			printf("%s\n", shell->env[a]);
+		if (env_is_there_equal(shell.env[a]) == 1)
+			printf("%s\n", shell.env[a]);
 		a++;
 	}
 }

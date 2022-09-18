@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void create_node(t_shell *shell, t_lexout *table)
+void create_node(t_lexout *table)
 {
 	static int count;
 	static t_node *prev;
@@ -30,14 +30,14 @@ void create_node(t_shell *shell, t_lexout *table)
 	}
 	else
 	{
-		shell->head = node;
+		shell.head = node;
 		node->previous_node = NULL;
 	}
 	prev = node;
 	++count;
 	if (count == table->totalnode)
-		shell->tail = node;
-	set_node(shell ,node);
+		shell.tail = node;
+	set_node(node);
 }
 
 int	builtin_check(char *command)
@@ -74,22 +74,22 @@ void	free_all_path(char **path)
 	}
 }
 
-char *search_in_path(t_shell *shell, t_node *node)
+char *search_in_path(t_node *node)
 {
 	int i;
 	char *searched;
 
 
-	i = is_there_path(shell);
+	i = is_there_path();
 	if (i == -1)
 	{
-		shell->err_code = 1;
-		print_error(shell, node);
+		shell.err_code = 1;
+		print_error(node);
 		return (NULL);
 	}
 	else
 	{
-		node->my_path = split_path(shell, i);
+		node->my_path = split_path(i);
 		i = 0;
 		while (node->my_path[i])
 		{
@@ -105,11 +105,11 @@ char *search_in_path(t_shell *shell, t_node *node)
 	}
 }
 
-char **split_path(t_shell *shell, int ind)
+char **split_path(int ind)
 {
 	char **copy_path;
 
-	copy_path = ft_split(shell->env[ind], ':');
+	copy_path = ft_split(shell.env[ind], ':');
 	edit_first_path(copy_path);
 	return (copy_path);
 }
@@ -134,14 +134,14 @@ void edit_first_path(char **all_path_copy)
 	all_path_copy[0] = first_path;
 }
 
-int	is_there_path(t_shell *shell)
+int	is_there_path()
 {
 	int i;
 
 	i = 0;
-	while (shell->env[i])
+	while (shell.env[i])
 	{
-		if (ft_strncmp(shell->env[i], "PATH=", 5))
+		if (ft_strncmp(shell.env[i], "PATH=", 5))
 			return (i);
 		++i;
 	}

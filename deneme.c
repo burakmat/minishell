@@ -45,9 +45,32 @@ void do_nut(int sig)
 		return ;
 }
 
+void sinyal(int sig)
+{
+	int pid;
+	char c = 26;
+	int fd;
+	fd = dup(1);
+	close(1);
+	pid = fork();
+	if (!pid)
+	{
+		dup2(fd, 1);
+		write(1, &c, 1);
+		printf("cock\n");
+	}
+	else
+	{
+
+		exit(0);
+	}
+}
+
+
 int main()
 {
 	int fd;
+	
 	int pipes[2];
 	char *arg[] = {"which", "which", NULL};
 	char a = 26;
@@ -57,33 +80,15 @@ int main()
 	e = 0;
 	// pipe(pipes);
 	// signal(SIGINT, SIG_DFL);
+	signal(SIGINT, &sinyal);
 
-	while (1)
-	{
-		// printf("stop!!\n");
-		// sleep(5);
-		fd = fork();
-		if (!fd)
-		{
-			cocuk();
-		}
-		else
-		{
-			signal(SIGINT, &do_nut);
-			signal(SIGQUIT, &do_nut);
-			wait(&e);
-			if (WEXITSTATUS(e) == 1)
-			{
-				printf("exit\n");
-				break;
-			}
-			else if (WEXITSTATUS(e) == 0)
-			{
-				write(1, "\n", 1);
-			}
-		}
-	}
+while (1)
+{
 
+	buffer = readline("shell>>");
+
+	printf("-%s-\n", buffer);
+}
 
 
 

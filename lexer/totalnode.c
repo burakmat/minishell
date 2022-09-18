@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void	totalnode(char *argv, t_lexout *tolex, t_shell *shell)
+void	totalnode(char *argv, t_lexout *tolex)
 {
 	int i;
 
@@ -21,16 +21,16 @@ void	totalnode(char *argv, t_lexout *tolex, t_shell *shell)
 	while (argv[i] != '\0')
 	{
 		if(argv[i] == '"')
-			i += totalnodeinquote(argv + i, shell);
+			i += totalnodeinquote(argv + i);
 		else if(argv[i] == 39)
-			i += totalnodeinsinglequote(argv + i, shell);
+			i += totalnodeinsinglequote(argv + i);
 		else if (argv[i] == '|')
 			tolex->totalnode++;
 		i++;
 	}
 }
 
-int	totalnodeinquote(char *argv, t_shell *shell)
+int	totalnodeinquote(char *argv)
 {
 	int i;
 
@@ -38,11 +38,11 @@ int	totalnodeinquote(char *argv, t_shell *shell)
 	while (argv[i] != '"' && argv[i] != '\0')
 		i++;
 	if (argv[i] != '"')
-		shell->err_code = 5;
+		shell.err_code = 5;
 	return(i);
 }
 
-int	totalnodeinsinglequote(char *argv, t_shell *shell)
+int	totalnodeinsinglequote(char *argv)
 {
 	int i;
 
@@ -50,6 +50,6 @@ int	totalnodeinsinglequote(char *argv, t_shell *shell)
 	while (argv[i] != 39 && argv[i] != '\0')
 		i++;
 	if (argv[i] != 39)
-		shell->err_code = 5;
+		shell.err_code = 5;
 	return(i);
 }
