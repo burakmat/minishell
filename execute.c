@@ -57,7 +57,8 @@ void	execute(t_shell *shell, t_node *node)
 				a = wait(&shell->exit_status_before);
 				if (a < 0)
 					break ;
-				shell->exit_status = shell->exit_status_before;
+				if (shell->exit_status != 127 && shell->exit_status_before == 256 && builtin_check(node->exec_args[0]) == 0)
+					shell->exit_status = 1;
 			}
 			break ;
 		}

@@ -40,6 +40,7 @@ int main(int argc, char **argv, char **env)
 		{
 			totalnode(a, &tolex, &shell);//finds total node
 			a = dollar_sign(a, &shell);//$ yap
+			shell.exit_status = 0;
 			lexer(a, &tolex, &shell);//all nodes ready
 			if (shell.err_code < 4 && shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
 				free(shell.head);
