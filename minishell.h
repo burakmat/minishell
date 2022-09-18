@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/18 11:38:19 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/18 15:30:02 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ void close_all_node_fd(t_shell *shell);
 char	*ft_strjoin_builtin(char *s1, char *s2);
 void	builtin_echo(t_node *node);
 void	free_oldenv(t_shell *shell);
-void	re_malloc_env(t_shell *shell, t_node *node, int i);
+void	re_malloc_env(t_shell *shell, t_node *node, int i, int b);
 void	add_env(t_shell *shell, t_node *node, int a);
 void	builtin_export(t_shell *shell);
 void	show_env(t_shell *shell);
@@ -204,10 +204,13 @@ int		is_env_valid(char *argv, int mode);
 int		ft_strncmp_builtin(char *s1, char *s2, int a);
 int 	is_last_equal(char *argv);
 void	show_export(char **temp);
-void	builtin_exit();
+void	builtin_exit(void);
 int	compare_ascii(char **temp);
+void	show_export_helper(char **temp, int i, int a, int t);
+void	export_director(t_shell *shell, t_node *node);
+
 //pwd & cd
-void	builtin_pwd();
+void	builtin_pwd(void);
 void	builtin_cd(t_shell *shell ,t_node *node);
 void	find_env_path(t_shell *shell, t_node *node);
 void	edit_envt_path(t_shell *shell);

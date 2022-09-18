@@ -60,7 +60,7 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 		free(a);
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 	return (0);
 }
