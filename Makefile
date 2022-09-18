@@ -1,5 +1,5 @@
 SRCS = main.c lexer/*c utility.c command_table.c finish.c execute.c list_utils.c \
-	set_nodes.c pipe.c builtins/*c handle_redirect.c
+	set_nodes.c pipe.c builtins/*c handle_redirect.c utility2.c utility3.c
 
 OBJS = $(SRCS:.c=.o)
 

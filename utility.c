@@ -1,9 +1,20 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utility.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmat <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 15:21:34 by bmat              #+#    #+#             */
+/*   Updated: 2022/09/18 15:21:36 by bmat             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell.h"
 
 int	ft_strlen(char *s1)
 {
-	int a;
+	int	a;
 
 	if (!s1)
 		return (0);
@@ -58,156 +69,4 @@ char	**ft_split(char *s, char c)
 		}
 	}
 	return (arr);
-}
-
-int	ft_strncmp(char *s1, char *s2, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size && (s1[i] != '\0' || s2[i] != '\0'))
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	ft_strncmp_exact(char *s1, char *s2, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size && (s1[i] != '\0' || s2[i] != '\0'))
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	if (s1[i] != '\0')
-		return (0);
-	return (1);
-}
-
-int	ft_strlcpy(char *dst, char *src, int b)
-{
-	int	a;
-	int	c;
-
-	a = 0;
-	c = ft_strlen(src);
-	if (b > 0)
-	{
-		while (a < b - 1 && src[a])
-		{
-			dst[a] = src[a];
-			a++;
-		}
-			dst[a] = '\0';
-	}
-	return (c);
-}
-
-char	*ft_strjoin_path(char *s1, char *s2)
-{
-	char	*last;
-	int	b;
-
-	if (s2 == NULL)
-		return(ft_strdup(s1));
-	b = ft_strlen(s1);
-	last = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2));
-	if (!last || !s1)
-		return (0);
-	ft_strlcpy(last, s1, ft_strlen(s1) + 1);
-	last[b] = '/';
-	ft_strlcpy(&last[b + 1], s2, ft_strlen(s2) + 1);
-	return (last);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*ps;
-
-	ps = malloc(size * count);
-	if (ps == 0)
-		return (0);
-	ft_bzero(ps, size * count);
-	return (ps);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, '\0', n);
-}
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	size_t	a;
-
-	a = 0;
-	while (a < len)
-	{
-		((unsigned char *)b)[a] = (unsigned char)c;
-		a++;
-	}
-	return (b);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	char	*s;
-	int		len;
-	int		i;
-
-	i = 0;
-	len = ft_strlen((char *)s1);
-	s = (char *)malloc(sizeof(char) * len + 1);
-	if (!s)
-		return (0);
-	while (s1[i] != '\0')
-	{
-		s[i] = s1[i];
-		i++;
-	}
-	s[i] = '\0';
-	return (s);
-}
-
-char **duplicate_env(char **env)
-{
-	int		i;
-	char	**temp;
-
-	i = 0;
-	while (env && env[i])
-		i++;
-	temp = malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (env[i])
-	{
-		temp[i] = ft_strdup(env[i]);
-		i++;
-	}
-	temp[i] = env[i];
-	return(temp);
-}
-
-void	free_2d_char(char **arr)
-{
-	int i;
-
-	if (arr != NULL)
-	{
-
-		i = 0;
-		while (arr[i])
-		{
-			free(arr[i]);
-			++i;
-		}
-		free(arr[i]);//null
-		free(arr);
-	}
 }
