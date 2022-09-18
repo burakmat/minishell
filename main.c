@@ -1,13 +1,17 @@
 #include "minishell.h"
 
+t_shell shell;
 
 void	sig_int(int sig)
 {
 	(void)sig;
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	printf("\n");
-	rl_redisplay();
+	if (shell.totalnode > 0)
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		printf("\n");
+		rl_redisplay();
+	}
 }
 
 t_shell g_shell;
@@ -15,7 +19,6 @@ t_shell g_shell;
 int main(int argc, char **argv, char **env)
 {
 	t_lexout tolex;
-
 	char	*a;
 
 	(void)argc;
@@ -30,13 +33,14 @@ int main(int argc, char **argv, char **env)
 		add_history(a);
 		if (a == NULL)
 		{
-			printf("exit");
+			printf("exit\n");
 			exit(0);
 		}
 		if (*a != '\0')//same??
 		{
 			totalnode(a, &tolex, &g_shell);//finds total node
 			a = dollar_sign(a, &g_shell);//$ yap
+			g_shell.exit_status = 0;
 			lexer(a, &tolex, &g_shell);//all nodes ready
 			if (g_shell.err_code < 4 && g_shell.head->command == NULL && g_shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
 				free(g_shell.head);
@@ -56,7 +60,6 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 		free(a);
-		// system("leaks minishell");
 	}
 	return (0);
 }
@@ -88,4 +91,5 @@ void	fillboxesstatic(t_lexout *tolex, t_shell *shell)
 	tolex->currentnode = 0;
 	tolex->totalnode = 0;
 	shell->readline_index = 0;
+	shell->exit_status_before = 0;
 }

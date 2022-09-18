@@ -23,7 +23,10 @@ void	find_env_path(t_shell *shell, t_node *node)
 		if (ft_strncmp(shell->env[i], "PWD", 3))
 		{
 			if (chdir(node->exec_args[1]) < 0)
+			{
 				perror(node->exec_args[1]);
+				shell->exit_status = 1;
+			}
 			getcwd(s, 1000);
 			free(shell->env[i]);
 			s = ft_strjoin_env("PWD=", s);
@@ -57,7 +60,10 @@ void	extra_env_path(t_shell *shell, t_node *node)
 				chdir(dup);
 			free(dup);
 			if ((ft_strlen(node->exec_args[1]) > 2 || node->exec_args[1][1] == '~') && chdir(node->exec_args[1] + 2) < 0)
+			{
 				perror(node->exec_args[1]);
+				shell->exit_status = 1;
+			}
 			getcwd(temp, 1000);
 			temp = ft_strjoin_env("PWD=", temp);
 			free(shell->env[i]);

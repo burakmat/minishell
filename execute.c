@@ -22,14 +22,14 @@ void newProcess(t_shell *shell, t_node *node)
 			go_to_builtin(shell, node, node->exec_args[0]);
 		if (node->cmd_path != NULL)
 			execve(node->cmd_path, node->exec_args, NULL);
-		exit(0);
-		
+		exit(1);
 	}
 }
 
 void	execute(t_shell *shell, t_node *node)
 {
 	int i;
+	int a;
 
 	i = -1;
 	while (1)
@@ -52,15 +52,17 @@ void	execute(t_shell *shell, t_node *node)
 		else//main
 		{
 			close_all_node_fd(shell);
-			while (wait(NULL) > 0) ;
-			// printf("stat%d\n", status);
+			while (1)
+			{
+				a = wait(&shell->exit_status_before);
+				if (a < 0)
+					break ;
+				if (shell->exit_status != 127 && shell->exit_status_before == 256 && builtin_check(node->exec_args[0]) == 0)
+					shell->exit_status = 1;
+			}
 			break ;
 		}
 	}
-	//clear all node;
-	// arguman null;
-	// pipe;
-	// flag split spli
 }
 
 void	go_to_builtin(t_shell *shell, t_node *node, char *argv)
