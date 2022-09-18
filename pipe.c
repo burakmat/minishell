@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipe.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmat <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 15:27:35 by bmat              #+#    #+#             */
+/*   Updated: 2022/09/18 15:27:36 by bmat             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	create_pipes(t_shell *shell)
 {
-	int i;
+	int	i;
 
 	if (shell->pipes == NULL && shell->totalnode > 1)
 	{
-		shell->pipes = malloc(sizeof(int *) * shell->totalnode);//null pointer included, need to be freed after
+		shell->pipes = malloc(sizeof(int *) * shell->totalnode);
 		i = 0;
 		while (i < shell->totalnode - 1)
 		{
@@ -18,9 +30,9 @@ void	create_pipes(t_shell *shell)
 	}
 }
 
-void close_unnecessary_fd(t_shell *shell, t_node *node)
+void	close_unnecessary_fd(t_shell *shell, t_node *node)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	(void)node;
@@ -32,10 +44,10 @@ void close_unnecessary_fd(t_shell *shell, t_node *node)
 	}
 }
 
-void close_all_node_fd(t_shell *shell)
+void	close_all_node_fd(t_shell *shell)
 {
-	int i;
-	t_node *node;
+	int		i;
+	t_node	*node;
 
 	node = shell->head;
 	while (node)
