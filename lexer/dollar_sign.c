@@ -32,6 +32,18 @@ int	until_equal(char *argv)
 	return (i);	
 }
 
+void	dollar_status(t_shell *shell)
+{
+	char	*temp;
+	int		i;
+
+	temp = ft_itoa(shell->exit_status);
+	i = 0;
+	while (temp[i])
+		shell->temp_readline[shell->readline_index++]= temp[i++];
+	// shell->exit_status = 0;
+	free(temp);
+}
 
 int	dollarsign_check(char *argv, t_shell *shell)
 {
@@ -42,6 +54,8 @@ int	dollarsign_check(char *argv, t_shell *shell)
 
 	i = 1;
 	a = 0;
+	if (argv[i] == '?' && (((argv[i+ 1] <= 13 && argv[i + 1] >= 9) || argv[i + 1] == 32) || argv[i + 1] == '\0'))
+		dollar_status(shell);
 	temp2 = malloc(sizeof(char) * 1000);
 	while (argv[i] != '\0' && !((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '$' && argv[i] != '"' && argv[i] != 39)
 		temp2[a++] = argv[i++];

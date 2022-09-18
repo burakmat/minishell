@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/16 15:17:27 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/18 11:38:19 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,9 @@ char	*dollar_sign(char *argv, t_shell *shell);
 int	dollarsign_check(char *argv, t_shell *shell);
 int	dollarsign_inquote(char *argv, t_shell *shell);
 int	dollarsign_insinglequote(char *argv, t_shell *shell);
+int	itoacount(int n);
+char	*ft_itoa(int n);
+void	dollar_status(t_shell *shell);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout *table);

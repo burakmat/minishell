@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **env)
 	(void)argv;
 	shell.env = duplicate_env(env);
 	shell.pipes = NULL;
-	shell->exit_status = 0;
+	shell.exit_status = 0;
 	signal(SIGINT, &sig_int);
 	while (1)
 	{
@@ -33,7 +33,7 @@ int main(int argc, char **argv, char **env)
 		add_history(a);
 		if (a == NULL)
 		{
-			printf("exit");
+			printf("exit\n");
 			exit(0);
 		}
 		if (*a != '\0')//same??
@@ -59,7 +59,6 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 		free(a);
-		// system("leaks minishell");
 	}
 	return (0);
 }
@@ -92,5 +91,4 @@ void	fillboxesstatic(t_lexout *tolex, t_shell *shell)
 	tolex->totalnode = 0;
 	shell->readline_index = 0;
 	shell->exit_status_before = 0;
-	shell->exit_status = 0;
 }

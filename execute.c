@@ -59,7 +59,6 @@ void	execute(t_shell *shell, t_node *node)
 					break ;
 				shell->exit_status = shell->exit_status_before;
 			}
-			// printf("stat%d\n", shell->exit_status);
 			break ;
 		}
 	}
