@@ -10,20 +10,22 @@ void	sig_int(int sig)
 	rl_redisplay();
 }
 
+t_shell g_shell;
+
 int main(int argc, char **argv, char **env)
 {
 	t_lexout tolex;
-	t_shell shell;
+
 	char	*a;
 
 	(void)argc;
 	(void)argv;
-	shell.env = duplicate_env(env);
-	shell.pipes = NULL;
+	g_shell.env = duplicate_env(env);
+	g_shell.pipes = NULL;
 	signal(SIGINT, &sig_int);
 	while (1)
 	{
-		fillboxesstatic(&tolex, &shell);
+		fillboxesstatic(&tolex, &g_shell);
 		a = readline("MEGAshell>>"); 
 		add_history(a);
 		if (a == NULL)
@@ -33,24 +35,24 @@ int main(int argc, char **argv, char **env)
 		}
 		if (*a != '\0')//same??
 		{
-			totalnode(a, &tolex, &shell);//finds total node
-			a = dollar_sign(a, &shell);//$ yap
-			lexer(a, &tolex, &shell);//all nodes ready
-			if (shell.err_code < 4 && shell.head->command == NULL && shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
-				free(shell.head);
-			else if (shell.err_code >= 6)//need an error case for first character pipe |
+			totalnode(a, &tolex, &g_shell);//finds total node
+			a = dollar_sign(a, &g_shell);//$ yap
+			lexer(a, &tolex, &g_shell);//all nodes ready
+			if (g_shell.err_code < 4 && g_shell.head->command == NULL && g_shell.head->redirections == NULL) //same??--only difference ">> | pwd .."
+				free(g_shell.head);
+			else if (g_shell.err_code >= 6)//need an error case for first character pipe |
 			{
-				print_error(&shell, NULL);
-				clear_all_nodes(shell.head);
+				print_error(&g_shell, NULL);
+				clear_all_nodes(g_shell.head);
 			}
-			else if (shell.err_code == 4 || shell.err_code == 5)
-				print_error(&shell, NULL);
+			else if (g_shell.err_code == 4 || g_shell.err_code == 5)
+				print_error(&g_shell, NULL);
 			else
 			{
-				create_pipes(&shell);//1
-				execute(&shell, shell.head);
-				clear_all_nodes(shell.head);//1
-				free_shell_pipes(&shell);
+				create_pipes(&g_shell);//1
+				execute(&g_shell, g_shell.head);
+				clear_all_nodes(g_shell.head);//1
+				free_shell_pipes(&g_shell);
 			}
 		}
 		free(a);
