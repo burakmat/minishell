@@ -8,9 +8,10 @@ void	sig_int(int sig)
 	if (g_shell.totalnode == 0)
 	{
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		rl_replace_line("", 1);
 		printf("\n");
 		rl_redisplay();
+		// printf("\033[A");
 	}
 }
 
@@ -27,11 +28,12 @@ int main(int argc, char **argv, char **env)
 	while (1)
 	{
 		fillboxesstatic(&tolex, &g_shell);
-		a = readline("MEGAshell>>"); 
+		a = readline("MEGAshell>> ");
 		add_history(a);
 		if (a == NULL)
 		{
-			printf("exit\n");
+			printf("\033[A");
+			printf("MEGAshell>> exit\n");
 			exit(0);
 		}
 		if (*a != '\0')//same??
@@ -58,7 +60,7 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 		free(a);
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }
