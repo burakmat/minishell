@@ -81,12 +81,10 @@ char *search_in_path(t_shell *shell, t_node *node)
 
 
 	i = is_there_path(shell);
-	if (i == -1)
-	{
-		shell->err_code = 1;
-		print_error(shell, node);
+	if (!access(node->command, X_OK) && node->command != NULL)
+		return (ft_strdup(node->command));
+	else if (i == -1)
 		return (NULL);
-	}
 	else
 	{
 		node->my_path = split_path(shell, i);
@@ -99,8 +97,6 @@ char *search_in_path(t_shell *shell, t_node *node)
 			free(searched);
 			++i;
 		}
-		if (!access(node->command, X_OK) && node->command != NULL)
-			return (ft_strdup(node->command));
 		return (NULL);
 	}
 }
