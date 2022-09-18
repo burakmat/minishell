@@ -1,11 +1,11 @@
 #include "minishell.h"
 
-t_shell shell;
+t_shell g_shell;
 
 void	sig_int(int sig)
 {
 	(void)sig;
-	if (shell.totalnode > 0)
+	if (g_shell.totalnode == 0)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -13,8 +13,6 @@ void	sig_int(int sig)
 		rl_redisplay();
 	}
 }
-
-t_shell g_shell;
 
 int main(int argc, char **argv, char **env)
 {
@@ -60,6 +58,7 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 		free(a);
+		system("leaks minishell");
 	}
 	return (0);
 }
@@ -82,6 +81,7 @@ void	fillboxes(t_lexout *tolex, t_shell *shell)
 	tolex->illegalflag = 0;
 	tolex->boxwasin = 0;
 	tolex->illegalcommand = 0;
+	shell->totalnode = 0;
 	(void)shell;
 }
 
@@ -92,4 +92,5 @@ void	fillboxesstatic(t_lexout *tolex, t_shell *shell)
 	tolex->totalnode = 0;
 	shell->readline_index = 0;
 	shell->exit_status_before = 0;
+	shell->totalnode = 0;
 }
