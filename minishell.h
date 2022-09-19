@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 14:59:09 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:07:00 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,56 +37,54 @@ typedef struct s_lexout
 	int			box2lastisspace;
 	char		*box3;
 	int			box3index;
-	int			box3null;//number of nulls in argument
+	int			box3null;
 	int			box3space;
 	char		*box4;
 	int			box4index;
 	int			box4space;
-	int			illegalflag;//if 1 going through, 0 split into spaces
-	int			currentnode;//starts from 0
+	int			illegalflag;
+	int			currentnode;
 	int			totalnode;
 	int			illegalcommand;
-	
 }	t_lexout;
-
 typedef struct s_free
 {
-	char **my_path;
+	char	**my_path;
 }	t_free;
 
 typedef struct s_node
 {
-	char *command;
-	char *flags;
-	char *argument;
-	char *redirections;
-	struct s_node *next_node;
-	struct s_node *previous_node;
-	char *cmd_path;
-	char **exec_args;
-	char **my_path;
-	int id;
-	int is_builtin;
-	int	null_num;
-	int	illegalflag;
-	int illegalcommand;
-	int in;
-	int out;
+	char			*command;
+	char			*flags;
+	char			*argument;
+	char			*redirections;
+	struct s_node	*next_node;
+	struct s_node	*previous_node;
+	char			*cmd_path;
+	char			**exec_args;
+	char			**my_path;
+	int				id;
+	int				is_builtin;
+	int				null_num;
+	int				illegalflag;
+	int				illegalcommand;
+	int				in;
+	int				out;
 }	t_node;
 
 typedef struct s_shell
 {
-	int **pipes;
-	int	totalnode;
-	int err_code;
-	char **env;
+	int		**pipes;
+	int		totalnode;
+	int		err_code;
+	char	**env;
 	char	*temp_readline;
 	int		readline_index;
 	int		exit_status;
 	int		exit_status_before;
-	t_node *head;
-	t_node *tail;
-	t_free free_;
+	t_node	*head;
+	t_node	*tail;
+	t_free	free_;
 }	t_shell;
 
 // main
@@ -142,21 +140,21 @@ int		totalnodeinsinglequote(char *argv, t_shell *shell);
 
 //dollar_sign
 char	*dollar_sign(char *argv, t_shell *shell);
-int	dollarsign_check(char *argv, t_shell *shell);
-int	dollarsign_inquote(char *argv, t_shell *shell);
-int	dollarsign_insinglequote(char *argv, t_shell *shell);
-int	itoacount(int n);
+int		dollarsign_check(char *argv, t_shell *shell);
+int		dollarsign_inquote(char *argv, t_shell *shell);
+int		dollarsign_insinglequote(char *argv, t_shell *shell);
+int		itoacount(int n);
 char	*ft_itoa(int n);
 void	dollar_status(t_shell *shell);
 void	dollarsign_check_norm(t_shell *shell, char *temp2);
-int	until_equal(char *argv);
+int		until_equal(char *argv);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout *table);
-char *search_in_path(t_shell *shell, t_node *node);
-char **split_path(t_shell *shell, int ind);
-void edit_first_path(char **all_path_copy);
-int	is_there_path(t_shell *shell);
+char	*search_in_path(t_shell *shell, t_node *node);
+char	**split_path(t_shell *shell, int ind);
+void	edit_first_path(char **all_path_copy);
+int		is_there_path(t_shell *shell);
 int		builtin_check(char *command);
 void	free_all_path(char **path);
 
@@ -198,8 +196,8 @@ void	set_flags(t_shell *shell, t_node *node);
 
 //pipe.c
 void	create_pipes(t_shell *shell);
-void close_unnecessary_fd(t_shell *shell, t_node *node);
-void close_all_node_fd(t_shell *shell);
+void	close_unnecessary_fd(t_shell *shell, t_node *node);
+void	close_all_node_fd(t_shell *shell);
 
 //builtin
 char	*ft_strjoin_builtin(char *s1, char *s2);
@@ -209,20 +207,20 @@ void	re_malloc_env(t_shell *shell, t_node *node, int i, int b);
 void	add_env(t_shell *shell, t_node *node, int a);
 void	builtin_export(t_shell *shell);
 void	show_env(t_shell *shell);
-int	env_dup_check(t_shell *shell, char *argv);
+int		env_dup_check(t_shell *shell, char *argv);
 void	different_value(t_shell *shell, t_node *node);
 int		is_env_valid(char *argv, int mode);
 int		ft_strncmp_builtin(char *s1, char *s2, int a);
-int 	is_last_equal(char *argv);
+int		is_last_equal(char *argv);
 void	show_export(char **temp);
 void	builtin_exit(void);
-int	compare_ascii(char **temp);
+int		compare_ascii(char **temp);
 void	show_export_helper(char **temp, int i, int a, int t);
 void	export_director(t_shell *shell, t_node *node);
 
 //pwd & cd
 void	builtin_pwd(void);
-void	builtin_cd(t_shell *shell ,t_node *node);
+void	builtin_cd(t_shell *shell, t_node *node);
 void	find_env_path(t_shell *shell, t_node *node);
 void	edit_envt_path(t_shell *shell);
 char	*ft_strjoin_env(char *s1, char *s2);
@@ -236,7 +234,7 @@ int		env_is_there_equal(char *argv);
 
 //edit env
 void	edit_unset(t_shell *shell, t_node *node);
-int	builtin_exist(t_shell *shell, char *argv);
+int		builtin_exist(t_shell *shell, char *argv);
 void	build_new_env(t_shell *shell);
 char	*find_home(t_shell *shell);
 
