@@ -44,7 +44,7 @@ void	builtin_process(t_shell *shell, t_node *node, int i)
 	if (node->exec_args && builtin_check(node->exec_args[0]) == 5)
 		edit_unset(shell, node);
 	if (node->exec_args && builtin_check(node->exec_args[0]) == 4)
-		re_malloc_env(shell, node, i);
+		export_director(shell, node);
 	new_process(shell, node);
 	if (node->next_node != NULL)
 		node = node->next_node;
