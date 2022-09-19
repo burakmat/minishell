@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmat <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/19 09:59:14 by bmat              #+#    #+#             */
+/*   Updated: 2022/09/19 09:59:16 by bmat             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void clear_all_nodes(t_node *head)
+void	clear_all_nodes(t_node *head)
 {
 	t_node	*current;
 	t_node	*temp;
-	
+
 	current = head;
 	while (current)
 	{
@@ -30,7 +42,7 @@ void	freeexec_args(t_node *node)
 	int	i;
 
 	i = 0;
-	if (node->exec_args)	
+	if (node->exec_args)
 	{
 		while (node->exec_args[i] != NULL)
 		{
@@ -41,9 +53,9 @@ void	freeexec_args(t_node *node)
 	}
 }
 
-void free_shell_pipes(t_shell *shell)
+void	free_shell_pipes(t_shell *shell)
 {
-	int i;
+	int	i;
 
 	if (shell->pipes != NULL)
 	{
@@ -53,7 +65,7 @@ void free_shell_pipes(t_shell *shell)
 			free(shell->pipes[i]);
 			++i;
 		}
-		free(shell->pipes[i]);//null pointer
+		free(shell->pipes[i]);
 		free(shell->pipes);
 		shell->pipes = NULL;
 	}

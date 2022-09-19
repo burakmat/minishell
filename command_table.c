@@ -1,14 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_table.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bmat <marvin@42.fr>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/19 09:32:27 by bmat              #+#    #+#             */
+/*   Updated: 2022/09/19 09:32:28 by bmat             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void create_node(t_shell *shell, t_lexout *table)
+void	init_node(t_node *node, t_lexout *table)
 {
-	static int count;
-	static t_node *prev;
-	t_node *node;
-
-	if (table->currentnode == 0)
-		count = 0;
-	node = malloc(sizeof(t_node));
 	node->command = table->box1;
 	node->flags = table->box2;
 	node->argument = table->box3;
@@ -23,6 +28,18 @@ void create_node(t_shell *shell, t_lexout *table)
 	node->next_node = NULL;
 	node->my_path = NULL;
 	node->exec_args = NULL;
+}
+
+void	create_node(t_shell *shell, t_lexout *table)
+{
+	static int		count;
+	static t_node	*prev;
+	t_node			*node;
+
+	if (table->currentnode == 0)
+		count = 0;
+	node = malloc(sizeof(t_node));
+	init_node(node, table);
 	if (count)
 	{
 		prev->next_node = node;
@@ -37,48 +54,36 @@ void create_node(t_shell *shell, t_lexout *table)
 	++count;
 	if (count == table->totalnode)
 		shell->tail = node;
-	set_node(shell ,node);
+	set_node(shell, node);
 }
 
 int	builtin_check(char *command)
 {
-	if (ft_strncmp_exact(command, "echo", 5) || ft_strncmp_exact(command, "/bin/echo", 10))
+	if (ft_strncmp_exact(command, "echo", 5) || \
+		ft_strncmp_exact(command, "/bin/echo", 10))
 		return (1);
-	else if (ft_strncmp_exact(command, "cd", 3) || ft_strncmp_exact(command, "/usr/bin/cd", 12))
+	else if (ft_strncmp_exact(command, "cd", 3) || \
+		ft_strncmp_exact(command, "/usr/bin/cd", 12))
 		return (2);
-	else if (ft_strncmp_exact(command, "pwd", 4) || ft_strncmp_exact(command, "/bin/pwd", 9))
+	else if (ft_strncmp_exact(command, "pwd", 4) || \
+		ft_strncmp_exact(command, "/bin/pwd", 9))
 		return (3);
 	else if (ft_strncmp_exact(command, "export", 7))
 		return (4);
 	else if (ft_strncmp_exact(command, "unset", 6))
 		return (5);
-	else if (ft_strncmp_exact(command, "env", 4) || ft_strncmp_exact(command, "/usr/bin/env", 13))
+	else if (ft_strncmp_exact(command, "env", 4) || \
+		ft_strncmp_exact(command, "/usr/bin/env", 13))
 		return (6);
 	else if (ft_strncmp_exact(command, "exit", 5))
 		return (7);
 	return (0);
 }
 
-
-void	free_all_path(char **path)
+char	*search_in_path(t_shell *shell, t_node *node)
 {
-	int i;
-
-	if (path != NULL)
-	{
-		i = 0;
-		while (path[i])
-			free(path[i++]);
-		free(path);
-		path = NULL;
-	}
-}
-
-char *search_in_path(t_shell *shell, t_node *node)
-{
-	int i;
-	char *searched;
-
+	int		i;
+	char	*searched;
 
 	i = is_there_path(shell);
 	if (!access(node->command, X_OK) && node->command != NULL)
@@ -99,47 +104,4 @@ char *search_in_path(t_shell *shell, t_node *node)
 		}
 		return (NULL);
 	}
-}
-
-char **split_path(t_shell *shell, int ind)
-{
-	char **copy_path;
-
-	copy_path = ft_split(shell->env[ind], ':');
-	edit_first_path(copy_path);
-	return (copy_path);
-}
-
-void edit_first_path(char **all_path_copy)
-{
-	char *first_path;
-	int i;
-	int j;
-
-	i = ft_strlen(all_path_copy[0]);
-	i -= 5;
-	first_path = malloc(i + 1);
-	j = 0;
-	while (j < i)
-	{
-		first_path[j] = all_path_copy[0][j + 5];
-		++j;
-	}
-	first_path[i] = '\0';
-	free(all_path_copy[0]);
-	all_path_copy[0] = first_path;
-}
-
-int	is_there_path(t_shell *shell)
-{
-	int i;
-
-	i = 0;
-	while (shell->env[i])
-	{
-		if (ft_strncmp(shell->env[i], "PATH=", 5))
-			return (i);
-		++i;
-	}
-	return (-1);
 }

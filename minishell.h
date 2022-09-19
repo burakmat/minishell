@@ -184,6 +184,7 @@ void	execute(t_shell *shell, t_node *node);
 void	go_to_builtin(t_shell *shell, t_node *node, char *argv);
 //set_nodes.c
 void	set_node(t_shell *shell, t_node *node);
+void	set_flags(t_shell *shell, t_node *node);
 
 //pipe.c
 void	create_pipes(t_shell *shell);
@@ -226,8 +227,8 @@ int	builtin_exist(t_shell *shell, char *argv);
 void	build_new_env(t_shell *shell);
 
 //handle_redirect.c
-int		check_input_redirections(t_shell *shell, t_node *node);
-void	set_input_redirections(t_shell *shell, t_node *node, int input_num);
-void	set_output_redirections(t_shell *shell, t_node *node);
+int		check_input_redirections(t_node *node);
+void	set_input_redirections(t_node *node, int input_num);
+void	set_output_redirections(t_node *node);
 
 #endif
