@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 12:46:43 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 14:59:09 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void	edit_envt_path(t_shell *shell);
 char	*ft_strjoin_env(char *s1, char *s2);
 char	*ft_strdup_env(char *s1);
 void	extra_env_path(t_shell *shell, t_node *node);
-
+void	extra_env_path_norm(char *temp, t_shell *shell, t_node *node, int i);
 //env
 void	builtin_env(t_shell *shell);
 void	show_env(t_shell *shell);
@@ -238,6 +238,7 @@ int		env_is_there_equal(char *argv);
 void	edit_unset(t_shell *shell, t_node *node);
 int	builtin_exist(t_shell *shell, char *argv);
 void	build_new_env(t_shell *shell);
+char	*find_home(t_shell *shell);
 
 //handle_redirect.c
 int		check_input_redirections(t_node *node);

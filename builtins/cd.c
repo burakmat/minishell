@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:03:52 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/18 15:29:16 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:00:46 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,37 +53,39 @@ void	extra_env_path(t_shell *shell, t_node *node)
 {
 	char	*temp;
 	int		i;
-	char	*dup;
 
-	i = 0;
 	temp = malloc(sizeof(char) * 1000);
-	while (shell->env[i])
-	{
-		if (ft_strncmp(shell->env[i], "HOME=", 5))
-			dup = ft_strdup_env(shell->env[i]);
-		i++;
-	}
 	i = 0;
 	while (shell->env[i])
 	{
 		if (ft_strncmp(shell->env[i], "PWD=", 4))
 		{
-			if (node->exec_args[1][0] == '~' && (node->exec_args[1][1] == '/' || node->exec_args[1][1] == '\0'))
-				chdir(dup);
-			free(dup);
-			if ((ft_strlen(node->exec_args[1]) > 2 || node->exec_args[1][1] == '~') && chdir(node->exec_args[1] + 2) < 0)
-			{
-				perror(node->exec_args[1]);
-				shell->exit_status = 1;
-			}
-			getcwd(temp, 1000);
-			temp = ft_strjoin_env("PWD=", temp);
-			free(shell->env[i]);
-			shell->env[i] = temp;
+			extra_env_path_norm(temp, shell, node, i);
 			break ;
 		}
 		i++;
 	}
+}
+
+void	extra_env_path_norm(char *temp, t_shell *shell, t_node *node, int i)
+{
+	char	*dup;
+
+	dup = find_home(shell);
+	if (node->exec_args[1][0] == '~' && (node->exec_args[1][1] == '/' \
+			|| node->exec_args[1][1] == '\0'))
+		chdir(dup);
+	free(dup);
+	if ((ft_strlen(node->exec_args[1]) > 2 || \
+	node->exec_args[1][1] == '~') && chdir(node->exec_args[1] + 2) < 0)
+	{
+		perror(node->exec_args[1]);
+		shell->exit_status = 1;
+	}
+	getcwd(temp, 1000);
+	temp = ft_strjoin_env("PWD=", temp);
+	free(shell->env[i]);
+	shell->env[i] = temp;
 }
 
 void	edit_envt_path(t_shell *shell)
@@ -92,14 +94,8 @@ void	edit_envt_path(t_shell *shell)
 	int		i;
 	char	*dup;
 
-	i = 0;
 	temp = malloc(sizeof(char) * 1000);
-	while (shell->env[i])
-	{
-		if (ft_strncmp(shell->env[i], "HOME=", 5))
-			dup = ft_strdup_env(shell->env[i]);
-		i++;
-	}
+	dup = find_home(shell);
 	i = 0;
 	while (shell->env[i])
 	{
