@@ -42,9 +42,9 @@ void	execute(t_shell *shell, t_node *node)
 			if (node->exec_args && builtin_check(node->exec_args[0]) == 2)
 				builtin_cd(shell, node);
 			if (node->exec_args && builtin_check(node->exec_args[0]) == 5)
-				edit_unset(shell, node);	
+				edit_unset(shell, node);
 			if (node->exec_args && builtin_check(node->exec_args[0]) == 4)
-				re_malloc_env(shell, node, i);
+				export_director(shell, node);
 			newProcess(shell, node);
 			if (node->next_node != NULL) //node->exec_args error vermesin diye
 				node = node->next_node;
@@ -57,7 +57,7 @@ void	execute(t_shell *shell, t_node *node)
 				a = wait(&shell->exit_status_before);
 				if (a < 0)
 					break ;
-				if (shell->exit_status != 127 && shell->exit_status_before == 256 && builtin_check(node->exec_args[0]) == 0)
+				if (shell->exit_status != 127 && shell->exit_status_before == 256 && node->exec_args && builtin_check(node->exec_args[0]) == 0)
 					shell->exit_status = 1;
 			}
 			break ;

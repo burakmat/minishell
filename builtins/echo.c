@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 15:05:10 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/18 15:29:13 by osyalcin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 int	isthere_flag(char *flag)
@@ -6,7 +18,6 @@ int	isthere_flag(char *flag)
 		return (2);
 	return (1);
 }
-
 
 void	builtin_echo(t_node *node)
 {

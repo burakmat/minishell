@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 15:10:50 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/18 15:30:59 by osyalcin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	builtin_export(t_shell *shell)
 {
-	char **temp;
+	char	**temp;
 
 	temp = duplicate_env(shell->env);
 	compare_ascii(temp);
-	show_export(temp); // asciye göre sırala trolleme char atabilirsin
+	show_export(temp);
 }
 
 int	ft_strncmp_ascii(char *s1, char *s2, int size)
@@ -23,12 +35,11 @@ int	ft_strncmp_ascii(char *s1, char *s2, int size)
 	return (0);
 }
 
-
 int	compare_ascii(char **temp)
 {
-	int	i;
-	int	j;
-	char *tem2;
+	int		i;
+	int		j;
+	char	*tem2;
 
 	i = 0;
 	while (temp[i])
@@ -55,7 +66,14 @@ void	show_export(char **temp)
 	int		a;
 	char	t;
 
+	a = 0;
+	t = 0;
 	i = 0;
+	show_export_helper(temp, i, a, t);
+}
+
+void	show_export_helper(char **temp, int i, int a, int t)
+{
 	while (temp[i])
 	{
 		a = 0;

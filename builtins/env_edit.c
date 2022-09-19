@@ -1,17 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_edit.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 15:05:38 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/18 15:30:25 by osyalcin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void	re_malloc_env(t_shell *shell, t_node *node, int i)
+void	export_director(t_shell *shell, t_node *node)
 {
-	char **temp;
-	int a;
-	int b;
+	int		b;
+	int		i;
 
-	a = 0;
 	b = 1;
 	i = 0;
+	re_malloc_env(shell, node, i, b);
+	different_value(shell, node);
+}
+
+void	re_malloc_env(t_shell *shell, t_node *node, int i, int b)
+{
+	char	**temp;
+	int		a;
+
+	a = 0;
 	while (node->exec_args[b])
 	{
-		if (is_env_valid(node->exec_args[b], 1) == 1 && env_dup_check(shell, node->exec_args[b]) == 0)
+		if (is_env_valid(node->exec_args[b], 1) == 1 \
+			&& env_dup_check(shell, node->exec_args[b]) == 0)
 			i++;
 		b++;
 	}
@@ -29,20 +50,20 @@ void	re_malloc_env(t_shell *shell, t_node *node, int i)
 	free(shell->env);
 	shell->env = temp;
 	add_env(shell, node, a);
-	different_value(shell, node);
 }
 
 void	different_value(t_shell *shell, t_node *node)
 {
-	int i;
-	int b;
+	int	i;
+	int	b;
 
 	i = 0;
 	b = 0;
 	while (node->exec_args[i])
 	{
 		b = env_dup_check(shell, node->exec_args[i]);
-		if (b != 0 && is_env_valid(node->exec_args[i], 0) == 1 && is_last_equal(node->exec_args[i]) == 1)
+		if (b != 0 && is_env_valid(node->exec_args[i], 0) == 1 \
+			&& is_last_equal(node->exec_args[i]) == 1)
 		{
 			free(shell->env[b]);
 			shell->env[b] = ft_strdup(node->exec_args[i]);
@@ -51,24 +72,12 @@ void	different_value(t_shell *shell, t_node *node)
 	}
 }
 
-int is_last_equal(char *argv)
-{
-	int	i;
-
-	i = 0;
-	while (argv[i] != '=' && argv[i] != '\0')
-		i++;
-	if (argv[i] == '=')
-		return (1);
-	return (0);	
-}
-
 int	env_dup_check(t_shell *shell, char *argv)
 {
-	int i;
-	int a;
-	int b;
-	int d;
+	int	i;
+	int	a;
+	int	b;
+	int	d;
 
 	i = 0;
 	a = 0;
@@ -96,27 +105,12 @@ void	add_env(t_shell *shell, t_node *node, int a)
 	i = 1;
 	while (node->exec_args[i])
 	{
-		if (env_dup_check(shell, node->exec_args[i]) == 0 && is_env_valid(node->exec_args[i], 0) == 1)
+		if (env_dup_check(shell, node->exec_args[i]) == 0 \
+			&& is_env_valid(node->exec_args[i], 0) == 1)
 		{
 			shell->env[a] = ft_strdup(node->exec_args[i]);
 			a++;
 		}
 		i++;
 	}
-}
-
-int		is_env_valid(char *argv, int mode)
-{
-	int i;
-
-	i = 0;
-	while (argv[i] != '=' && argv[i] != '\0' && !(argv[0] >= 48 && argv[0] <= 57))
-		i++;
-	if (i == 0)
-	{
-		if (mode == 1)
-			printf("\"%s\" not a valid identifier\n", argv);
-		return (0);
-	}
-	return (1);
 }
