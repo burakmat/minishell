@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmat <bmat@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:24:31 by bmat              #+#    #+#             */
-/*   Updated: 2022/09/19 15:36:15 by bmat             ###   ########.fr       */
+/*   Updated: 2022/09/19 21:10:14 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int argc, char **argv, char **env)
 	g_shell.env = duplicate_env(env);
 	g_shell.pipes = NULL;
 	signal(SIGINT, &sig_int);
+	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		fillboxesstatic(&tolex, &g_shell);
