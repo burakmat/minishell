@@ -31,4 +31,7 @@ clean :
 	$(RM) *.o
 	$(RM) lexer/*.o
 
+ffclean: fclean
+	$(RM) $(LIB) ./lib/readline
+
 re : fclean all
