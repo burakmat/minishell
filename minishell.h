@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 12:22:26 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:46:43 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ int		box4passquote(char *argv);
 int		box4passsinglequote(char *argv);
 void	box4_check(t_shell *shell, t_lexout *tolex);
 void	box4_go_to_check(t_shell *shell, char *argv);
+int		fourthbox_direction_less(char *argv, t_lexout *tolex);
+void	is_fourthbox_null(t_lexout *tolex);
 
 //total node
 
@@ -146,6 +148,8 @@ int	dollarsign_insinglequote(char *argv, t_shell *shell);
 int	itoacount(int n);
 char	*ft_itoa(int n);
 void	dollar_status(t_shell *shell);
+void	dollarsign_check_norm(t_shell *shell, char *temp2);
+int	until_equal(char *argv);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout *table);
