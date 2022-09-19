@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_input_source.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmat <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:32:52 by bmat              #+#    #+#             */
-/*   Updated: 2022/09/19 11:32:53 by bmat             ###   ########.fr       */
+/*   Updated: 2022/09/19 20:20:39 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	empty_input(char **re, int i)
 	}
 }
 
-void	last_less_less(int *pipes, char **re, int i)
+void	last_less_less(int *pipes, char **re, int i, t_node *node)
 {
 	char	*buffer;
 
@@ -44,6 +44,7 @@ void	last_less_less(int *pipes, char **re, int i)
 			close(pipes[1]);
 			dup2(pipes[0], 0);
 			close(pipes[0]);
+			node->in = 1;
 			return ;
 		}
 		else
@@ -84,7 +85,7 @@ int	handle_inputs(t_node *node, char **re, int i, int *input_num)
 		buffer = NULL;
 		if (--(*input_num) < 1)
 		{
-			last_less_less(pipes, re, i);
+			last_less_less(pipes, re, i, node);
 			return (1);
 		}
 		else
