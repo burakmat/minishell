@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 16:25:14 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:50:08 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ int		lexer(char *argv, t_lexout *tolex, t_shell *shell);
 void	fillboxesstatic(t_lexout *tolex, t_shell *shell);
 
 //box1
-int		firstbox(char *argv, t_lexout *tolex);
+int		firstbox(char *argv, t_lexout *tolex, int i);
 int		inquote(char *argv, t_lexout *tolex);
 int		box1indoublequote(char *argv, t_lexout *tolex);
 int		box1insinglequote(char *argv, t_lexout *tolex);
-
+int		before_firstbox(char *argv, t_lexout *tolex);
 //box2
 int		secondbox(char *argv, t_lexout *tolex, int i);
 int		secondboxinquote(char *argv, t_lexout *tolex);
