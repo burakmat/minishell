@@ -6,17 +6,24 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:16:51 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 20:52:21 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:31:04 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	firstbox(char *argv, t_lexout *tolex)
+int	before_firstbox(char *argv, t_lexout *tolex)
 {
+	int	a;
 	int	i;
 
-	i = 0;
+	a = 0;
+	i = firstbox(argv, tolex, a);
+	return (i);
+}
+
+int	firstbox(char *argv, t_lexout *tolex, int i)
+{
 	while (((argv[i] <= 13 && argv[i] >= 9)
 			|| argv[i] == 32) && argv[i] != '\0')
 		i++;

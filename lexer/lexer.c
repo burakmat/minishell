@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 20:53:55 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 21:30:19 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 	fourthbox(argv, tolex);
 	is_fourthbox_null(tolex);
 	box4_check(shell, tolex);
-	i += firstbox(argv, tolex);
+	i += before_firstbox(argv, tolex);
 	i += before_secondbox(argv + i, tolex);
 	is_second_box_null(tolex);
 	i += before_thirdbox(argv + i, tolex);
