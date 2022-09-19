@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:03:27 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/18 15:03:48 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:11:31 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_strncmp_builtin(char *s1, char *s2, int a)
 			return (0);
 		i++;
 	}
-	if (s1[i] == '=')
+	if (s1[i] == '=' || s1[i] == '\0')
 	{
 		return (1);
 	}
