@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 12:17:14 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 12:09:25 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:14:16 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 	i += firstbox(argv, tolex);
 	i += before_secondbox(argv + i, tolex);
 	is_second_box_null(tolex);
-	i += thirdbox(argv + i, tolex);
+	i += before_thirdbox(argv + i, tolex);
 	if (tolex->box1 == NULL && tolex->box4 == NULL && tolex->totalnode > 1)
 		shell->err_code = 6;
 	if (argv[0] != '|')

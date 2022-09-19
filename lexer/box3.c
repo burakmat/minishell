@@ -6,18 +6,26 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:49 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 11:33:15 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:22:14 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	thirdbox(char *argv, t_lexout *tolex)
+int	before_thirdbox(char *argv, t_lexout *tolex)
 {
+	int	a;
 	int	i;
 
+	a = 0;
 	i = 0;
-	i += box3escapespace(argv, tolex);
+	a += box3escapespace(argv, tolex);
+	i += thirdbox(argv, tolex, a);
+	return (i);
+}
+
+int	thirdbox(char *argv, t_lexout *tolex, int i)
+{
 	while (argv[i] != '\0' && argv[i] != '|')
 	{
 		if (tolex->box3space == 1)
@@ -37,12 +45,8 @@ int	thirdbox(char *argv, t_lexout *tolex)
 		}
 		i += box3escapespace(argv + i, tolex);
 	}
-	if (tolex->box3index == 0)
-	{
-		free(tolex->box3);
-		tolex->box3 = NULL;
+	if (thirdbox_is_null(tolex))
 		return (i);
-	}
 	tolex->box3[tolex->box3index++] = '\0';
 	tolex->box3null++;
 	return (i);

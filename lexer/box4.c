@@ -6,15 +6,15 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:06:38 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/13 18:24:55 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:25:02 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void fourthbox(char *argv, t_lexout *tolex)
+void	fourthbox(char *argv, t_lexout *tolex)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (argv[i] != '\0' && argv[i] != '|')
@@ -23,7 +23,7 @@ void fourthbox(char *argv, t_lexout *tolex)
 			i += box4passquote(argv + i);
 		else if (argv[i] == 39)
 			i += box4passsinglequote(argv + i);
-		else if(argv[i] == '<')
+		else if (argv[i] == '<')
 		{
 			if (argv[i + 1] == '<')
 				i += box4lessless(argv + i, tolex);
@@ -32,7 +32,7 @@ void fourthbox(char *argv, t_lexout *tolex)
 			else
 				i += box4less(argv + i, tolex);
 		}
-		else if(argv[i] == '>')
+		else if (argv[i] == '>')
 		{
 			if (argv[i + 1] == '>')
 				i += box4greatgreat(argv + i, tolex);
@@ -51,9 +51,9 @@ void fourthbox(char *argv, t_lexout *tolex)
 	}
 }
 
-int box4passquote(char *argv)
+int	box4passquote(char *argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (argv[i] != '"' && argv[i] != '\0')
@@ -61,9 +61,9 @@ int box4passquote(char *argv)
 	return (i + 1);
 }
 
-int box4passsinglequote(char *argv)
+int	box4passsinglequote(char *argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (argv[i] != 39 && argv[i] != '\0')
@@ -71,9 +71,9 @@ int box4passsinglequote(char *argv)
 	return (i + 1);
 }
 
-int box4inquote_mode2(char *argv, t_lexout *tolex)
+int	box4inquote_mode2(char *argv, t_lexout *tolex)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	argv[i++] = 32;
@@ -83,12 +83,12 @@ int box4inquote_mode2(char *argv, t_lexout *tolex)
 		argv[i++] = 32;
 	}
 	argv[i++] = 32;
-	return(i);	
+	return(i);
 }
 
-int box4insinglequote_mode2(char *argv, t_lexout *tolex)
+int	box4insinglequote_mode2(char *argv, t_lexout *tolex)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	argv[i++] = 32;
@@ -98,5 +98,5 @@ int box4insinglequote_mode2(char *argv, t_lexout *tolex)
 		argv[i++] = 32;
 	}
 	argv[i++] = 32;
-	return(i);	
+	return(i);
 }

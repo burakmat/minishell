@@ -6,17 +6,17 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 11:41:17 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/16 12:30:55 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:24:29 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void box4_check(t_shell *shell, t_lexout *tolex)
+void	box4_check(t_shell *shell, t_lexout *tolex)
 {
-	int i;
-	int a;
-	char *temp;
+	int		i;
+	int		a;
+	char	*temp;
 
 	i = 0;
 	temp = malloc(sizeof(char) * 1000);

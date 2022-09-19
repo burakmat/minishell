@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 12:09:41 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:22:26 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,12 @@ int		secondbox_fornorm_v2(char *argv, t_lexout *tolex);
 int		before_secondbox(char *argv, t_lexout *tolex);
 
 //box3
-int		thirdbox(char *argv, t_lexout *tolex);
+int		thirdbox(char *argv, t_lexout *tolex, int i);
 int		box3inquote(char *argv, t_lexout *tolex);
 int		box3escapespace(char *argv, t_lexout *tolex);
 int		box3insinglequote(char *argv, t_lexout *tolex);
+int		before_thirdbox(char *argv, t_lexout *tolex);
+int		thirdbox_is_null(t_lexout *tolex);
 
 //box4
 void	fourthbox(char *argv, t_lexout *tolex);

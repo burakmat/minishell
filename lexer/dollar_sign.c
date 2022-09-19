@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dollar_sign.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/19 12:25:27 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/19 12:27:02 by osyalcin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 char	*dollar_sign(char *argv, t_shell *shell)
 {
 	int		i;
 
-	shell->temp_readline = malloc(sizeof(char) * (ft_strlen(argv) + 300));	
+	shell->temp_readline = malloc(sizeof(char) * (ft_strlen(argv) + 300));
 	i = 0;
 	while (argv[i])
 	{
 		if (argv[i] == '"')
 			i += dollarsign_inquote(argv + i, shell);
-		else if(argv[i] == 39)
+		else if (argv[i] == 39)
 			i += dollarsign_insinglequote(argv + i, shell);
 		else if (argv[i] == '$')
 			i += dollarsign_check(argv + i, shell);
@@ -19,7 +31,7 @@ char	*dollar_sign(char *argv, t_shell *shell)
 	}
 	free(argv);
 	shell->temp_readline[shell->readline_index] = '\0';
-	return (shell->temp_readline);	
+	return (shell->temp_readline);
 }
 
 int	until_equal(char *argv)
@@ -29,7 +41,7 @@ int	until_equal(char *argv)
 	i = 0;
 	while (argv[i] != '=' && argv[i] != '\0')
 		i++;
-	return (i);	
+	return (i);
 }
 
 void	dollar_status(t_shell *shell)
@@ -40,8 +52,7 @@ void	dollar_status(t_shell *shell)
 	temp = ft_itoa(shell->exit_status);
 	i = 0;
 	while (temp[i])
-		shell->temp_readline[shell->readline_index++]= temp[i++];
-	// shell->exit_status = 0;
+		shell->temp_readline[shell->readline_index++] = temp[i++];
 	free(temp);
 }
 
@@ -82,7 +93,7 @@ int	dollarsign_check(char *argv, t_shell *shell)
 
 int	dollarsign_inquote(char *argv, t_shell *shell)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	shell->temp_readline[shell->readline_index++] = argv[i++];
@@ -94,16 +105,5 @@ int	dollarsign_inquote(char *argv, t_shell *shell)
 			shell->temp_readline[shell->readline_index++] = argv[i++];
 	}
 	shell->temp_readline[shell->readline_index++] = argv[i++];
-	return(i);
-}
-
-int	dollarsign_insinglequote(char *argv, t_shell *shell)
-{
-	int i;
-
-	i = 0;
-	shell->temp_readline[shell->readline_index++] = argv[i++];
-	while (argv[i] != 39 && argv[i] != '\0')
-		shell->temp_readline[shell->readline_index++] = argv[i++];
-	return(i);
+	return (i);
 }
