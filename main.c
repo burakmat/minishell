@@ -65,6 +65,7 @@ int main(int argc, char **argv, char **env)
 	return (0);
 }
 
+
 void	fillboxes(t_lexout *tolex, t_shell *shell)
 {
 	tolex->box1 = malloc(sizeof(char) * 1000);
@@ -76,14 +77,14 @@ void	fillboxes(t_lexout *tolex, t_shell *shell)
 	tolex->box2index = 0;
 	tolex->box3index = 0;
 	tolex->box3space = 0;
-	tolex->box3null = 0;
+	tolex->box3null  = 0;
 	tolex->box4index = 0;
 	tolex->box4space = 0;
 	tolex->illegalflag = 0;
 	tolex->boxwasin = 0;
 	tolex->illegalcommand = 0;
 	shell->totalnode = 0;
-	tolex->box2space = 2;
+	(void)shell;
 }
 
 void	fillboxesstatic(t_lexout *tolex, t_shell *shell)
