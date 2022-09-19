@@ -60,11 +60,10 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 		free(a);
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 	return (0);
 }
-
 
 void	fillboxes(t_lexout *tolex, t_shell *shell)
 {
@@ -77,14 +76,14 @@ void	fillboxes(t_lexout *tolex, t_shell *shell)
 	tolex->box2index = 0;
 	tolex->box3index = 0;
 	tolex->box3space = 0;
-	tolex->box3null  = 0;
+	tolex->box3null = 0;
 	tolex->box4index = 0;
 	tolex->box4space = 0;
 	tolex->illegalflag = 0;
 	tolex->boxwasin = 0;
 	tolex->illegalcommand = 0;
 	shell->totalnode = 0;
-	(void)shell;
+	tolex->box2space = 2;
 }
 
 void	fillboxesstatic(t_lexout *tolex, t_shell *shell)

@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:49 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/12 11:54:16 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 11:33:15 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	thirdbox(char *argv, t_lexout *tolex)
 		{
 			tolex->box3[tolex->box3index++] = '\0';
 			tolex->box3null++;
-			tolex->box3space = 0;	
+			tolex->box3space = 0;
 		}
 		else if (argv[i] == '"')
 			i += box3inquote(argv + i, tolex);
@@ -50,7 +50,7 @@ int	thirdbox(char *argv, t_lexout *tolex)
 
 int	box3insinglequote(char *argv, t_lexout *tolex)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (argv[i] == 39)
@@ -69,7 +69,7 @@ int	box3insinglequote(char *argv, t_lexout *tolex)
 
 int	box3inquote(char *argv, t_lexout *tolex)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (argv[i] == '"')
@@ -93,7 +93,8 @@ int	box3escapespace(char *argv, t_lexout *tolex)
 	i = 0;
 	if (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
 	{
-		while (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
+		while (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) \
+			&& argv[i] != '\0')
 			i++;
 		if (tolex->box3index > 0)
 			tolex->box3space = 1;
