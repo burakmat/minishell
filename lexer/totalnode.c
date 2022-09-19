@@ -14,15 +14,15 @@
 
 void	totalnode(char *argv, t_lexout *tolex, t_shell *shell)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	tolex->totalnode = 1;
 	while (argv[i] != '\0')
 	{
-		if(argv[i] == '"')
+		if (argv[i] == '"')
 			i += totalnodeinquote(argv + i, shell);
-		else if(argv[i] == 39)
+		else if (argv[i] == 39)
 			i += totalnodeinsinglequote(argv + i, shell);
 		else if (argv[i] == '|')
 			tolex->totalnode++;
@@ -32,24 +32,24 @@ void	totalnode(char *argv, t_lexout *tolex, t_shell *shell)
 
 int	totalnodeinquote(char *argv, t_shell *shell)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (argv[i] != '"' && argv[i] != '\0')
 		i++;
 	if (argv[i] != '"')
 		shell->err_code = 5;
-	return(i);
+	return (i);
 }
 
 int	totalnodeinsinglequote(char *argv, t_shell *shell)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (argv[i] != 39 && argv[i] != '\0')
 		i++;
 	if (argv[i] != 39)
 		shell->err_code = 5;
-	return(i);
+	return (i);
 }

@@ -30,7 +30,8 @@ char	*lexer_ft_strjoin(char *s1, char *s2)
 
 	a = 0;
 	b = lexer_ft_strlen(s1);
-	last = malloc(sizeof(char) * (lexer_ft_strlen(s1) + lexer_ft_strlen(s2) + 1));
+	last = malloc(sizeof(char) * \
+		(lexer_ft_strlen(s1) + lexer_ft_strlen(s2) + 1));
 	if (!last)
 		return (0);
 	while (b > a)
@@ -71,9 +72,10 @@ int	box4escapespace(char *argv, t_lexout *tolex)
 	int	i;
 
 	i = 0;
-	while (((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '\0')
+	while (((argv[i] <= 13 && argv[i] >= 9) || \
+		argv[i] == 32) && argv[i] != '\0')
 	{
-		i++;	
+		i++;
 		tolex->box4space = 1;
 	}
 	return (i);

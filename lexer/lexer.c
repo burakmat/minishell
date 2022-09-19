@@ -33,10 +33,6 @@ int	lexer(char *argv, t_lexout *tolex, t_shell *shell)
 	else
 		shell->err_code = 4;
 	tolex->currentnode += 1;
-	// printf("firstbox %s\n", tolex->box1);
-	// printf("secondbox %s\n", tolex->box2);
-	// printf("thirdbox %s\n", tolex->box3);
-	// printf("fourth -%s\n", tolex->box4);
 	if (argv[i] == '|' && argv[0] != '|')
 		lexer(argv + i + 1, tolex, shell);
 	shell->totalnode = tolex->totalnode;
