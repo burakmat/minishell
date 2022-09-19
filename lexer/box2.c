@@ -6,18 +6,26 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:32 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/09 18:21:39 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:11:55 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	secondbox(char *argv, t_lexout *tolex)
+int	before_secondbox(char *argv, t_lexout *tolex)
 {
+	int	a;
 	int	i;
 
+	a = 0;
 	i = 0;
-	i += lexer_escapespace(argv + i, tolex);
+	a += lexer_escapespace(argv, tolex);
+	i += secondbox(argv, tolex, a);
+	return (i);
+}
+
+int	secondbox(char *argv, t_lexout *tolex, int i)
+{
 	while (tolex->box2runaway != 1 && argv[i] != '\0' && argv[i] != '|')
 	{
 		if (argv[i] == '"')
@@ -27,11 +35,9 @@ int	secondbox(char *argv, t_lexout *tolex)
 		else if (argv[i] == '-')
 		{
 			if (((argv[i + 1] <= 13 && argv[i + 1] >= 9) || argv[i + 1] == 32))
-			{
-				tolex->box2runaway = 1;
 				return (i);
-			}
-			while (!((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) && argv[i] != '"' && argv[i] != '\0' && argv[i] != 39 && argv[i] != '|')
+			while (!((argv[i] <= 13 && argv[i] >= 9) || argv[i] == 32) \
+		&& argv[i] != '"' && argv[i] != '\0' && argv[i] != 39 && argv[i] != '|')
 				tolex->box2[tolex->box2index++] = argv[i++];
 			tolex->box2lastisspace = 0;
 		}
@@ -44,11 +50,6 @@ int	secondbox(char *argv, t_lexout *tolex)
 			tolex->box2runaway = 1;
 		i += lexer_escapespace(argv + i, tolex);
 	}
-	if (tolex->box2index == 0)
-	{
-		free(tolex->box2);
-		tolex->box2 = NULL;
-	}
 	return (i);
 }
 
@@ -57,16 +58,10 @@ int	secondboxinquote(char *argv, t_lexout *tolex)
 	int	i;
 
 	i = 1;
-	if (argv[i] == '"')
-	{
-		i++;
-		return (i);
-	}
-	if (argv[i] != '-' && (isbeforeflag(tolex) || tolex->box2lastisspace == 1))
-	{
-		tolex->box2runaway = 1;
+	if (secondbox_fornorm_v2(argv, tolex) == 2)
+		return (2);
+	if (secondbox_fornorm_v2(argv, tolex) == 0)
 		return (0);
-	}
 	else
 	{
 		if (((argv[i] <= 13 && argv[i] >= 9)
@@ -91,16 +86,10 @@ int	secondboxinsinglequote(char *argv, t_lexout *tolex)
 	int	i;
 
 	i = 1;
-	if (argv[i] == 39)
-	{
-		i++;
-		return (i);
-	}
-	if (argv[i] != '-' && (isbeforeflag(tolex) || tolex->box2lastisspace == 1))
-	{
-		tolex->box2runaway = 1;
+	if (secondbox_fornorm(argv, tolex) == 2)
+		return (2);
+	if (secondbox_fornorm(argv, tolex) == 0)
 		return (0);
-	}
 	else
 	{
 		if (((argv[i] <= 13 && argv[i] >= 9)

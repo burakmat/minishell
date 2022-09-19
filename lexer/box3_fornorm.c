@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   box3_fornorm.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 15:09:24 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/18 15:10:01 by osyalcin         ###   ########.fr       */
+/*   Created: 2022/09/19 12:17:26 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/19 12:21:39 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	builtin_exit(void)
+int	thirdbox_is_null(t_lexout *tolex)
 {
-	printf("exit\n");
-	exit(0);
+	if (tolex->box3index == 0)
+	{
+		free(tolex->box3);
+		tolex->box3 = NULL;
+		return (1);
+	}
+	return (0);
 }

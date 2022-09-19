@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/18 15:03:52 by osyalcin          #+#    #+#             */
+/*   Updated: 2022/09/18 15:29:16 by osyalcin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-void	builtin_cd(t_shell *shell , t_node *node)
+void	builtin_cd(t_shell *shell, t_node *node)
 {
 	if (node->exec_args[1] != NULL && node->exec_args[1][0] != '~')
 		find_env_path(shell, node);
-	else if (node->exec_args[1] == NULL  || (node->exec_args[1][0] == '~' && node->exec_args[1][1] == '\0'))
+	else if (node->exec_args[1] == NULL
+		|| (node->exec_args[1][0] == '~' && node->exec_args[1][1] == '\0'))
 		edit_envt_path(shell);
 	else if (node->exec_args[1] != NULL && node->exec_args[1][0] == '~')
 		extra_env_path(shell, node);
 }
 
-
 void	find_env_path(t_shell *shell, t_node *node)
 {
-	int	i;
-	char *s;
+	int		i;
+	char	*s;
 
 	i = 0;
 	s = malloc(sizeof(char) * 1000);
@@ -33,7 +45,7 @@ void	find_env_path(t_shell *shell, t_node *node)
 			shell->env[i] = s;
 			break ;
 		}
-		i++;		
+		i++;
 	}
 }
 
@@ -70,13 +82,13 @@ void	extra_env_path(t_shell *shell, t_node *node)
 			shell->env[i] = temp;
 			break ;
 		}
-		i++;		
+		i++;
 	}
 }
 
 void	edit_envt_path(t_shell *shell)
 {
-	char *temp;
+	char	*temp;
 	int		i;
 	char	*dup;
 
@@ -101,6 +113,6 @@ void	edit_envt_path(t_shell *shell)
 			shell->env[i] = temp;
 			break ;
 		}
-		i++;		
+		i++;
 	}
 }

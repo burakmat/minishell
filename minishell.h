@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/18 11:38:19 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 12:46:43 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,22 @@ int		box1indoublequote(char *argv, t_lexout *tolex);
 int		box1insinglequote(char *argv, t_lexout *tolex);
 
 //box2
-int		secondbox(char *argv, t_lexout *tolex);
+int		secondbox(char *argv, t_lexout *tolex, int i);
 int		secondboxinquote(char *argv, t_lexout *tolex);
 int		secondboxinsinglequote(char *argv, t_lexout *tolex);
 int		isbeforeflag(t_lexout *tolex);
+int		secondbox_fornorm(char *argv, t_lexout *tolex);
+void	is_second_box_null(t_lexout *tolex);
+int		secondbox_fornorm_v2(char *argv, t_lexout *tolex);
+int		before_secondbox(char *argv, t_lexout *tolex);
 
 //box3
-int		thirdbox(char *argv, t_lexout *tolex);
+int		thirdbox(char *argv, t_lexout *tolex, int i);
 int		box3inquote(char *argv, t_lexout *tolex);
 int		box3escapespace(char *argv, t_lexout *tolex);
 int		box3insinglequote(char *argv, t_lexout *tolex);
+int		before_thirdbox(char *argv, t_lexout *tolex);
+int		thirdbox_is_null(t_lexout *tolex);
 
 //box4
 void	fourthbox(char *argv, t_lexout *tolex);
@@ -125,6 +131,8 @@ int		box4passquote(char *argv);
 int		box4passsinglequote(char *argv);
 void	box4_check(t_shell *shell, t_lexout *tolex);
 void	box4_go_to_check(t_shell *shell, char *argv);
+int		fourthbox_direction_less(char *argv, t_lexout *tolex);
+void	is_fourthbox_null(t_lexout *tolex);
 
 //total node
 
@@ -140,6 +148,8 @@ int	dollarsign_insinglequote(char *argv, t_shell *shell);
 int	itoacount(int n);
 char	*ft_itoa(int n);
 void	dollar_status(t_shell *shell);
+void	dollarsign_check_norm(t_shell *shell, char *temp2);
+int	until_equal(char *argv);
 
 //command_table.c
 void	create_node(t_shell *shell, t_lexout *table);
@@ -195,7 +205,7 @@ void close_all_node_fd(t_shell *shell);
 char	*ft_strjoin_builtin(char *s1, char *s2);
 void	builtin_echo(t_node *node);
 void	free_oldenv(t_shell *shell);
-void	re_malloc_env(t_shell *shell, t_node *node, int i);
+void	re_malloc_env(t_shell *shell, t_node *node, int i, int b);
 void	add_env(t_shell *shell, t_node *node, int a);
 void	builtin_export(t_shell *shell);
 void	show_env(t_shell *shell);
@@ -205,10 +215,13 @@ int		is_env_valid(char *argv, int mode);
 int		ft_strncmp_builtin(char *s1, char *s2, int a);
 int 	is_last_equal(char *argv);
 void	show_export(char **temp);
-void	builtin_exit();
+void	builtin_exit(void);
 int	compare_ascii(char **temp);
+void	show_export_helper(char **temp, int i, int a, int t);
+void	export_director(t_shell *shell, t_node *node);
+
 //pwd & cd
-void	builtin_pwd();
+void	builtin_pwd(void);
 void	builtin_cd(t_shell *shell ,t_node *node);
 void	find_env_path(t_shell *shell, t_node *node);
 void	edit_envt_path(t_shell *shell);
