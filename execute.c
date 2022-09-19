@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmat <bmat@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 15:32:11 by bmat              #+#    #+#             */
-/*   Updated: 2022/09/19 15:45:01 by bmat             ###   ########.fr       */
+/*   Updated: 2022/09/19 16:20:43 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	new_process(t_shell *shell, t_node *node)
 t_node	*builtin_process(t_shell *shell, t_node *node)
 {
 	if (node->exec_args && builtin_check(node->exec_args[0]) == 7)
-		builtin_exit();
+		builtin_exit(shell, node);
 	if (node->exec_args && builtin_check(node->exec_args[0]) == 2)
 		builtin_cd(shell, node);
 	if (node->exec_args && builtin_check(node->exec_args[0]) == 5)
