@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 15:07:00 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:14:11 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_lexout
 	char		*box2;
 	int			box2index;
 	int			box2runaway;
-	int			box2space;
 	int			box2lastisspace;
 	char		*box3;
 	int			box3index;

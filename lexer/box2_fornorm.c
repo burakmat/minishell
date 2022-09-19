@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:48:15 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 12:02:11 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/19 20:15:19 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void	is_second_box_null(t_lexout *tolex)
 	{
 		free(tolex->box2);
 		tolex->box2 = NULL;
+	}
+	if (tolex->box2index > 0)
+	{
+		tolex->box2[tolex->box2index++] = '\0';
 	}
 }
 
