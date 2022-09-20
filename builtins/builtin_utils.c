@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:03:27 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 22:11:31 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:09:59 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,26 @@ char	*ft_strdup_env(char *s1)
 	}
 	s[i] = '\0';
 	return (s);
+}
+
+int	ft_strncmp_export(char *s1, char *s2, int size)
+{
+	int	i;
+
+	i = 0;
+	if (s1 == NULL)
+		return (0);
+	if (s1[0] == '\0')
+		return (0);
+	while (i < size && (s1[i] != '\0' || s2[i] != '\0'))
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	if (s1[i] == '\0' || s1[i] == '=')
+	{
+		return (1);
+	}
+	return (0);
 }

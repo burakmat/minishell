@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:05:17 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 22:07:32 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:26:38 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,19 @@ void	edit_unset(t_shell *shell, t_node *node)
 {
 	int		i;
 	int		len;
-	char	*temp;
 	int		a;
 
 	i = 1;
-	len = 0;
-	while (shell->env[len])
-		len++;
 	while (node->exec_args[i] != NULL)
 	{
+		len = 0;
+		while (shell->env[len])
+			len++;
 		if (builtin_exist(shell, node->exec_args[i]) >= 0)
 		{
 			a = builtin_exist(shell, node->exec_args[i]);
-			temp = shell->env[a];
+			free(shell->env[a]);
 			shell->env[a] = shell->env[len - 1];
-			free(temp);
 			shell->env[len - 1] = NULL;
 			build_new_env(shell);
 		}
@@ -67,7 +65,7 @@ void	build_new_env(t_shell *shell)
 		temp[i] = shell->env[i];
 		i++;
 	}
-	temp[i] = NULL;
+	temp[i] = shell->env[i];
 	free(shell->env);
 	shell->env = temp;
 }

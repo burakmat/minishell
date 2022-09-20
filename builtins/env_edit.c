@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 15:05:38 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/18 15:30:25 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:16:11 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	different_value(t_shell *shell, t_node *node)
 	int	i;
 	int	b;
 
-	i = 0;
+	i = 1;
 	b = 0;
 	while (node->exec_args[i])
 	{
@@ -87,9 +87,9 @@ int	env_dup_check(t_shell *shell, char *argv)
 		a++;
 	while (shell->env[i])
 	{
-		if (ft_strncmp(shell->env[i], argv, a) == 0)
+		if (ft_strncmp_export(shell->env[i], argv, a) == 0)
 			b++;
-		if (ft_strncmp(shell->env[i], argv, a) == 1)
+		if (ft_strncmp_export(shell->env[i], argv, a) == 1)
 			d = i;
 		i++;
 	}

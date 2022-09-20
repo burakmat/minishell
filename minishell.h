@@ -6,7 +6,7 @@
 /*   By: osyalcin <osyalcin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:06:40 by osyalcin          #+#    #+#             */
-/*   Updated: 2022/09/19 21:31:28 by osyalcin         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:59:28 by osyalcin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void	builtin_exit(t_shell *shell, t_node *node);
 int		compare_ascii(char **temp);
 void	show_export_helper(char **temp, int i, int a, int t);
 void	export_director(t_shell *shell, t_node *node);
-
+int		ft_strncmp_export(char *s1, char *s2, int size);
 //pwd & cd
 void	builtin_pwd(void);
 void	builtin_cd(t_shell *shell, t_node *node);
