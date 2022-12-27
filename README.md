@@ -28,46 +28,46 @@ This will create an executable minishell in the current directory. To run minish
 
 Minishell supports a variety of commands, including both external programs and built-in commands.
 
-####Built-in Commands
+### Built-in Commands
 
 Minishell includes a number of built-in commands that allow you to interact with the shell and the operating system.
-echo
+#### echo
 
 The echo command prints a message to the terminal. It takes a single argument, which can be a string or a variable.
 
 echo message
 
-cd
+#### cd
 
 The cd command changes the current working directory. It takes a single argument specifying the new directory to change to.
 
 cd directory
 
-exit
+#### exit
 
 The exit command terminates minishell.
 
 exit
 
-export
+#### export
 
 The export command adds an environment variable to the shell. It takes a single argument in the form name=value.
 
 export name=value
 
-unset
+#### unset
 
 The unset command deletes an environment variable from the shell. It takes a single argument specifying the name of the variable to delete.
 
 unset name
 
-env
+#### env
 
 The env command displays all of the current environment variables. It takes no arguments.
 
 env
 
-pwd
+#### pwd
 
 The pwd command prints the current working directory. It takes no arguments.
 
