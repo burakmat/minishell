@@ -28,25 +28,51 @@ This will create an executable minishell in the current directory. To run minish
 
 Minishell supports a variety of commands, including both external programs and built-in commands.
 
-To run an external program, simply type the program name followed by any necessary arguments. For example, to run the ls command to list the files in the current directory:
+####Built-in Commands
 
-ls
+Minishell includes a number of built-in commands that allow you to interact with the shell and the operating system.
+echo
 
-To run a built-in command, type the command name followed by any necessary arguments. For example, to change the current working directory:
+The echo command prints a message to the terminal. It takes a single argument, which can be a string or a variable.
 
-cd /path/to/directory
+echo message
 
-Minishell also supports input/output redirection and pipes. For example, to redirect the output of the ls command to a file:
+cd
 
-ls > output.txt
+The cd command changes the current working directory. It takes a single argument specifying the new directory to change to.
 
-To pipe the output of one command to another command, use the | symbol:
-
-ls | grep "pattern"
-
-To exit minishell, use the exit command:
+cd directory
 
 exit
+
+The exit command terminates minishell.
+
+exit
+
+export
+
+The export command adds an environment variable to the shell. It takes a single argument in the form name=value.
+
+export name=value
+
+unset
+
+The unset command deletes an environment variable from the shell. It takes a single argument specifying the name of the variable to delete.
+
+unset name
+
+env
+
+The env command displays all of the current environment variables. It takes no arguments.
+
+env
+
+pwd
+
+The pwd command prints the current working directory. It takes no arguments.
+
+pwd
+
 
 # License
 
