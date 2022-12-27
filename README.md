@@ -99,4 +99,4 @@ I devoloped this project with [Osman Selim Yalçın](https://github.com/osman-se
 
 ## License
 
-cub3d is licensed under the [MIT](https://github.com/burakmat/minishell/blob/master/LICENSE) License.
+minishell is licensed under the [MIT](https://github.com/burakmat/minishell/blob/master/LICENSE) License.
