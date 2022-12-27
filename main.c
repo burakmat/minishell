@@ -76,12 +76,12 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		fillboxesstatic(&tolex, &g_shell);
-		a = readline("MEGAshell>> ");
+		a = readline("minishell>> ");
 		add_history(a);
 		if (a == NULL)
 		{
 			printf("\033[A");
-			printf("MEGAshell>> exit\n");
+			printf("minishell>> exit\n");
 			exit(0);
 		}
 		if (*a != '\0')
