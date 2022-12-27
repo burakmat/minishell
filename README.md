@@ -93,7 +93,7 @@ Keep in mind that the directories listed in PATH are only searched when you run 
 ```
 /path/to/executable
 ```
-## Contributior
+## Contributor
 
 I devoloped this project with [Osman Selim Yalçın](https://github.com/osman-selim-yalcin)
 
