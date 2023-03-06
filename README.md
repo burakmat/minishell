@@ -10,6 +10,8 @@ Features
 1. Support for pipes
 1. Basic built-in commands (e.g. cd, exit)
 
+<img src="https://github.com/burakmat/minishell/blob/main/cover/demo.png" alt="demo" />
+
 ## Building and Running
 
 Minishell can be built and run on any system with a C compiler.
