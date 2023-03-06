@@ -2,7 +2,7 @@
 # minishell
 
 Minishell is a simple Unix shell written in C. It provides a command-line interface for the user to interact with the operating system.
-Features
+Features:
 
 1. Execute commands and programs
 1. Support for command line arguments
@@ -10,7 +10,7 @@ Features
 1. Support for pipes
 1. Basic built-in commands (e.g. cd, exit)
 
-<img src="https://github.com/burakmat/minishell/blob/main/cover/demo.png" alt="demo" />
+<img src="https://github.com/burakmat/minishell/blob/master/imgs/demo.png" alt="demo" width="50%" />
 
 ## Building and Running
 
